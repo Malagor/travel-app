@@ -12,7 +12,7 @@ export function App() {
     <div className={classes.App}>
       <Clock theme={theme} />
       <button type="button" onClick={toggleTheme} className={classes.themeBtn}>
-        Theme
+        Theme toggle
       </button>
     </div>
   );
