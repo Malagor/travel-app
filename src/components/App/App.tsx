@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Clock, ErrorMessage } from 'components';
+import { Clock, ErrorMessage, LanguageToggle } from 'components';
 import { Button, Paper } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import classes from './App.module.scss';
 
 export function App() {
@@ -18,13 +19,16 @@ export function App() {
     gap: '20px',
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className={classes.App}>
       <Paper elevation={3} style={styleBtn}>
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
-          Theme toggle
+          {t('Theme toggle')}
         </Button>
+        <LanguageToggle />
         <ErrorMessage />
       </Paper>
     </div>
