@@ -22,14 +22,15 @@ https://travel-app-react-524c7.web.app/
 1. React - https://reactjs.org/  
 2. Redux, redux-thunk, redux-devtools-extension - https://redux.js.org/  
 3. Typescript - https://www.typescriptlang.org/  
-4. Apollo - https://www.howtographql.com/  
+4. --- Apollo - https://www.howtographql.com/  
 
 ### Used libs:  
 1. styled-components - https://askd.rocks/pres/styled-gdg/  
 2. react-router/react-router-dom - https://reactrouter.com/  
-3. react-hook-form
-4. react-window
-5. react-paginate
+3. --- react-hook-form
+4. --- react-window
+5. --- react-paginate
+6. i18n - https://react.i18next.com/
 
 ### Linters:
  prettier, eslint.
