@@ -1,0 +1,1 @@
+export { PointInfoTest } from './PointInfoTest';

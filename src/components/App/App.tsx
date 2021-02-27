@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Clock } from 'components';
 import { Button, Paper } from '@material-ui/core';
+import { Clock, PointInfoTest } from 'components';
+
 import classes from './App.module.scss';
-import {PointInfoTest} from "../PointInfoTest/PointInfoTest";
 
 export function App() {
   const [theme, setTheme] = useState('');
@@ -21,7 +21,7 @@ export function App() {
   };
 
   const toggleObject = () => {
-    const objKeys = ['W346312699', 'N3660336221', 'W102188799', 'R9095854'];
+    const objKeys = ['W346312699', 'N3660336221', 'W102188799', 'R9095854', 'errorKey', 'errorKey', 'errorKey'];
     const len = objKeys.length;
     const index = Math.floor(Math.random() * len);
     setObject(objKeys[index]);

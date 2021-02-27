@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { ErrorMessage } from 'components';
 import { TPointInfo } from 'types';
 import classes from './PointInfoTest.module.scss';
 
@@ -29,18 +30,15 @@ export const PointInfoTest: FC<PointInfoTestProps> = ({ xid, lang = 'ru' }) => {
         return resp.json();
       })
       .then((data) => {
-        console.log(data);
         setIsLoading(false);
         setPointInfo(data);
         return data;
-      })
-      .catch(onError);
+      });
 
   useEffect(() => {
     setIsError(false);
     setIsLoading(true);
-    getPlaceData()
-      .catch(onError);
+    getPlaceData().catch(onError);
   }, [xid]);
 
   const pointView = () => {
@@ -48,27 +46,26 @@ export const PointInfoTest: FC<PointInfoTestProps> = ({ xid, lang = 'ru' }) => {
 
     const source = preview?.source;
     const desc = wikipediaExtracts?.text;
-    console.log('source', source);
 
     return (
       <div style={{ maxWidth: '300px', textAlign: 'center' }}>
         <h2>{name}</h2>
-        {source && <img src={source} alt="{name}" style={{maxWidth: "100%"}}/>}
+        {source && (
+          <img src={source} alt="{name}" style={{ maxWidth: '100%' }} />
+        )}
         <p>{desc}</p>
       </div>
     );
   };
 
   const hasData = !(isError || isLoading);
-  const loader = isLoading ? 'loader' : null;
-  const error = isError ? 'ErrorMessage' : null;
-  const content = hasData ? pointView() : null;
 
   return (
     <div className={classes.PointInfoTest}>
-      {loader}
-      {error}
-      {content}
+      {isLoading && 'loader'}
+      {isError && <ErrorMessage />}
+      {hasData && pointView()}
+      {hasData ? pointView() : null }
     </div>
   );
 };
