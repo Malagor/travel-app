@@ -6,8 +6,8 @@ export const LanguageToggle: FC = () => (
   <div>
     <ButtonGroup color="primary" aria-label="outlined primary button group">
       <Button onClick={() => i18n.changeLanguage('en')}>Eng</Button>
-      <Button onClick={() => i18n.changeLanguage('ru')}>Rus</Button>
-      <Button onClick={() => i18n.changeLanguage('be')}>Bel</Button>
+      <Button onClick={() => i18n.changeLanguage('ru')}>Рус</Button>
+      <Button onClick={() => i18n.changeLanguage('be')}>Бел</Button>
     </ButtonGroup>
   </div>
 );

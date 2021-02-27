@@ -1,43 +1,31 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { DEFAULT_LANGUAGE } from './appConstants/general';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import en from './locales/en/translation.json';
+import ru from './locales/ru/translation.json';
+import be from './locales/be/translation.json';
 
-// the translations
-// (tip move them in a JSON file and import them)
+
 const resources = {
   en: {
-    translation: {
-      'Error Message':
-        'The data was lost somewhere and we sent a lifeguard to search for it.',
-      'Theme toggle': 'Theme toggle',
-    },
+    translation: en,
   },
   ru: {
-    translation: {
-      'Error Message':
-        'Данные где-то потерялись и мы выслали спасателя на их поиски.',
-      'Theme toggle': 'Переключить тему',
-    },
+    translation: ru,
   },
   be: {
-    translation: {
-      'Error Message':
-        'Данныя дзесьці згубіліся і мы выслалі выратавальніка на іх пошукі.',
-      'Theme toggle': 'Змяніць тэму',
-    },
+    translation: be,
   },
 };
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
     resources,
-    lng: DEFAULT_LANGUAGE,
-
-    keySeparator: false, // we do not use keys in form messages.welcome
-
+    keySeparator: false,
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 
