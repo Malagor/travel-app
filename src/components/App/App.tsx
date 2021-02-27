@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock } from 'components';
+import { Clock, ErrorMessage } from 'components';
 import { Button, Paper } from '@material-ui/core';
 import classes from './App.module.scss';
 
@@ -25,6 +25,7 @@ export function App() {
         <Button variant="contained" color="primary" onClick={toggleTheme}>
           Theme toggle
         </Button>
+        <ErrorMessage />
       </Paper>
     </div>
   );
