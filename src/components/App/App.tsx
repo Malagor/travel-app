@@ -18,6 +18,8 @@ export function App() {
     justifyContent: 'center',
     alignItems: 'center',
     gap: '20px',
+    width: '500px',
+    height: '500px'
   };
 
   const toggleObject = () => {
