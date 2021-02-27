@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Clock } from 'components';
 import { Button, Paper } from '@material-ui/core';
 import classes from './App.module.scss';
+import {PointInfoTest} from "../PointInfoTest/PointInfoTest";
 
 export function App() {
   const [theme, setTheme] = useState('');
+  const [object, setObject] = useState('');
 
   const toggleTheme = () => {
     setTheme((t) => (t === 'light' ? 'dark' : 'light'));
   };
-  const styleBtn: React.CSSProperties = {
+  const stylePaper: React.CSSProperties = {
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
@@ -18,13 +20,24 @@ export function App() {
     gap: '20px',
   };
 
+  const toggleObject = () => {
+    const objKeys = ['W346312699', 'N3660336221', 'W102188799', 'R9095854'];
+    const len = objKeys.length;
+    const index = Math.floor(Math.random() * len);
+    setObject(objKeys[index]);
+  };
+
   return (
     <div className={classes.App}>
-      <Paper elevation={3} style={styleBtn}>
+      <Paper elevation={3} style={stylePaper}>
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
           Theme toggle
         </Button>
+        <Button variant="contained" color="secondary" onClick={toggleObject}>
+          Change Object
+        </Button>
+         <PointInfoTest xid={object} />
       </Paper>
     </div>
   );
