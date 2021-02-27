@@ -1,2 +1,10 @@
-.PointInfoTest {
+.pointInfoTest {
+  position: relative;
+  min-height: 200px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
 }

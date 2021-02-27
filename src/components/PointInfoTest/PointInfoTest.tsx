@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ErrorMessage } from 'components';
+import {ErrorMessage, Loader} from 'components';
 import { TPointInfo } from 'types';
 import classes from './PointInfoTest.module.scss';
 
@@ -48,12 +48,14 @@ export const PointInfoTest: FC<PointInfoTestProps> = ({ xid, lang = 'ru' }) => {
     const desc = wikipediaExtracts?.text;
 
     return (
-      <div style={{ maxWidth: '300px', textAlign: 'center' }}>
+      <div>
         <h2>{name}</h2>
-        {source && (
-          <img src={source} alt="{name}" style={{ maxWidth: '100%' }} />
-        )}
-        <p>{desc}</p>
+        <div className={classes.content}>
+          {source && (
+            <img src={source} alt="{name}" style={{ maxWidth: '100%' }} />
+          )}
+          <p>{desc}</p>
+        </div>
       </div>
     );
   };
@@ -61,11 +63,10 @@ export const PointInfoTest: FC<PointInfoTestProps> = ({ xid, lang = 'ru' }) => {
   const hasData = !(isError || isLoading);
 
   return (
-    <div className={classes.PointInfoTest}>
-      {isLoading && 'loader'}
-      {isError && <ErrorMessage />}
-      {hasData && pointView()}
-      {hasData ? pointView() : null }
+    <div className={classes.pointInfoTest}>
+       {isLoading && <Loader />}
+       {isError && <ErrorMessage />}
+       {hasData && pointView()}
     </div>
   );
 };
