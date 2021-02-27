@@ -14,7 +14,7 @@ export const ErrorMessage: FC<ErrorMessageProps> = ({ locale= 'be' }) => {
   };
 
   return (
-    <div className={classes.ErrorMessage}>
+    <div className={classes.errorMessage}>
       <Tourist />
       <p>{massage[locale]}</p>
     </div>
