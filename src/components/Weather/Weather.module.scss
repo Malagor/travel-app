@@ -1,0 +1,51 @@
+$green: #7ca79f;
+
+.weather {
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: $green;
+  }
+  &Title {
+    max-width: 130px;
+    h3 {
+      margin: 0;
+    }
+    span {
+      display: block;
+      margin-top: -3px;
+      line-height: 1.2;
+    }
+  }
+  &Icon {
+    margin-left: 10px;
+    max-width: 50px;
+    width: 100%;
+    background-position: center;
+    background-size: 140%;
+  }
+  &Body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  &Temperature {
+    margin-left: 5px;
+    font-size: 50px;
+    font-weight: 700;
+    color: darken($green, 25%);
+  }
+  &Info {
+    margin-left: 15px;
+  }
+  &Item {
+    display: flex;
+    justify-content: space-between;
+    span {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+  }
+}

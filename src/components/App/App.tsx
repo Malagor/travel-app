@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Clock, Loader, ErrorMessage} from 'components';
+import { Clock, Loader, ErrorMessage, Weather } from 'components';
 import { Button, Paper } from '@material-ui/core';
 import classes from './App.module.scss';
 
@@ -17,11 +17,12 @@ export function App() {
     alignItems: 'center',
     gap: '20px',
     width: '500px',
-    height: '500px'
+    height: '500px',
   };
 
   return (
     <div className={classes.App}>
+      <Weather locale="be" city="Minsk" />
       <Paper elevation={3} style={styleBtn}>
         <Loader />
         <Clock theme={theme} />
