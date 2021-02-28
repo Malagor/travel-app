@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Clock, Loader, ErrorMessage, Weather } from 'components';
+import { Clock, Weather, ErrorMessage, LanguageToggle } from 'components';
 import { Button, Paper } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import classes from './App.module.scss';
 
 export function App() {
@@ -17,18 +18,20 @@ export function App() {
     alignItems: 'center',
     gap: '20px',
     width: '500px',
-    height: '500px',
+    margin: '20px',
   };
+
+  const { t } = useTranslation();
 
   return (
     <div className={classes.App}>
       <Weather locale="be" city="Minsk" />
       <Paper elevation={3} style={styleBtn}>
-        <Loader />
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
-          Theme toggle
+          {t('Theme toggle')}
         </Button>
+        <LanguageToggle />
         <ErrorMessage />
       </Paper>
     </div>
