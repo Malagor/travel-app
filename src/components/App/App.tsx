@@ -17,6 +17,8 @@ export function App() {
     justifyContent: 'center',
     alignItems: 'center',
     gap: '20px',
+    width: '500px',
+    margin: '20px'
   };
 
   const { t } = useTranslation();
