@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Paper } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { Clock, PointInfoTest } from 'components';
 
 import classes from './App.module.scss';
@@ -19,8 +20,10 @@ export function App() {
     alignItems: 'center',
     gap: '20px',
     width: '500px',
-    height: '500px'
+    margin: '20px'
   };
+
+  const { t } = useTranslation();
 
   const toggleObject = () => {
     const objKeys = ['W346312699', 'N3660336221', 'W102188799', 'R9095854', 'errorKey', 'errorKey', 'errorKey'];
@@ -34,7 +37,7 @@ export function App() {
       <Paper elevation={3} style={stylePaper}>
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
-          Theme toggle
+          {t('Theme toggle')}
         </Button>
         <Button variant="contained" color="secondary" onClick={toggleObject}>
           Change Object
