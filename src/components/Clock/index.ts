@@ -1,1 +1,1 @@
-export { Clock } from './Clock';
+export { ClockWidget } from './ClockWidget';
