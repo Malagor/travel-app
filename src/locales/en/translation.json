@@ -1,4 +1,9 @@
 {
   "Error Message": "The data was lost somewhere and we sent a lifeguard to search for it.",
-  "Theme toggle": "Theme toggle"
+  "Theme toggle": "Theme toggle",
+  "Weather": {
+    "cloudCover": "cloud cover",
+    "wind": "wind",
+    "humidity": "humidity"
+  }
 }

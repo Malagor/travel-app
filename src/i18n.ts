@@ -5,7 +5,6 @@ import en from './locales/en/translation.json';
 import ru from './locales/ru/translation.json';
 import be from './locales/be/translation.json';
 
-
 const resources = {
   en: {
     translation: en,
@@ -23,7 +22,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    keySeparator: false,
+    keySeparator: '.',
     interpolation: {
       escapeValue: false,
     },

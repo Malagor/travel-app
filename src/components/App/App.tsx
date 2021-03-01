@@ -25,7 +25,7 @@ export function App() {
 
   return (
     <div className={classes.App}>
-      <Weather locale="be" city="Minsk" />
+      <Weather city="Minsk" />
       <Paper elevation={3} style={styleBtn}>
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>

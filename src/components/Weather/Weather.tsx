@@ -1,20 +1,22 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Paper } from '@material-ui/core';
 import { ErrorMessage, Loader } from 'components';
 import { TWeatherInfo } from './WeatherInfo.types';
 import classes from './Weather.module.scss';
 
 type WeatherProps = {
-  locale: string;
   city: string;
 };
 
-export const Weather: FC<WeatherProps> = ({ locale, city }) => {
+export const Weather: FC<WeatherProps> = ({ city }) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [weatherInfo, setWeatherInfo] = useState<TWeatherInfo>(
     {} as TWeatherInfo
   );
+  const [t, i18n] = useTranslation();
+  const locale = i18n.language;
 
   const API_KEY = '0dd4c70fbcb17123e868e6d308f9906a';
   const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=${locale}`;
@@ -49,8 +51,11 @@ export const Weather: FC<WeatherProps> = ({ locale, city }) => {
   const getComponent = () => {
     const { name: cityName } = weatherInfo;
     const { description, icon } = weatherInfo.weather[0];
-    const { temp, feels_like: feelsLike, humidity } = weatherInfo.main;
+    const { temp, humidity } = weatherInfo.main;
+    const { all: cloudCover } = weatherInfo.clouds;
     const { speed: windSpeed } = weatherInfo.wind;
+
+    const iconUrl = `url(http://openweathermap.org/img/wn/${icon}@2x.png)`;
 
     return (
       <div className={classes.weather}>
@@ -61,9 +66,7 @@ export const Weather: FC<WeatherProps> = ({ locale, city }) => {
           </div>
           <div
             className={classes.weatherIcon}
-            style={{
-              backgroundImage: `url(http://openweathermap.org/img/wn/${icon}@2x.png)`,
-            }}
+            style={{ backgroundImage: iconUrl }}
           />
         </div>
         <div className={classes.weatherBody}>
@@ -72,16 +75,13 @@ export const Weather: FC<WeatherProps> = ({ locale, city }) => {
           )}°`}</div>
           <div className={classes.weatherInfo}>
             <div className={classes.weatherItem}>
-              Feels like:
-              <span>{`${Math.round(feelsLike)}°C`}</span>
+              {t('Weather.humidity')}:<span>{`${humidity}%`}</span>
             </div>
             <div className={classes.weatherItem}>
-              Wind:
-              <span>{`${windSpeed} m/s`}</span>
+              {t('Weather.wind')}:<span>{`${windSpeed} m/s`}</span>
             </div>
             <div className={classes.weatherItem}>
-              Humidity:
-              <span>{`${humidity}%`}</span>
+              {t('Weather.cloudCover')}:<span>{`${cloudCover}%`}</span>
             </div>
           </div>
         </div>
@@ -90,11 +90,11 @@ export const Weather: FC<WeatherProps> = ({ locale, city }) => {
   };
 
   const style: React.CSSProperties = {
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     minHeight: '150px',
     minWidth: '200px',
-    padding: isError ? '20px' : '0',
     overflow: 'hidden',
   };
 
