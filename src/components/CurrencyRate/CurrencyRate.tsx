@@ -37,12 +37,57 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
           setRates(
             currencies.map((currency) => data.conversion_rates[currency])
           );
+
+          const updateTime = new Date(data.time_last_update_utc);
+          const updateDate = `${updateTime.getDate()}-${updateTime.getMonth()}-${updateTime.getFullYear()}`;
+
+          const currentRates = {
+            update: updateDate,
+            rates: data.conversion_rates,
+          };
+
+          const storageData = localStorage.getItem('TA-currency');
+
+          if (typeof storageData === 'string') {
+            const parsedStorageData = JSON.parse(storageData);
+            parsedStorageData[currentCountry] = currentRates;
+            localStorage.setItem(
+              'TA-currency',
+              JSON.stringify(parsedStorageData)
+            );
+          } else {
+            const newStorageData = { [currentCountry]: currentRates };
+            localStorage.setItem('TA-currency', JSON.stringify(newStorageData));
+          }
+
           return data;
         });
 
     setIsError(false);
     setIsLoading(true);
-    getCurrencyRateData().catch(onError);
+
+    const storageData = localStorage.getItem('TA-currency');
+    if (typeof storageData === 'string') {
+      const parsedStorageData = JSON.parse(storageData);
+      const now = new Date();
+      const currentDate = `${now.getDate()}-${now.getMonth()}-${now.getFullYear()}`;
+      if (
+        parsedStorageData[currentCountry] &&
+        parsedStorageData[currentCountry].update === currentDate
+      ) {
+        setRates(
+          currencies.map(
+            (currency) => parsedStorageData[currentCountry].rates[currency]
+          )
+        );
+        setIsError(false);
+        setIsLoading(false);
+      } else {
+        getCurrencyRateData().catch(onError);
+      }
+    } else {
+      getCurrencyRateData().catch(onError);
+    }
   }, [currentCountry, apiUrl, currencies]);
 
   const rateList = rates.map((rate, index) => (
