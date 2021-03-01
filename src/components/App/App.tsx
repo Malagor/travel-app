@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Clock, ErrorMessage, LanguageToggle } from 'components';
+import { Clock, ErrorMessage, LanguageToggle, CurrencyRate } from 'components';
 import { Button, Paper } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import classes from './App.module.scss';
 
 export function App() {
   const [theme, setTheme] = useState('');
+  const [currentCountry, setCurrentCountry] = useState('mexico');
 
   const toggleTheme = () => {
     setTheme((t) => (t === 'light' ? 'dark' : 'light'));
@@ -18,7 +19,7 @@ export function App() {
     alignItems: 'center',
     gap: '20px',
     width: '500px',
-    margin: '20px'
+    margin: '20px',
   };
 
   const { t } = useTranslation();
@@ -32,6 +33,7 @@ export function App() {
         </Button>
         <LanguageToggle />
         <ErrorMessage />
+        <CurrencyRate currentCountry={currentCountry} />
       </Paper>
     </div>
   );
