@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Paper } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { Clock, PointInfoTest } from 'components';
+import { Clock, LanguageToggle, PointInfoTest } from 'components';
 
 import classes from './App.module.scss';
 
@@ -19,14 +19,23 @@ export function App() {
     justifyContent: 'center',
     alignItems: 'center',
     gap: '20px',
-    width: '500px',
-    margin: '20px'
+    width: '100%',
+    maxWidth: '900px',
+    margin: '20px',
   };
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const toggleObject = () => {
-    const objKeys = ['W346312699', 'N3660336221', 'W102188799', 'R9095854', 'errorKey', 'errorKey', 'errorKey'];
+    const objKeys = [
+      'W346312699',
+      'N3660336221',
+      'W102188799',
+      'R9095854',
+      'errorKey',
+      'errorKey',
+      'errorKey',
+    ];
     const len = objKeys.length;
     const index = Math.floor(Math.random() * len);
     setObject(objKeys[index]);
@@ -36,13 +45,14 @@ export function App() {
     <div className={classes.App}>
       <Paper elevation={3} style={stylePaper}>
         <Clock theme={theme} />
+        <LanguageToggle />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
           {t('Theme toggle')}
         </Button>
         <Button variant="contained" color="secondary" onClick={toggleObject}>
           Change Object
         </Button>
-         <PointInfoTest xid={object} />
+        <PointInfoTest xid={object} lang={i18n.language} />
       </Paper>
     </div>
   );
