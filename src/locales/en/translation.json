@@ -4,6 +4,7 @@
   "Weather": {
     "cloudCover": "cloud cover",
     "wind": "wind",
-    "humidity": "humidity"
+    "humidity": "humidity",
+    "metersPerSecond": "m/s"
   }
 }

@@ -12,3 +12,4 @@ export const TABLE_SCROLLBAR_THUMB_COLOR = '#1E33570D';
 export const TABLE_POPUP_BORDER_COLOR = '#363D4833';
 
 export const ALERT_COLOR = '#FA6678'; // red
+export const WEATHER_COLOR = '#7ca79f'; // green

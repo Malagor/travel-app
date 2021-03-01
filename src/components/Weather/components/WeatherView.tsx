@@ -1,13 +1,15 @@
+import { darken } from '@material-ui/core';
+import { WEATHER_COLOR } from 'appConstants/colors';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TWeatherInfo } from '../WeatherInfo.types';
-import classes from './Weather.module.scss';
+import { TWeatherInfo } from 'types';
+import classes from './WeatherView.module.scss';
 
-type WeatherProps = {
+type WeatherViewProps = {
   info: TWeatherInfo;
 };
 
-const Weather: FC<WeatherProps> = ({ info }) => {
+export const WeatherView: FC<WeatherViewProps> = ({ info }) => {
   const { name: cityName } = info;
   const { description, icon } = info.weather[0];
   const { temp, humidity } = info.main;
@@ -19,7 +21,10 @@ const Weather: FC<WeatherProps> = ({ info }) => {
 
   return (
     <div className={classes.weather}>
-      <div className={classes.weatherHeader}>
+      <div
+        className={classes.weatherHeader}
+        style={{ backgroundColor: WEATHER_COLOR }}
+      >
         <div className={classes.weatherTitle}>
           <h3>{cityName}</h3>
           <span>{description}</span>
@@ -30,15 +35,17 @@ const Weather: FC<WeatherProps> = ({ info }) => {
         />
       </div>
       <div className={classes.weatherBody}>
-        <div className={classes.weatherTemperature}>{`${Math.round(
-          temp
-        )}°`}</div>
+        <div
+          className={classes.weatherTemperature}
+          style={{ color: darken(WEATHER_COLOR, 0.35) }}
+        >{`${Math.round(temp)}°`}</div>
         <div className={classes.weatherInfo}>
           <div className={classes.weatherItem}>
             {t('Weather.humidity')}:<span>{`${humidity}%`}</span>
           </div>
           <div className={classes.weatherItem}>
-            {t('Weather.wind')}:<span>{`${windSpeed} m/s`}</span>
+            {t('Weather.wind')}:
+            <span>{`${windSpeed} ${t('Weather.metersPerSecond')}`}</span>
           </div>
           <div className={classes.weatherItem}>
             {t('Weather.cloudCover')}:<span>{`${cloudCover}%`}</span>
@@ -48,5 +55,3 @@ const Weather: FC<WeatherProps> = ({ info }) => {
     </div>
   );
 };
-
-export default Weather;

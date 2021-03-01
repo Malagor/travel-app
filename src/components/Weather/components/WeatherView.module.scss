@@ -1,11 +1,8 @@
-$green: #7ca79f;
-
 .weather {
   &Header {
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
-    background-color: $green;
   }
   &Title {
     max-width: 130px;
@@ -35,7 +32,6 @@ $green: #7ca79f;
     margin-left: 5px;
     font-size: 50px;
     font-weight: 700;
-    color: darken($green, 25%);
   }
   &Info {
     margin-left: 15px;

@@ -1,1 +1,1 @@
-export { WeatherContainer as Weather } from './WeatherContainer';
+export { Weather } from './Weather';

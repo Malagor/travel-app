@@ -4,6 +4,7 @@
   "Weather": {
     "cloudCover": "воблачнасць",
     "wind": "вецер",
-    "humidity": "вільготнасць"
+    "humidity": "вільготнасць",
+    "metersPerSecond": "м/с"
   }
 }

@@ -1,15 +1,16 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper } from '@material-ui/core';
+import { TWeatherInfo } from 'types';
+import { WEATHER_API_KEY } from 'appConstants/api';
 import { ErrorMessage, Loader } from 'components';
-import { TWeatherInfo } from './WeatherInfo.types';
-import Weather from './components/Weather';
+import { WeatherView } from './components/WeatherView';
 
-type WeatherContainerProps = {
+type WeatherProps = {
   city: string;
 };
 
-export const WeatherContainer: FC<WeatherContainerProps> = ({ city }) => {
+export const Weather: FC<WeatherProps> = ({ city }) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [weatherInfo, setWeatherInfo] = useState<TWeatherInfo>(
@@ -18,8 +19,7 @@ export const WeatherContainer: FC<WeatherContainerProps> = ({ city }) => {
   const [, i18n] = useTranslation();
   const locale = i18n.language;
 
-  const API_KEY = '0dd4c70fbcb17123e868e6d308f9906a';
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=${locale}`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric&lang=${locale}`;
 
   const getWeatherData = useCallback(
     () =>
@@ -63,7 +63,7 @@ export const WeatherContainer: FC<WeatherContainerProps> = ({ city }) => {
     <Paper elevation={3} style={style}>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {hasData && <Weather info={weatherInfo} />}
+      {hasData && <WeatherView info={weatherInfo} />}
     </Paper>
   );
 };
