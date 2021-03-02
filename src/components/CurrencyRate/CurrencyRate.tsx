@@ -118,9 +118,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
 
   const drawCurrencyRates = () => (
     <>
-      <h3 className={classes.currencyRate__header}>
-        {`1 ${CURRENCY_MAP[currentCountry]} =`}
-      </h3>
+      <h3>{`1 ${CURRENCY_MAP[currentCountry]} =`}</h3>
       <List>{rateList}</List>
       <Select
         defaultValue={currencies[currencies.length - 1]}
