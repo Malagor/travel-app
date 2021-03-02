@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClockWidget, ErrorMessage, LanguageToggle } from 'components';
+import { ClockWidget, Weather, ErrorMessage, LanguageToggle } from 'components';
 import { Button, Paper } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import classes from './App.module.scss';
