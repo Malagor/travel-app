@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 type TCTimeProps = {
@@ -6,10 +7,11 @@ type TCTimeProps = {
 };
 
 export const Time = (props :TCTimeProps) => {
-  const { options } = props
+  const { options } = props;
   const date = new Date();
+  const [, i18n] = useTranslation();
 
-  const stringData = date.toLocaleString("by", options)
+  const stringData = date.toLocaleString(i18n.language, options)
 
   const [data, setData] = useState(date)
 

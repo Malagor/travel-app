@@ -16,21 +16,24 @@ export const Clock = (props: TClockProps) => {
   if (theme === 'light') {
     cls.push(classes.light);
   }
-
  
   const [hour, setHour] = useState(date.getHours())
   const [min,setMin] = useState(date.getMinutes())
   const [sec, setSec] = useState(date.getSeconds())
 
-  const changeSec = () => setSec(sec + 1)
-  const changeMin = () => setMin(min + 1)
-  const changeHour = () => setHour(hour + 1)
-
-  setTimeout(changeSec, 1000)
-  setTimeout(changeMin, 1000 * 60)
-  setTimeout(changeHour, 1000 * 60 * 12)
-
-  console.log('hour', hour, 'min', min, 'sec', sec)
+  const wrapperClockLogic = React.useMemo(() => {
+    
+    const changeSec = () => setSec(sec + 1)
+    const changeMin = () => setMin(min + 1)
+    const changeHour = () => setHour(hour + 1)
+  
+    setTimeout(changeSec, 1000)
+    setTimeout(changeMin, 1000 * 60)
+    setTimeout(changeHour, 1000 * 60 * 12)
+  
+    console.log('hour', hour, 'min', min, 'sec', sec)
+  
+  }, [sec])
 
   return (
     <div className={cls.join(' ')}>
@@ -60,4 +63,5 @@ export const Clock = (props: TClockProps) => {
       </div>
     </div>
   );
+
 }
