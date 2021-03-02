@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Clock, ErrorMessage, LanguageToggle, CurrencyRate } from 'components';
+import {
+  Clock,
+  Weather,
+  ErrorMessage,
+  LanguageToggle,
+  CurrencyRate,
+} from 'components';
 import { Button, Paper } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import classes from './App.module.scss';
@@ -26,6 +32,7 @@ export function App() {
 
   return (
     <div className={classes.App}>
+      <Weather city="Minsk" />
       <Paper elevation={3} style={styleBtn}>
         <Clock theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
