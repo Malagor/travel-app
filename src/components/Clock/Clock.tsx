@@ -1,6 +1,5 @@
 import React from 'react';
-import classes from './Clock.module.scss';
-import { ClockRound } from './styled';
+import { ClockRound, HourHand, MinuteHand, SecondHand } from './styled';
 
 const DEGREASE = 6;
 
@@ -49,37 +48,18 @@ export class Clock extends React.Component<TClockProps, TClockState> {
   render() {
     const { hour, min, sec } = this.state;
     const { theme } = this.props;
-    const cls = [classes.Clock];
-    if (theme === 'light') {
-      cls.push(classes.light);
-    }
     return (
-      <div className={cls.join(' ')}>
-        <div className={classes.hour}>
-          <div
-            className={classes.hr}
-            style={{
-              transform: `rotateZ(${hour + min / 12}deg)`,
-            }}
-          />
+      <ClockRound theme={theme}>
+        <div className="hour">
+          <HourHand theme={theme} angle={hour + min / 12} />
         </div>
-        <div className={classes.min}>
-          <div
-            className={classes.mn}
-            style={{
-              transform: `rotateZ(${min}deg)`,
-            }}
-          />
+        <div className="min">
+          <MinuteHand theme={theme} angle={min} />
         </div>
-        <div className={classes.sec}>
-          <div
-            className={classes.sc}
-            style={{
-              transform: `rotateZ(${sec}deg)`,
-            }}
-          />
+        <div className="sec">
+          <SecondHand theme={theme} angle={sec} />
         </div>
-      </div>
+      </ClockRound>
     );
   }
 }
