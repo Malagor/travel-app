@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { CURRENCY_MAP } from 'appConstants/currencyMap';
+import { CURRENCY_API_KEY } from 'appConstants/api';
 import { Loader, ErrorMessage } from 'components';
 import { Paper, List, Select } from '@material-ui/core';
 import classes from './CurrencyRate.module.scss';
@@ -14,9 +15,8 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const API_KEY = '4b1c63d88f7f09c5e8b03ab5';
   const baseCurrency = CURRENCY_MAP[currentCountry];
-  const apiUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${baseCurrency}`;
+  const apiUrl = `https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${baseCurrency}`;
 
   const onError = () => {
     setIsError(true);
