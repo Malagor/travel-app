@@ -9,7 +9,7 @@ export const Time = (props :TCTimeProps) => {
   const { options } = props
   const date = new Date();
 
-  const stringData = date.toLocaleString("en-US", options)
+  const stringData = date.toLocaleString("by", options)
 
   const [data, setData] = useState(date)
 
