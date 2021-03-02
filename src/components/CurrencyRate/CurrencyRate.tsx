@@ -1,9 +1,11 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { CURRENCY_MAP } from 'appConstants/currencyMap';
 import { CURRENCY_API_KEY } from 'appConstants/api';
 import { Loader, ErrorMessage } from 'components';
-import { Paper, List, Select } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import { CurrencyRatesInfo } from 'types';
 import classes from './CurrencyRate.module.scss';
+import { CurrencyRateView } from './components/CurrencyRateView';
 
 type CurrencyRateProps = {
   currentCountry: string;
@@ -18,13 +20,32 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
   const baseCurrency = CURRENCY_MAP[currentCountry];
   const apiUrl = `https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${baseCurrency}`;
 
-  const onError = () => {
-    setIsError(true);
-    setIsLoading(false);
-  };
+  const storeCurrencyData = useCallback(
+    (data: CurrencyRatesInfo) => {
+      const updateTime = new Date(data.time_last_update_utc);
+      const updateDate = `${updateTime.getDate()}-${updateTime.getMonth()}-${updateTime.getFullYear()}`;
 
-  useEffect(() => {
-    const getCurrencyRateData = () =>
+      const currentRates = {
+        update: updateDate,
+        rates: data.conversion_rates,
+      };
+
+      const storageData = localStorage.getItem('TA-currency');
+
+      if (storageData) {
+        const parsedStorageData = JSON.parse(storageData);
+        parsedStorageData[currentCountry] = currentRates;
+        localStorage.setItem('TA-currency', JSON.stringify(parsedStorageData));
+      } else {
+        const newStorageData = { [currentCountry]: currentRates };
+        localStorage.setItem('TA-currency', JSON.stringify(newStorageData));
+      }
+    },
+    [currentCountry]
+  );
+
+  const getCurrencyRateData = useCallback(
+    () =>
       fetch(apiUrl)
         .then((resp) => {
           if (!resp.ok) {
@@ -37,38 +58,21 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
           setRates(
             currencies.map((currency) => data.conversion_rates[currency])
           );
-
-          const updateTime = new Date(data.time_last_update_utc);
-          const updateDate = `${updateTime.getDate()}-${updateTime.getMonth()}-${updateTime.getFullYear()}`;
-
-          const currentRates = {
-            update: updateDate,
-            rates: data.conversion_rates,
-          };
-
-          const storageData = localStorage.getItem('TA-currency');
-
-          if (typeof storageData === 'string') {
-            const parsedStorageData = JSON.parse(storageData);
-            parsedStorageData[currentCountry] = currentRates;
-            localStorage.setItem(
-              'TA-currency',
-              JSON.stringify(parsedStorageData)
-            );
-          } else {
-            const newStorageData = { [currentCountry]: currentRates };
-            localStorage.setItem('TA-currency', JSON.stringify(newStorageData));
-          }
+          storeCurrencyData(data);
 
           return data;
-        });
+        }),
+    [apiUrl, currencies, storeCurrencyData]
+  );
 
-    setIsError(false);
-    setIsLoading(true);
+  const onError = () => {
+    setIsError(true);
+    setIsLoading(false);
+  };
 
-    const storageData = localStorage.getItem('TA-currency');
-    if (typeof storageData === 'string') {
-      const parsedStorageData = JSON.parse(storageData);
+  const setRatesFromStore = useCallback(
+    (data: string) => {
+      const parsedStorageData = JSON.parse(data);
       const now = new Date();
       const currentDate = `${now.getDate()}-${now.getMonth()}-${now.getFullYear()}`;
       if (
@@ -85,50 +89,27 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
       } else {
         getCurrencyRateData().catch(onError);
       }
+    },
+    [currencies, currentCountry, getCurrencyRateData]
+  );
+
+  useEffect(() => {
+    setIsError(false);
+    setIsLoading(true);
+
+    const storageData = localStorage.getItem('TA-currency');
+    if (storageData) {
+      setRatesFromStore(storageData);
     } else {
       getCurrencyRateData().catch(onError);
     }
-  }, [currentCountry, apiUrl, currencies]);
-
-  const rateList = rates.map((rate, index) => (
-    <li key={rate}>
-      {rate} {currencies[index]}
-    </li>
-  ));
-
-  const currencyOptions = Object.values(CURRENCY_MAP)
-    .filter((currency) => currency !== 'USD' && currency !== 'EUR')
-    .map((currency) => (
-      <option key={currency} value={currency}>
-        {currency}
-      </option>
-    ));
-
-  function handleSelectChange(
-    evt: React.ChangeEvent<{
-      name?: string | undefined;
-      value: unknown;
-    }>
-  ) {
-    const newCurrency = evt.target.value;
-    if (typeof newCurrency === 'string') {
-      setCurrencies(['USD', 'EUR', newCurrency]);
-    }
-  }
-
-  const drawCurrencyRates = () => (
-    <>
-      <h3>{`1 ${CURRENCY_MAP[currentCountry]} =`}</h3>
-      <List>{rateList}</List>
-      <Select
-        defaultValue={currencies[currencies.length - 1]}
-        native
-        onChange={handleSelectChange}
-      >
-        {currencyOptions}
-      </Select>
-    </>
-  );
+  }, [
+    currentCountry,
+    apiUrl,
+    currencies,
+    getCurrencyRateData,
+    setRatesFromStore,
+  ]);
 
   const hasData = !(isError || isLoading);
 
@@ -136,7 +117,14 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
     <Paper elevation={3} className={classes.currencyRate}>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {hasData && drawCurrencyRates()}
+      {hasData && (
+        <CurrencyRateView
+          currentCountry={currentCountry}
+          currencies={currencies}
+          setCurrencies={setCurrencies}
+          rates={rates}
+        />
+      )}
     </Paper>
   );
 };
