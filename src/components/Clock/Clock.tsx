@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Clock.module.scss';
+import { ClockRound } from './styled';
 
 const DEGREASE = 6;
 
