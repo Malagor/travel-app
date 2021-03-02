@@ -18,13 +18,14 @@ export function App() {
     alignItems: 'center',
     gap: '20px',
     width: '500px',
-    margin: '20px'
+    margin: '20px',
   };
 
   const { t } = useTranslation();
 
   return (
     <div className={classes.App}>
+      <Weather city="Minsk" />
       <Paper elevation={3} style={styleBtn}>
         <ClockWidget theme={theme} />
         <Button variant="contained" color="primary" onClick={toggleTheme}>
