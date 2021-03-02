@@ -9,6 +9,9 @@ type TClockWidgetProps = {
 
 export const ClockWidget = (props: TClockWidgetProps) => {
   const date = new Date()
+ /*  придут в пропсах города для отображения */ 
+  const localCity = "localCity" 
+  const otherCity = "otherCity" 
 
   const optionsTime: object = {
      hour: 'numeric',
@@ -30,6 +33,7 @@ export const ClockWidget = (props: TClockWidgetProps) => {
 
         <div className={classes.timeBlock}>
           {/* Local Clock */}
+          <h4>{localCity}</h4>
           <Clock theme={props.theme} date={date}/>
           <div className={classes.timeBlock__time}>
             <Time options={optionsTime}/>
@@ -38,6 +42,7 @@ export const ClockWidget = (props: TClockWidgetProps) => {
 
         <div className={classes.timeBlock}>
           {/* Other Clock */}
+          <h4>{otherCity}</h4>
           <Clock theme={props.theme} date={date}/>
           <div className={classes.timeBlock__time}>
             <Time options={optionsTime}/>
