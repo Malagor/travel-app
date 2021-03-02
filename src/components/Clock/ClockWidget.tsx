@@ -8,16 +8,16 @@ type TClockWidgetProps = {
 };
 
 export const ClockWidget = (props: TClockWidgetProps) => {
-  const date = new Date()
+  const date = new Date();
  /*  придут в пропсах города для отображения */ 
-  const localCity = "localCity" 
-  const otherCity = "otherCity" 
+  const localCity = "localCity" ;
+  const otherCity = "otherCity" ;
 
   const optionsTime: object = {
      hour: 'numeric',
      minute: 'numeric',
      second: 'numeric'
-  }
+  };
 
   const optionsData: object = {
      year: 'numeric',
@@ -25,7 +25,7 @@ export const ClockWidget = (props: TClockWidgetProps) => {
      day: 'numeric',
      weekday: 'long',
      timezone: 'UTC',
-  }
+  };
 
   return (
     <div className={classes.wrapper}>

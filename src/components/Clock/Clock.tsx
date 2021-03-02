@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './Clock.module.scss';
 
 const FACTOR_MINUTE_AND_SEC = 6;
-const getDegForHourArrow = (hour: number, min: number) => 30*(hour + (1/60)*min)
+const getDegForHourArrow = (hour: number, min: number) => 30*(hour + (1/60)*min);
 
 type TClockProps = {
   theme: string;
@@ -23,17 +23,15 @@ export const Clock = (props: TClockProps) => {
 
   const wrapperClockLogic = React.useMemo(() => {
     
-    const changeSec = () => setSec(sec + 1)
-    const changeMin = () => setMin(min + 1)
-    const changeHour = () => setHour(hour + 1)
+    const changeSec = () => setSec(sec + 1);
+    const changeMin = () => setMin(min + 1);
+    const changeHour = () => setHour(hour + 1);
   
-    setTimeout(changeSec, 1000)
-    setTimeout(changeMin, 1000 * 60)
-    setTimeout(changeHour, 1000 * 60 * 12)
+    setTimeout(changeSec, 1000);
+    setTimeout(changeMin, 1000 * 60);
+    setTimeout(changeHour, 1000 * 60 * 12);
   
-    console.log('hour', hour, 'min', min, 'sec', sec)
-  
-  }, [sec])
+  }, [sec, min, hour]);
 
   return (
     <div className={cls.join(' ')}>
