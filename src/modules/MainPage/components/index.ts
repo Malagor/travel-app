@@ -1,1 +1,1 @@
-export { CountryCard } from './CounrtyCard';
+export { CountryCard } from './CountryCard';

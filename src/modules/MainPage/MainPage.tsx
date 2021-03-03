@@ -5,7 +5,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { CountryCard } from './components/CounrtyCard';
+import { CountryCard } from './components/CountryCard';
 import { countries } from './mockupDataCountries';
 
 const useStyles = makeStyles((theme) => ({
