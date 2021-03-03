@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { CountryCard } from './components/CounrtyCard';
-import { countries } from './mockupCounties';
+import { countries } from './mockupCountries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

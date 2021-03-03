@@ -7,7 +7,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Typography } from '@material-ui/core';
 import { CountryCardProps } from 'types';
 
-import { countries } from '../MainPage/mockupCounties';
+import { countries } from '../MainPage/mockupCountries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

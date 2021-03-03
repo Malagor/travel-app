@@ -1,4 +1,4 @@
-import { CountryCardProps } from '../../types';
+import { CountryCardProps } from 'types';
 
 export const countries: CountryCardProps[] = [
   {
