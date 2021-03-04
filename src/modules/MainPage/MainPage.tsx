@@ -1,12 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { State, StateCountry } from 'types';
+import * as actions from 'store/actions';
+import { Database } from 'services';
 import { CountryCard } from './components/CountryCard';
-import { countries } from './mockupDataCountries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,21 +27,46 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
   link: {
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 }));
 
-export const MainPage: FC = () => {
+type MainPageProps = {
+  countryList: StateCountry[];
+  setCountriesList: (payload: StateCountry[]) => void;
+  setCountry: (payload: StateCountry) => void;
+};
+
+const MainPage: FC<MainPageProps> = ({
+  countryList,
+  setCountriesList,
+  setCountry,
+}) => {
   const classes = useStyles();
+  const database = Database.create();
+
+  useEffect(() => {
+    setCountriesList(database.getCountriesList());
+  });
+
+  const updateCountryInfo = (id: number) => {
+    setCountry(database.getCountryById(id));
+  };
 
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Typography variant="h2">Main Page</Typography>
 
       <Grid container spacing={3}>
-        {countries.map((country) => (
+        {countryList.map((country) => (
           <Grid key={country.id} item xs={12} md={6} lg={4}>
-            <NavLink to={`/country/${country.id}`} className={classes.link}>
+            <NavLink
+              to={`/country/${country.id}`}
+              className={classes.link}
+              onClick={() => {
+                updateCountryInfo(+country.id);
+              }}
+            >
               <CountryCard {...country} />
             </NavLink>
           </Grid>
@@ -47,3 +75,14 @@ export const MainPage: FC = () => {
     </Container>
   );
 };
+
+const mapStateToProps = (state: State) => ({
+  countryList: state.countryList,
+});
+
+const mapActionsToProps = {
+  setCountry: actions.setCountry,
+  setCountriesList: actions.setCountriesList,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MainPage);

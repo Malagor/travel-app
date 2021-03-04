@@ -49,12 +49,6 @@ export type CountryCardProps = {
   image: string;
 };
 
-export type UserInfoType = {
-  id: number;
-  name: string;
-  avatar: string;
-};
-
 export type CurrencyType = {
   id: string;
   nameRu: string;
@@ -62,7 +56,13 @@ export type CurrencyType = {
   nameBe: string;
 };
 
-export type SettingsType = {
+export type StateUserInfo = {
+  id: string;
+  name: string;
+  avatar: string;
+};
+
+export type StateSettings = {
   language: string;
   theme: string;
   currencyList: CurrencyType[];
@@ -74,25 +74,25 @@ export type LanguagesType = {
   be?: string;
 }
 
-export type CountryType = {
-  id: string;
+export type StateCountry = {
+  id: string | number;
   name: LanguagesType;
-  description?: string;
   capital: LanguagesType;
+  currency?: CurrencyType;
+  description?: string;
   population?: number;
-  currency: CurrencyType;
   area?: number;
   languages?: string[];
   videos?: string[];
-  photos?: string[];
+  photos: string[];
 };
 
-export type StoreType = {
-  settings: SettingsType;
-  userInfo: UserInfoType;
-  country: string;
+export type State = {
+  settings: StateSettings | {};
+  userInfo: StateUserInfo | {};
+  country: StateCountry | {};
   lang: string;
   locale: string;
   timeZone: string;
-  countryList: CountryType[];
+  countryList: StateCountry[] | [];
 };

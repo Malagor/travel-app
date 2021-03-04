@@ -1,1 +1,3 @@
-export { CountryPage } from './CountryPage';
+import CountryPage from './CountryPage';
+
+export { CountryPage };
