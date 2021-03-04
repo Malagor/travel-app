@@ -5,3 +5,4 @@ export { ErrorMessage } from './ErrorMessage';
 export { LanguageToggle } from './LanguageToggle';
 export { Search } from './Search';
 export { Loader } from './Loader';
+export { CurrencyRate } from './CurrencyRate';
