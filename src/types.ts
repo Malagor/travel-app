@@ -40,6 +40,13 @@ export type TWeatherInfo = {
   id: number;
   name: string;
   cod: number;
+}
+
+export type CountryCardProps = {
+  id: string | number;
+  name: string;
+  description: string;
+  image: string;
 };
 
 export type CurrencyRatesInfo = {

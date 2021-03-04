@@ -1,55 +1,16 @@
-import React, { useState } from 'react';
-import {
-  Clock,
-  Weather,
-  ErrorMessage,
-  LanguageToggle,
-  CurrencyRate,
-} from 'components';
-import { Button, Paper } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import classes from './App.module.scss';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { MainPage, CountryPage } from 'modules';
+import { Layout } from '../Layout/Layout';
 
 export function App() {
-  const [theme, setTheme] = useState('');
-  const [currentCountry, setCurrentCountry] = useState('mexico');
-  const [preferredCurrencies, setPreferredCurrencies] = useState([
-    'USD',
-    'EUR',
-    'BYN',
-  ]);
-
-  const toggleTheme = () => {
-    setTheme((t) => (t === 'light' ? 'dark' : 'light'));
-  };
-  const styleBtn: React.CSSProperties = {
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '20px',
-    width: '500px',
-    margin: '20px',
-  };
-
-  const { t } = useTranslation();
-
   return (
-    <div className={classes.App}>
-      <Weather city="Minsk" />
-      <Paper elevation={3} style={styleBtn}>
-        <Clock theme={theme} />
-        <Button variant="contained" color="primary" onClick={toggleTheme}>
-          {t('Theme toggle')}
-        </Button>
-        <LanguageToggle />
-        <ErrorMessage />
-        <CurrencyRate
-          currentCountry={currentCountry}
-          preferredCurrencies={preferredCurrencies}
-        />
-      </Paper>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path="/country/:id" component={CountryPage} />
+        <Route path="/country" component={CountryPage} />
+        <Route exact path="/" component={MainPage} />
+      </Switch>
+    </Layout>
   );
 }
