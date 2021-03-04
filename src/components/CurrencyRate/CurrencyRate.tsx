@@ -9,11 +9,14 @@ import { CurrencyRateView } from './components/CurrencyRateView';
 
 type CurrencyRateProps = {
   currentCountry: string;
+  preferredCurrencies: string[];
 };
 
-export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
-  const [currencies, setCurrencies] = useState<string[]>(['USD', 'EUR', 'BYN']);
-  const [rates, setRates] = useState<number[]>([]);
+export const CurrencyRate: FC<CurrencyRateProps> = ({
+  currentCountry,
+  preferredCurrencies,
+}) => {
+  const [rates, setRates] = useState<[string, number][]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,13 +59,16 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
         .then((data) => {
           setIsLoading(false);
           setRates(
-            currencies.map((currency) => data.conversion_rates[currency])
+            preferredCurrencies.map((currency) => [
+              currency,
+              data.conversion_rates[currency],
+            ])
           );
           storeCurrencyData(data);
 
           return data;
         }),
-    [apiUrl, currencies, storeCurrencyData]
+    [apiUrl, preferredCurrencies, storeCurrencyData]
   );
 
   const onError = () => {
@@ -80,9 +86,10 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
         parsedStorageData[currentCountry].update === currentDate
       ) {
         setRates(
-          currencies.map(
-            (currency) => parsedStorageData[currentCountry].rates[currency]
-          )
+          preferredCurrencies.map((currency) => [
+            currency,
+            parsedStorageData[currentCountry].rates[currency],
+          ])
         );
         setIsError(false);
         setIsLoading(false);
@@ -90,7 +97,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
         getCurrencyRateData().catch(onError);
       }
     },
-    [currencies, currentCountry, getCurrencyRateData]
+    [preferredCurrencies, currentCountry, getCurrencyRateData]
   );
 
   useEffect(() => {
@@ -106,7 +113,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
   }, [
     currentCountry,
     apiUrl,
-    currencies,
+    preferredCurrencies,
     getCurrencyRateData,
     setRatesFromStore,
   ]);
@@ -118,12 +125,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({ currentCountry }) => {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {hasData && (
-        <CurrencyRateView
-          currentCountry={currentCountry}
-          currencies={currencies}
-          setCurrencies={setCurrencies}
-          rates={rates}
-        />
+        <CurrencyRateView currentCountry={currentCountry} rates={rates} />
       )}
     </Paper>
   );

@@ -13,6 +13,11 @@ import classes from './App.module.scss';
 export function App() {
   const [theme, setTheme] = useState('');
   const [currentCountry, setCurrentCountry] = useState('mexico');
+  const [preferredCurrencies, setPreferredCurrencies] = useState([
+    'USD',
+    'EUR',
+    'BYN',
+  ]);
 
   const toggleTheme = () => {
     setTheme((t) => (t === 'light' ? 'dark' : 'light'));
@@ -40,7 +45,10 @@ export function App() {
         </Button>
         <LanguageToggle />
         <ErrorMessage />
-        <CurrencyRate currentCountry={currentCountry} />
+        <CurrencyRate
+          currentCountry={currentCountry}
+          preferredCurrencies={preferredCurrencies}
+        />
       </Paper>
     </div>
   );
