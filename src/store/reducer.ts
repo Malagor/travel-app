@@ -9,9 +9,22 @@ import {
 const initialState: State = {
   settings: {},
   userInfo: {},
-  country: {},
+  country: {
+    id: '',
+    name: {
+      en: '',
+      ru: '',
+      be: ''
+    },
+    capital:
+      {
+      en: '',
+      ru: '',
+      be: ''
+    },
+  },
   countryList: [],
-  lang: '',
+  lang: 'ru',
   locale: '',
   timeZone: '',
 };
@@ -31,7 +44,7 @@ export const appReducer: Reducer = (state = initialState, action) => {
     case SET_USER_LANGUAGE:
       return {
         ...state,
-        settings: action.payload,
+        lang: action.payload,
       };
 
     default:

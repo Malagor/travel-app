@@ -15,7 +15,7 @@ import List from '@material-ui/core/List';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import clsx from 'clsx';
-import { Search } from 'components';
+import { LanguageToggle, Search } from 'components';
 import { mainListItems, secondaryListItems } from './components';
 import { useStyles } from './styled';
 import { Footer } from './components/Footer';
@@ -61,6 +61,7 @@ export const Layout: FC = ({ children }) => {
           </Typography>
           <div className={classes.grow} />
           <Search />
+          <LanguageToggle />
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

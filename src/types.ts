@@ -79,18 +79,18 @@ export type StateCountry = {
   name: LanguagesType;
   capital: LanguagesType;
   currency?: CurrencyType;
-  description?: string;
+  description?: LanguagesType;
   population?: number;
   area?: number;
   languages?: string[];
   videos?: string[];
-  photos: string[];
+  photos?: string[];
 };
 
 export type State = {
   settings: StateSettings | {};
   userInfo: StateUserInfo | {};
-  country: StateCountry | {};
+  country: StateCountry;
   lang: string;
   locale: string;
   timeZone: string;

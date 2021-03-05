@@ -10,3 +10,8 @@ export const setCountriesList = (payload: StateCountry[]) => ({
   type: SET_COUNTRIES_LIST,
   payload,
 });
+
+export const setLanguage = (payload: string) => ({
+  type: SET_COUNTRIES_LIST,
+  payload,
+});

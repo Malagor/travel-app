@@ -8,7 +8,19 @@ export class Database {
     this.DB = {
       settings: {},
       userInfo: {},
-      country: {},
+      country: {
+        id: '',
+        name: {
+          en: '',
+          ru: '',
+          be: ''
+        },
+        capital: {
+          en: '',
+          ru: '',
+          be: ''
+        },
+      },
       countryList: countries,
       lang: '',
       locale: '',
