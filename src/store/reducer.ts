@@ -6,8 +6,10 @@ import {
   SET_USER_LANGUAGE, SET_USER,
 } from 'appConstants';
 
+import { countries } from './mockupDataCountries';
 
-const initialState: State = {
+
+export const initialState: State = {
   settings: {
     theme: 'light',
     currencyList: [
@@ -57,7 +59,7 @@ const initialState: State = {
     locale: '',
     timeZone: ''
   },
-  countryList: [],
+  countryList: countries,
   lang: 'ru',
 };
 
