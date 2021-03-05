@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Typography } from '@material-ui/core';
 import { CountryCardProps } from 'types';
+import { PhotoGallery } from './components';
+import { countryPictures } from './mockupCountryPictures';
 
 import { countries } from '../MainPage/mockupDataCountries';
 
@@ -39,27 +41,36 @@ export const CountryPage: FC = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       {countryData ? (
-        <Paper className={classes.paper}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography variant="h2">{countryData.name}</Typography>
-            </Grid>
-            <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} spacing={3}>
+            <Paper className={classes.paper}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={4}>
-                  <img
-                    className={classes.image}
-                    src={countryData.image}
-                    alt={countryData.name}
-                  />
+                <Grid item xs={12}>
+                  <Typography variant="h2">{countryData.name}</Typography>
                 </Grid>
-                <Grid item xs={12} md={6} lg={8}>
-                  <p>{countryData.description}</p>
+                <Grid item xs={12}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} md={6} lg={4}>
+                      <img
+                        className={classes.image}
+                        src={countryData.image}
+                        alt={countryData.name}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={8}>
+                      <p>{countryData.description}</p>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Paper>
           </Grid>
-        </Paper>
+          <Grid item xs={12} spacing={3}>
+            <Paper className={classes.paper}>
+              <PhotoGallery pictures={countryPictures} />
+            </Paper>
+          </Grid>
+        </Grid>
       ) : (
         <Typography variant="h2">Country Page</Typography>
       )}
