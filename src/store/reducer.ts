@@ -3,30 +3,62 @@ import { State } from 'types';
 import {
   SET_COUNTRIES_LIST,
   SET_COUNTRY,
-  SET_USER_LANGUAGE,
+  SET_USER_LANGUAGE, SET_USER,
 } from 'appConstants';
 
+
 const initialState: State = {
-  settings: {},
-  userInfo: {},
+  settings: {
+    theme: 'light',
+    currencyList: [
+      {
+        id: 'RUB',
+        nameRu: 'Российский рубль',
+        nameEn: 'Russian Ruble',
+        nameBe: 'Расійскі рубель',
+      },
+      {
+        id: 'USD',
+        nameRu: 'Доллар США',
+        nameEn: 'US Dollar',
+        nameBe: 'Долар ЗША',
+      },
+      {
+        id: 'EUR',
+        nameRu: 'Евро',
+        nameEn: 'Euro',
+        nameBe: 'Еўра',
+      },
+      {
+        id: 'BYN',
+        nameRu: 'Беларусский рубль',
+        nameEn: 'Belorussian Ruble',
+        nameBe: 'Белаускі рубель',
+      },
+    ],
+  },
+  userInfo: {
+    id: '1',
+    name: 'Вася Пупилкин',
+    avatar: 'https://i.pravatar.cc/200',
+  },
   country: {
     id: '',
     name: {
       en: '',
       ru: '',
-      be: ''
+      be: '',
     },
-    capital:
-      {
+    capital: {
       en: '',
       ru: '',
-      be: ''
+      be: '',
     },
+    locale: '',
+    timeZone: ''
   },
   countryList: [],
   lang: 'ru',
-  locale: '',
-  timeZone: '',
 };
 
 export const appReducer: Reducer = (state = initialState, action) => {
@@ -45,6 +77,11 @@ export const appReducer: Reducer = (state = initialState, action) => {
       return {
         ...state,
         lang: action.payload,
+      };
+    case SET_USER:
+      return {
+        ...state,
+        userInfo: action.payload
       };
 
     default:

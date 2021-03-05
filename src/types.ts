@@ -63,7 +63,6 @@ export type StateUserInfo = {
 };
 
 export type StateSettings = {
-  language: string;
   theme: string;
   currencyList: CurrencyType[];
 };
@@ -85,15 +84,15 @@ export type StateCountry = {
   languages?: string[];
   videos?: string[];
   photos?: string[];
+  locale?: string;
+  timeZone?: string;
 };
 
 export type State = {
-  settings: StateSettings | {};
-  userInfo: StateUserInfo | {};
+  settings: StateSettings;
+  userInfo: StateUserInfo;
   country: StateCountry;
   lang: string;
-  locale: string;
-  timeZone: string;
   countryList: StateCountry[] | [];
 };
 

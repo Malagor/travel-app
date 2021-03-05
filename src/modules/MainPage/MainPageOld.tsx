@@ -4,29 +4,29 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { State, StateCountry } from 'types';
+import * as actions from 'store/actions';
 import { Database } from 'services';
-import { SET_COUNTRIES_LIST } from 'appConstants';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
-export const MainPageHooks: FC = () => {
+type MainPageProps = {
+  countryList: StateCountry[];
+  lang: string;
+  setCountriesList: (payload: StateCountry[]) => void;
+};
+
+const MainPageOld: FC<MainPageProps> = ({
+  countryList,
+  setCountriesList,
+  lang,
+}) => {
   const classes = useStyles();
   const database = Database.create();
 
-  const countryList: StateCountry[] = useSelector(
-    (state: State) => state.countryList
-  );
-  const lang = useSelector((state: State) => state.lang);
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch({
-      type: SET_COUNTRIES_LIST,
-      payload: database.getCountriesList(),
-    });
+    setCountriesList(database.getCountriesList());
   });
 
   return (
@@ -45,3 +45,14 @@ export const MainPageHooks: FC = () => {
     </Container>
   );
 };
+
+const mapStateToProps = (state: State) => ({
+  countryList: state.countryList,
+  lang: state.lang,
+});
+
+const mapActionsToProps = {
+  setCountriesList: actions.setCountriesList,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MainPageOld);

@@ -1,26 +1,24 @@
 import React, { FC, useEffect } from 'react';
-import { State, StateCountry } from 'types';
 
-import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Database } from 'services';
 
-import * as actions from 'store/actions';
+import { State, StateCountry } from 'types';
+import { SET_COUNTRY } from 'appConstants';
 import { CountryPageView } from './components/CountryPageView';
 
-type CountryPageProps = {
-  country: StateCountry;
-  setCountry: (payload: StateCountry) => void;
-  lang: string;
-};
-
-const CountryPage: FC<CountryPageProps> = ({ country, setCountry, lang }) => {
+export const CountryPage: FC = () => {
   const database = Database.create();
   const params: { id: string } = useParams();
   const { id } = params;
 
+  const country: StateCountry = useSelector((state: State) => state.country);
+  const lang: string = useSelector((state: State) => state.lang);
+  const dispatch = useDispatch();
+
   const updateCountryInfo = (idx: number) => {
-    setCountry(database.getCountryById(idx));
+    dispatch({ type: SET_COUNTRY, payload: database.getCountryById(idx) })
   };
 
   useEffect(() => {
@@ -29,14 +27,3 @@ const CountryPage: FC<CountryPageProps> = ({ country, setCountry, lang }) => {
 
   return <CountryPageView country={country} lang={lang} />;
 };
-
-const mapStateToProps = (state: State) => ({
-  country: state.country,
-  lang: state.lang,
-});
-
-const mapActionsToProps = {
-  setCountry: actions.setCountry,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(CountryPage);

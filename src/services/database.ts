@@ -1,4 +1,4 @@
-import { State, StateCountry } from 'types';
+import { State, StateCountry, StateUserInfo } from 'types';
 import { countries } from './mockupDataCountries';
 
 export class Database {
@@ -6,25 +6,57 @@ export class Database {
 
   constructor() {
     this.DB = {
-      settings: {},
-      userInfo: {},
+      settings: {
+        theme: 'light',
+        currencyList: [
+          {
+            id: 'RUB',
+            nameRu: 'Российский рубль',
+            nameEn: 'Russian Ruble',
+            nameBe: 'Расійскі рубель',
+          },
+          {
+            id: 'USD',
+            nameRu: 'Доллар США',
+            nameEn: 'US Dollar',
+            nameBe: 'Долар ЗША',
+          },
+          {
+            id: 'EUR',
+            nameRu: 'Евро',
+            nameEn: 'Euro',
+            nameBe: 'Еўра',
+          },
+          {
+            id: 'BYN',
+            nameRu: 'Беларусский рубль',
+            nameEn: 'Belorussian Ruble',
+            nameBe: 'Белаускі рубель',
+          },
+        ],
+      },
+      userInfo: {
+        id: '1',
+        name: 'Вася Пупилкин',
+        avatar: 'https://i.pravatar.cc/200',
+      },
       country: {
         id: '',
         name: {
           en: '',
           ru: '',
-          be: ''
+          be: '',
         },
         capital: {
           en: '',
           ru: '',
-          be: ''
+          be: '',
         },
+        locale: '',
+        timeZone: '',
       },
       countryList: countries,
-      lang: '',
-      locale: '',
-      timeZone: '',
+      lang: 'ru',
     };
   }
 
@@ -35,4 +67,6 @@ export class Database {
   getCountriesList = (): StateCountry[] => this.DB.countryList;
 
   getCountryById = (id: number): StateCountry => this.DB.countryList[id];
+
+  getUserInfo = (): StateUserInfo => this.DB.userInfo;
 }
