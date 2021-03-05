@@ -25,7 +25,7 @@ https://travel-app-react-524c7.web.app/
 4. --- Apollo - https://www.howtographql.com/  
 
 ### Used libs:  
-1. styled-components - https://askd.rocks/pres/styled-gdg/  
+1. styled-components - https://styled-components.com/ https://askd.rocks/pres/styled-gdg/  
 2. react-router/react-router-dom - https://reactrouter.com/  
 3. --- react-hook-form
 4. --- react-window

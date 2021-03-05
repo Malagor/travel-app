@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 import { ReactComponent as Tourist } from 'assets/svg/tourist.svg';
 import { useTranslation } from 'react-i18next';
-import classes from './ErrorMessage.module.scss';
+import { ErrorMessageStyled } from './styled';
 
 export const ErrorMessage: FC = () => {
-
   const { t } = useTranslation();
   return (
-    <div className={classes.errorMessage}>
+    <ErrorMessageStyled>
       <Tourist />
       <p>{t('Error Message')}</p>
-    </div>
+    </ErrorMessageStyled>
   );
 };
