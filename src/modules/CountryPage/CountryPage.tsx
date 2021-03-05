@@ -42,7 +42,7 @@ export const CountryPage: FC = () => {
     <Container maxWidth="lg" className={classes.container}>
       {countryData ? (
         <Grid container spacing={3}>
-          <Grid item xs={12} spacing={3}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -65,7 +65,7 @@ export const CountryPage: FC = () => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} spacing={3}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <PhotoGallery pictures={countryPictures} />
             </Paper>
