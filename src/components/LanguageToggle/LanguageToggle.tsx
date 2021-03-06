@@ -3,12 +3,14 @@ import { Button, ButtonGroup } from '@material-ui/core';
 import i18n from 'i18next';
 import { useDispatch } from 'react-redux';
 import { SET_USER_LANGUAGE } from 'appConstants';
+import { setLanguage } from 'store/actions';
 
 export const LanguageToggle: FC = () => {
   const dispatch = useDispatch();
 
   const updateLang = (lang: string) => {
     dispatch({ type: SET_USER_LANGUAGE, payload: lang });
+    // dispatch(setLanguage(lang));
   };
 
   return (
@@ -16,24 +18,24 @@ export const LanguageToggle: FC = () => {
       <ButtonGroup color="inherit" aria-label="primary button group">
         <Button
           onClick={() => {
-            updateLang('en');
             i18n.changeLanguage('en');
+            updateLang('en');
           }}
         >
           Eng
         </Button>
         <Button
           onClick={() => {
-            updateLang('ru');
             i18n.changeLanguage('ru');
+            updateLang('ru');
           }}
         >
           Рус
         </Button>
         <Button
           onClick={() => {
-            updateLang('be');
             i18n.changeLanguage('be');
+            updateLang('be');
           }}
         >
           Бел

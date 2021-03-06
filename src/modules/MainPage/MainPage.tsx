@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, StateCountry } from 'types';
 import { Database } from 'services';
-import { SET_COUNTRIES_LIST } from 'appConstants';
+import { setCountriesList } from 'store/actions';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
@@ -18,15 +18,12 @@ export const MainPage: FC = () => {
   const countryList: StateCountry[] = useSelector(
     (state: State) => state.countryList
   );
-  const lang = useSelector((state: State) => state.lang);
+  const lang = useSelector((state: State) => state.userInfo.lang);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({
-      type: SET_COUNTRIES_LIST,
-      payload: database.getCountriesList(),
-    });
+    dispatch(setCountriesList(database.getCountriesList()));
   });
 
   return (

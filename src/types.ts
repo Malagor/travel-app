@@ -50,28 +50,26 @@ export type CountryCardProps = {
 };
 
 export type CurrencyType = {
-  id: string;
-  nameRu: string;
-  nameEn: string;
-  nameBe: string;
+  [key: string]: { nameRu: string; nameEn: string; nameBe: string };
 };
 
 export type StateUserInfo = {
   id: string;
   name: string;
   avatar: string;
+  lang: string;
 };
 
 export type StateSettings = {
   theme: string;
-  currencyList: CurrencyType[];
+  currencyList: CurrencyType;
 };
 
 export type LanguagesType = {
   en?: string;
   ru?: string;
   be?: string;
-}
+};
 
 export type StateCountry = {
   id: string | number;
@@ -92,7 +90,6 @@ export type State = {
   settings: StateSettings;
   userInfo: StateUserInfo;
   country: StateCountry;
-  lang: string;
   countryList: StateCountry[] | [];
 };
 

@@ -36,7 +36,7 @@ const CountryPageOld: FC<CountryPageProps> = ({
 
 const mapStateToProps = (state: State) => ({
   country: state.country,
-  lang: state.lang,
+  lang: state.userInfo.lang,
 });
 
 const mapActionsToProps = {

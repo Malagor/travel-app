@@ -14,7 +14,7 @@ export const CountryPage: FC = () => {
   const { id } = params;
 
   const country: StateCountry = useSelector((state: State) => state.country);
-  const lang: string = useSelector((state: State) => state.lang);
+  const lang: string = useSelector((state: State) => state.userInfo.lang);
   const dispatch = useDispatch();
 
   const updateCountryInfo = (idx: number) => {
