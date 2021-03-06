@@ -1,5 +1,6 @@
 import { CurrencyType, StateCountry } from 'types';
 import { countries } from 'services/mockupDataCountries';
+import { COUNTRY_PER_PAGE } from 'appConstants';
 
 type DBUser = {
   id: string;
@@ -63,7 +64,15 @@ export class Database {
     return new Database();
   }
 
-  getCountriesList = (): StateCountry[] => this.DB.countriesList;
+  getCountriesList = (
+    count: number = COUNTRY_PER_PAGE,
+    offset: number = 0
+  ): StateCountry[] => {
+    if (count === 0) {
+      return this.DB.countriesList.slice(offset)
+    }
+    return this.DB.countriesList.slice(offset, offset + count);
+  };
 
   getCountryById = (id: number): StateCountry => this.DB.countriesList[id];
 
