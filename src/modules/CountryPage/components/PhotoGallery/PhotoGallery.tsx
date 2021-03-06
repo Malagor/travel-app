@@ -28,22 +28,22 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   const settings = {
+    customPaging(i: number) {
+      return (
+        <a className={classes.slickThumbsLink}>
+          <img src={pictures[i]} />
+        </a>
+      );
+    },
+    dots: true,
+    dotsClass: classes.slickThumbs,
     focusOnSelect: true,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
-    isFullScreen: fullScreen,
-    className: fullScreen ? classes.SliderFullScreen : '',
+    className: fullScreen ? classes.sliderFullScreen : '',
   };
-
-  const slides = pictures.map((pictureURL) => (
-    <div key={pictureURL}>
-      <img src={pictureURL} alt="country pic" />
-    </div>
-  ));
-
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   const handleFullScreen = () => {
     if (sliderRef.current && document.fullscreenElement === null) {
@@ -68,6 +68,14 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
       document.onfullscreenchange = null;
     };
   }, []);
+
+  const slides = pictures.map((pictureURL) => (
+    <div key={pictureURL}>
+      <img src={pictureURL} alt="country pic" />
+    </div>
+  ));
+
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   return (
     <SliderContainer

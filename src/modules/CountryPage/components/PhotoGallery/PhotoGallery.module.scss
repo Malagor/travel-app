@@ -4,6 +4,24 @@
   align-items: center;
 }
 
-.SliderFullScreen {
+.sliderFullScreen {
   width: 100%;
 }
+
+.slickThumbs {
+  display: flex !important;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.slickThumbsLink {
+  cursor: pointer;
+}
+
+.slickThumbs img {
+  height: 100px;
+}
+
