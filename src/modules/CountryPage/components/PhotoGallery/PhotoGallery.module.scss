@@ -1,3 +1,7 @@
+.sliderContainer {
+  width: 100%;
+}
+
 .sliderContainerFullScreen {
   display: flex;
   justify-content: center;
@@ -6,6 +10,11 @@
 
 .sliderFullScreen {
   width: 100%;
+}
+
+.slickSlider {
+  display: flex;
+  flex-direction: column;
 }
 
 .slickThumbs {
@@ -24,4 +33,5 @@
 .slickThumbs img {
   height: 100px;
 }
+
 

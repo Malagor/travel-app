@@ -15,6 +15,18 @@ type PhotoGalleryProps = {
 
 const SliderContainer = styled('div')`
   position: relative;
+
+  .slick-track {
+    display: flex;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  li.slick-active img {
+    opacity: 0.5;
+  }
 `;
 
 const GalleryFullScreenButton = styled(IconButton)`
@@ -39,10 +51,13 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
     dotsClass: classes.slickThumbs,
     focusOnSelect: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     speed: 500,
-    className: fullScreen ? classes.sliderFullScreen : '',
+    className: fullScreen ? classes.sliderFullScreen : classes.slickSlider,
+    centerMode: true,
+    variableWidth: true,
+    adaptiveHeight: true,
   };
 
   const handleFullScreen = () => {
@@ -80,7 +95,9 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
   return (
     <SliderContainer
       ref={sliderRef}
-      className={fullScreen ? classes.sliderContainerFullScreen : ''}
+      className={
+        fullScreen ? classes.sliderContainerFullScreen : classes.sliderContainer
+      }
     >
       <GalleryFullScreenButton size="medium" onClick={handleFullScreen}>
         {fullScreen ? (
