@@ -1,4 +1,4 @@
-import { SET_COUNTRIES_LIST, SET_COUNTRY } from 'appConstants';
+import { SET_COUNTRIES_LIST, SET_COUNTRY, SET_USER_LANGUAGE } from 'appConstants';
 import { StateCountry } from '../types';
 
 export const setCountry = (payload: StateCountry) => ({
@@ -12,6 +12,6 @@ export const setCountriesList = (payload: StateCountry[]) => ({
 });
 
 export const setLanguage = (payload: string) => ({
-  type: SET_COUNTRIES_LIST,
+  type: SET_USER_LANGUAGE,
   payload,
 });

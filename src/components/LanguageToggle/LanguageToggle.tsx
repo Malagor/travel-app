@@ -2,15 +2,13 @@ import React, { FC } from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
 import i18n from 'i18next';
 import { useDispatch } from 'react-redux';
-import { SET_USER_LANGUAGE } from 'appConstants';
 import { setLanguage } from 'store/actions';
 
 export const LanguageToggle: FC = () => {
   const dispatch = useDispatch();
 
   const updateLang = (lang: string) => {
-    dispatch({ type: SET_USER_LANGUAGE, payload: lang });
-    // dispatch(setLanguage(lang));
+    dispatch(setLanguage(lang));
   };
 
   return (
