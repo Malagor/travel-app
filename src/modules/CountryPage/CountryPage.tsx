@@ -2,14 +2,13 @@ import React, { FC, useCallback, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Database } from 'services';
+import { database } from 'services/database';
 
 import { State, StateCountry } from 'types';
 import { setCountry } from 'store/actions';
 import { CountryPageView } from './components/CountryPageView';
 
 export const CountryPage: FC = () => {
-  const database = Database.create();
   const params: { id: string } = useParams();
   const { id } = params;
 
@@ -21,7 +20,7 @@ export const CountryPage: FC = () => {
     (idx: number) => {
       dispatch(setCountry(database.getCountryById(idx)));
     },
-    [database, dispatch]
+    [dispatch]
   );
 
   useEffect(() => {

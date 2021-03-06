@@ -1,8 +1,7 @@
-import { Database } from 'services';
 import { CurrencyType, State } from 'types';
+import { database } from 'services/database';
 
 export const initialState = () => {
-  const database = Database.create();
 
   const userInfo = database.getUserInfo('1');
   const countryList = database.getCountriesList();

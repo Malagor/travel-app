@@ -6,14 +6,13 @@ import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, StateCountry } from 'types';
-import { Database } from 'services';
+import { database } from 'services/database';
 import { setCountriesList } from 'store/actions';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
 export const MainPage: FC = () => {
   const classes = useStyles();
-  const database = Database.create();
 
   const countryList: StateCountry[] = useSelector(
     (state: State) => state.countryList
@@ -24,7 +23,7 @@ export const MainPage: FC = () => {
 
   useEffect(() => {
     dispatch(setCountriesList(database.getCountriesList()));
-  }, [dispatch, database]);
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg" className={classes.container}>
