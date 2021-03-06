@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Database } from 'services';
 
 import { State, StateCountry } from 'types';
-import { SET_COUNTRY } from 'appConstants';
+import { setCountry } from 'store/actions';
 import { CountryPageView } from './components/CountryPageView';
 
 export const CountryPage: FC = () => {
@@ -18,7 +18,7 @@ export const CountryPage: FC = () => {
   const dispatch = useDispatch();
 
   const updateCountryInfo = (idx: number) => {
-    dispatch({ type: SET_COUNTRY, payload: database.getCountryById(idx) })
+    dispatch(setCountry(database.getCountryById(idx)));
   };
 
   useEffect(() => {
