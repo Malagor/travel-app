@@ -24,7 +24,7 @@ export const MainPage: FC = () => {
 
   useEffect(() => {
     dispatch(setCountriesList(database.getCountriesList()));
-  });
+  }, [dispatch, database]);
 
   return (
     <Container maxWidth="lg" className={classes.container}>
