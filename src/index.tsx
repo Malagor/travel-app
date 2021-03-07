@@ -5,11 +5,14 @@ import './i18n';
 import { App } from './components';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { AppState } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AppState>
+        <App />
+      </AppState>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
