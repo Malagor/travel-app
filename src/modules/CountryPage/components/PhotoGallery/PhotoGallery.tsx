@@ -5,8 +5,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import styled from 'styled-components';
 import { WHITE_COLOR } from 'appConstants/colors';
+
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
@@ -36,6 +39,38 @@ const GalleryFullScreenButton = styled(IconButton)`
   z-index: 10;
 `;
 
+function SampleNextArrow({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      type="button"
+      className={`${classes.slickArrow} ${classes.slickNextArrow}`}
+      onClick={onClick}
+    >
+      <ArrowForwardIosIcon fontSize="large" />
+    </button>
+  );
+}
+
+function SamplePrevArrow({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      type="button"
+      className={`${classes.slickArrow} ${classes.slickPrevArrow}`}
+      onClick={onClick}
+    >
+      <ArrowBackIosIcon fontSize="large" />
+    </button>
+  );
+}
+
 export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
@@ -58,6 +93,8 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
     centerMode: true,
     variableWidth: true,
     adaptiveHeight: true,
+    nextArrow: <SampleNextArrow onClick={() => {}} />,
+    prevArrow: <SamplePrevArrow onClick={() => {}} />,
   };
 
   const handleFullScreen = () => {

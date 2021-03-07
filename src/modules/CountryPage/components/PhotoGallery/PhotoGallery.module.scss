@@ -17,6 +17,37 @@
   flex-direction: column;
 }
 
+.slickArrow {
+  z-index: 10;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  color: rgba(225, 225, 225, 0.6);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  &:hover svg {
+    color: rgba(255, 255, 255, 1);
+    transition: color 0.6s;
+  }
+  &:active svg {
+    color: rgba(88, 144, 235, 0.8);
+    transition: color 0s;
+  }
+}
+
+.slickPrevArrow {
+  left: 0;
+}
+
+.slickNextArrow {
+  right: 0;
+}
+
 .slickThumbs {
   display: flex !important;
   justify-content: center;
@@ -33,5 +64,3 @@
 .slickThumbs img {
   height: 100px;
 }
-
-
