@@ -92,7 +92,6 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
     className: fullScreen ? classes.sliderFullScreen : classes.slickSlider,
     centerMode: true,
     variableWidth: true,
-    adaptiveHeight: true,
     nextArrow: <SampleNextArrow onClick={() => {}} />,
     prevArrow: <SamplePrevArrow onClick={() => {}} />,
   };
