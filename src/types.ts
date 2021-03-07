@@ -40,13 +40,57 @@ export type TWeatherInfo = {
   id: number;
   name: string;
   cod: number;
-}
+};
 
 export type CountryCardProps = {
   id: string | number;
   name: string;
   description: string;
   image: string;
+};
+
+export type CurrencyType = {
+  [key: string]: { nameRu: string; nameEn: string; nameBe: string };
+};
+
+export type StateUserInfo = {
+  id: string;
+  name: string;
+  avatar: string;
+  lang: string;
+};
+
+export type StateSettings = {
+  theme: string;
+  currencyList: CurrencyType;
+};
+
+export type LanguagesType = {
+  en?: string;
+  ru?: string;
+  be?: string;
+};
+
+export type StateCountry = {
+  id: string | number;
+  name: LanguagesType;
+  capital: LanguagesType;
+  currency?: CurrencyType;
+  description?: LanguagesType;
+  population?: number;
+  area?: number;
+  languages?: string[];
+  videos?: string[];
+  photos?: string[];
+  locale?: string;
+  timeZone?: string;
+};
+
+export type State = {
+  settings: StateSettings;
+  userInfo: StateUserInfo;
+  country: StateCountry;
+  countryList: StateCountry[] | [];
 };
 
 export type CurrencyRatesInfo = {
