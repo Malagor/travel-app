@@ -1,26 +1,13 @@
 import React, {FC} from 'react';
-
+import classes from './DigitalWatch.module.scss';
 
 type TDigitalWatchProps = {
-  date: Date;
-  language: string;
+  time: string;
+  theme: string;
 }
 
-export const DigitalWatch: FC<TDigitalWatchProps> = ({date, language}) => {
-  const optionsTime: object = {
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
- };
-
- console.log('date', date)
-
- const stringData = date.toLocaleString(language, optionsTime);
-
- return (
-   <div>
-     { stringData }
-   </div>
- )
-
-}
+export const DigitalWatch: FC<TDigitalWatchProps> = ({time, theme}) => (
+  <div className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>
+    { time }
+  </div>
+)

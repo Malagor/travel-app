@@ -9,7 +9,7 @@ import { Layout } from '../Layout/Layout';
 export function App() {
   return (
     <div>
-      <ClockWidget />
+      <ClockWidget theme='light'/>
     </div>
 
 /*     <Layout>

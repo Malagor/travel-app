@@ -1,26 +1,14 @@
 import React, {FC} from 'react';
+import classes from './DateString.module.scss';
+
 
 type TDateProps = {
-  date: Date;
-  language: string;
+  day: string;
+  theme: string;
 };
 
-export const DateString: FC<TDateProps> = ({date, language}) => {
-  const optionsDate: object = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'long',
-    timezone: 'UTC',
- };
-
-const stringData = date.toLocaleString(language, optionsDate);
- 
-
- return (
-   <div>
-     { stringData }
-   </div>
- )
-
-}
+export const DateString: FC<TDateProps> = ({day, theme}) => ( 
+  <div className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>
+    { day }
+  </div>
+)
