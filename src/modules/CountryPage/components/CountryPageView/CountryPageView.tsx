@@ -6,7 +6,6 @@ import { Typography } from '@material-ui/core';
 import { LanguagesType, StateCountry } from 'types';
 import { useStyles } from './styled';
 import { PhotoGallery } from './components';
-import { countryPictures } from '../../mockupCountryPictures';
 
 type CountryPageProps = {
   country: StateCountry;
@@ -50,11 +49,13 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <PhotoGallery pictures={countryPictures} />
-            </Paper>
-          </Grid>
+          {country.attractions && (
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <PhotoGallery country={country} lang={lang} />
+              </Paper>
+            </Grid>
+          )}
         </Grid>
       ) : (
         <Typography variant="h2">Country Page</Typography>

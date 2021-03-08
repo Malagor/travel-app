@@ -71,6 +71,12 @@ export type LanguagesType = {
   be?: string;
 };
 
+export type AttractionsType = {
+  photo: string;
+  name: LanguagesType;
+  description: LanguagesType;
+};
+
 export type StateCountry = {
   id: string | number;
   name: LanguagesType;
@@ -84,6 +90,7 @@ export type StateCountry = {
   photos?: string[];
   locale?: string;
   timeZone?: string;
+  attractions?: AttractionsType[];
 };
 
 export type State = {

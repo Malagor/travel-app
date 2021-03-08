@@ -48,6 +48,31 @@
   right: 0;
 }
 
+.slickImage {
+  position: relative;
+}
+
+.slickImageCaption {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  color:rgba(225, 225, 225, 1);
+  padding: 10px 20px;
+}
+
+.slickImageTitle {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.slickImageDescription {
+  margin: 0;
+}
+
 .slickThumbs {
   display: flex !important;
   justify-content: center;
@@ -63,4 +88,11 @@
 
 .slickThumbs img {
   height: 100px;
+}
+
+@media (max-width: 800px) {
+  .slickImageCaption {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
 }

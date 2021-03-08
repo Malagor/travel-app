@@ -9,11 +9,13 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import styled from 'styled-components';
 import { WHITE_COLOR } from 'appConstants/colors';
+import { LanguagesType, StateCountry } from 'types';
 
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
-  pictures: string[];
+  country: StateCountry;
+  lang: string;
 };
 
 const SliderContainer = styled('div')`
@@ -71,14 +73,21 @@ function SamplePrevArrow({
   );
 }
 
-export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
+export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   const settings = {
     customPaging(i: number) {
       return (
         <a className={classes.slickThumbsLink}>
-          <img src={pictures[i]} />
+          <img
+            src={country.attractions ? country.attractions[i].photo : ''}
+            alt={
+              country.attractions
+                ? country.attractions[i].name[lang as keyof LanguagesType]
+                : ''
+            }
+          />
         </a>
       );
     },
@@ -120,11 +129,24 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ pictures }) => {
     };
   }, []);
 
-  const slides = pictures.map((pictureURL) => (
-    <div key={pictureURL}>
-      <img src={pictureURL} alt="country pic" />
-    </div>
-  ));
+  const slides = country.attractions
+    ? country.attractions.map((attraction) => (
+        <div className={classes.slickImage} key={attraction.photo}>
+          <img
+            src={attraction.photo}
+            alt={attraction.name[lang as keyof LanguagesType]}
+          />
+          <div className={classes.slickImageCaption}>
+            <p className={classes.slickImageTitle}>
+              {attraction.name[lang as keyof LanguagesType]}
+            </p>
+            <p className={classes.slickImageDescription}>
+              {attraction.description[lang as keyof LanguagesType]}
+            </p>
+          </div>
+        </div>
+      ))
+    : null;
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
