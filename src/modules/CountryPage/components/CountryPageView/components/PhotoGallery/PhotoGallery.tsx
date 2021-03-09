@@ -2,15 +2,15 @@ import React, { FC, useState, useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import styled from 'styled-components';
+
 import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import styled from 'styled-components';
-import { WHITE_COLOR } from 'appConstants/colors';
-import { LanguagesType, StateCountry } from 'types';
 
+import { LanguagesType, StateCountry } from 'types';
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
@@ -34,14 +34,7 @@ const SliderContainer = styled('div')`
   }
 `;
 
-const GalleryFullScreenButton = styled(IconButton)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-`;
-
-function SampleNextArrow({
+function NextArrow({
   onClick,
 }: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -57,7 +50,7 @@ function SampleNextArrow({
   );
 }
 
-function SamplePrevArrow({
+function PrevArrow({
   onClick,
 }: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -98,11 +91,27 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 500,
-    className: fullScreen ? classes.sliderFullScreen : classes.slickSlider,
+    className: fullScreen ? classes.slickFullScreen : classes.slickSlider,
     centerMode: true,
     variableWidth: true,
-    nextArrow: <SampleNextArrow onClick={() => {}} />,
-    prevArrow: <SamplePrevArrow onClick={() => {}} />,
+    nextArrow: <NextArrow onClick={() => {}} />,
+    prevArrow: <PrevArrow onClick={() => {}} />,
+    responsive: [
+      {
+        breakpoint: 501,
+        settings: {
+          centerMode: true,
+          variableWidth: true,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          centerMode: false,
+          variableWidth: false,
+        },
+      },
+    ],
   };
 
   const handleFullScreen = () => {
@@ -154,16 +163,16 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
     <SliderContainer
       ref={sliderRef}
       className={
-        fullScreen ? classes.sliderContainerFullScreen : classes.sliderContainer
+        fullScreen ? classes.slickContainerFullScreen : classes.slickContainer
       }
     >
-      <GalleryFullScreenButton size="medium" onClick={handleFullScreen}>
-        {fullScreen ? (
-          <FullscreenExitIcon htmlColor={WHITE_COLOR} />
-        ) : (
-          <FullscreenIcon htmlColor={WHITE_COLOR} />
-        )}
-      </GalleryFullScreenButton>
+      <IconButton
+        size="medium"
+        onClick={handleFullScreen}
+        className={classes.slickFullScreenButton}
+      >
+        {fullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+      </IconButton>
       <Slider {...settings}>{slides}</Slider>
     </SliderContainer>
   );

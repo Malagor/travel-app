@@ -1,14 +1,30 @@
-.sliderContainer {
+.slickContainer {
   width: 100%;
 }
 
-.sliderContainerFullScreen {
+.slickFullScreenButton {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  svg {
+    color:rgba(225, 225, 225, 1);
+  }
+
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.6s;
+  }
+}
+
+.slickContainerFullScreen {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.sliderFullScreen {
+.slickFullScreen {
   width: 100%;
 }
 
@@ -90,9 +106,35 @@
   height: 100px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .slickImageCaption {
     font-size: 0.8em;
     padding: 5px 10px;
+  }
+
+  .slickThumbs img {
+    height: 60px;
+  }
+}
+
+@media (max-width: 500px) {
+  .slickFullScreenButton {
+    display: none !important;
+  }
+
+  .slickThumbs {
+    display: none !important;
+  }
+
+  .slickImageCaption {
+    position: relative;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    color:rgba(0,0,0,0.8);
+    padding: 5px;
+  }
+
+  .slickArrow {
+    width: 60px;
   }
 }
