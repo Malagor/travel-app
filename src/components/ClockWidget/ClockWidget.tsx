@@ -30,11 +30,8 @@ export const ClockWidget: FC<TClockWidgetProps> = ({theme}) => {
 
   const [, i18n] = useTranslation();
 
-  const dateLocaleCity = moment().locale(i18n.language).tz(timezoneMyCity)
-  const dateOtherCity = moment().locale(i18n.language).tz(timezoneNewYork)
-
-  const [localeDate, setLocaleDate] = useState(dateLocaleCity)
-  const [otherDate, setOtherDate] = useState(dateOtherCity)
+  const [localeDate, setLocaleDate] = useState<null | moment.Moment>(null)
+  const [otherDate, setOtherDate] = useState<null | moment.Moment>(null)
 
   const tick = () => {
     const dateLocaleCityNow = moment().locale(i18n.language).tz(timezoneMyCity)
@@ -55,23 +52,23 @@ export const ClockWidget: FC<TClockWidgetProps> = ({theme}) => {
 
         <div className={classes.timeBlock}>
           <h4 className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>localCity</h4>
-          <Clock time={getTimeForClock(localeDate)} theme={theme}/>
+            {localeDate && <Clock time={getTimeForClock(localeDate)} theme={theme}/>}
           <div className={classes.timeBlock__time}>
-            <DigitalWatch time={getTimeDigitalWatch(localeDate)}  theme={theme}/>
+            {localeDate && <DigitalWatch time={getTimeDigitalWatch(localeDate)}  theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            <DateString day={getTimeDate(localeDate)} theme={theme}/>
+            {localeDate && <DateString day={getTimeDate(localeDate)} theme={theme}/>}
           </div>
         </div>
 
         <div className={classes.timeBlock}>
           <h4 className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>{timezoneNewYork}</h4>
-          <Clock time={getTimeForClock(otherDate)} theme={theme}/>
+            {otherDate && <Clock time={getTimeForClock(otherDate)} theme={theme}/>}
           <div className={classes.timeBlock__time}>
-            <DigitalWatch time={getTimeDigitalWatch(otherDate)} theme={theme}/>
+            {otherDate && <DigitalWatch time={getTimeDigitalWatch(otherDate)} theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            <DateString day={getTimeDate(otherDate)} theme={theme}/>
+            {otherDate && <DateString day={getTimeDate(otherDate)} theme={theme}/>}
           </div>
         </div>
 
