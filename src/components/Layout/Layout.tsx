@@ -20,7 +20,11 @@ import { mainListItems, secondaryListItems } from './components';
 import { useStyles } from './styled';
 import { Footer } from './components/Footer';
 
-export const Layout: FC = ({ children }) => {
+type LayoutProps = {
+  pathname: string;
+};
+
+export const Layout: FC<LayoutProps> = ({ children, pathname }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -60,7 +64,7 @@ export const Layout: FC = ({ children }) => {
             Go-Go Travel
           </Typography>
           <div className={classes.grow} />
-          <Search />
+          {pathname === '/' && <Search />}
           <LanguageToggle />
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
