@@ -131,11 +131,7 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
 
   useEffect(() => {
     document.onfullscreenchange = () => {
-      if (document.fullscreenElement === sliderRef.current) {
-        setFullScreen(true);
-      } else {
-        setFullScreen(false);
-      }
+      setFullScreen(document.fullscreenElement === sliderRef.current);
     };
     return () => {
       document.onfullscreenchange = null;
