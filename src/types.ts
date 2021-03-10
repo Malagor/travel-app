@@ -91,6 +91,7 @@ export type State = {
   userInfo: StateUserInfo;
   country: StateCountry;
   countryList: StateCountry[] | [];
+  search: string;
 };
 
 export type CurrencyRatesInfo = {

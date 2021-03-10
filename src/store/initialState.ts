@@ -2,7 +2,6 @@ import { CurrencyType, State } from 'types';
 import { database } from 'services/database';
 
 export const initialState = () => {
-
   const userInfo = database.getUserInfo('1');
   const countryList = database.getCountriesList();
   const currencyList = database.getCurrenciesList();
@@ -28,6 +27,7 @@ export const initialState = () => {
       name: userInfo.name,
       avatar: userInfo.avatar,
     },
+    search: '',
   };
 
   return state;

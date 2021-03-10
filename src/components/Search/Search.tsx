@@ -1,4 +1,7 @@
 import React, { FC, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearch } from 'store/actions';
+import { State } from 'types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { useStyles } from './styled';
@@ -8,6 +11,8 @@ type SearchProps = {};
 export const Search: FC<SearchProps> = () => {
   const classes = useStyles();
   const inputRef = useRef<HTMLInputElement>(null);
+  const search = useSelector((state: State) => state.search);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     inputRef.current!.focus();
@@ -26,6 +31,8 @@ export const Search: FC<SearchProps> = () => {
         }}
         inputProps={{ 'aria-label': 'search' }}
         inputRef={inputRef}
+        value={search}
+        onChange={(evt) => dispatch(setSearch(evt.target.value))}
       />
     </div>
   );
