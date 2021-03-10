@@ -16,8 +16,8 @@ const getTimeForClock = (date: moment.Moment) => {
     return {hour, min, sec}
 }
 
-const getTimeDigitalWatch = (date: moment.Moment) => date.format('hh: mm: ss')
-const getTimeDate = (date: moment.Moment) => date.format('dddd, ll')
+const getCountryTime = (date: moment.Moment) => date.format('hh: mm: ss')
+const getCountryDate = (date: moment.Moment) => date.format('dddd, ll')
 
 
 type TClockWidgetProps = {
@@ -54,10 +54,10 @@ export const ClockWidget: FC<TClockWidgetProps> = ({theme}) => {
           <h4 className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>localCity</h4>
             {localeDate && <Clock time={getTimeForClock(localeDate)} theme={theme}/>}
           <div className={classes.timeBlock__time}>
-            {localeDate && <DigitalWatch time={getTimeDigitalWatch(localeDate)}  theme={theme}/>}
+            {localeDate && <DigitalWatch time={getCountryTime(localeDate)}  theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            {localeDate && <DateString day={getTimeDate(localeDate)} theme={theme}/>}
+            {localeDate && <DateString day={getCountryDate(localeDate)} theme={theme}/>}
           </div>
         </div>
 
@@ -65,10 +65,10 @@ export const ClockWidget: FC<TClockWidgetProps> = ({theme}) => {
           <h4 className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>{timezoneNewYork}</h4>
             {otherDate && <Clock time={getTimeForClock(otherDate)} theme={theme}/>}
           <div className={classes.timeBlock__time}>
-            {otherDate && <DigitalWatch time={getTimeDigitalWatch(otherDate)} theme={theme}/>}
+            {otherDate && <DigitalWatch time={getCountryTime(otherDate)} theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            {otherDate && <DateString day={getTimeDate(otherDate)} theme={theme}/>}
+            {otherDate && <DateString day={getCountryDate(otherDate)} theme={theme}/>}
           </div>
         </div>
 
