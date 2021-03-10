@@ -72,7 +72,11 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
   const settings = {
     customPaging(i: number) {
       return (
-        <a className={classes.slickThumbsLink}>
+        <button
+          style={{ border: 'none', padding: 0, outline: 'none' }}
+          type="button"
+          className={classes.slickThumbsLink}
+        >
           <img
             src={country.attractions ? country.attractions[i].photo : ''}
             alt={
@@ -81,7 +85,7 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
                 : ''
             }
           />
-        </a>
+        </button>
       );
     },
     dots: true,
