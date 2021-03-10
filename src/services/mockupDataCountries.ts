@@ -245,7 +245,7 @@ export const countries: StateCountry[] = [
         },
         description: {
           en: 'Medieval castle in Ukraine.',
-          ru: 'Средневековый замок ва Украине.',
+          ru: 'Средневековый замок в Украине.',
           be: 'Cярэднявечны замак у Украіне.',
         },
       },
