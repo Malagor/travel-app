@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { LanguagesType, StateCountry } from 'types';
+import { VideoPlayer } from '../VideoPlayer';
 import { useStyles } from './styled';
 
 type CountryPageProps = {
@@ -40,6 +41,9 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                     {country?.description &&
                       country.description[lang as keyof LanguagesType]}
                   </p>
+                </Grid>
+                <Grid item xs={12} md={7} lg={7}>
+                  <VideoPlayer url={country?.videos?.[0] || ''} />
                 </Grid>
               </Grid>
             </Grid>
