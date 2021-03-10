@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import classes from './DigitalWatch.module.scss';
 
 type TDigitalWatchProps = {
-  time: string;
+  time: string; 
   theme: string;
 }
 
