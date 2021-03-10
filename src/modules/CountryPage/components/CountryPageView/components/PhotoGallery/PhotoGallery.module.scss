@@ -96,6 +96,7 @@
   list-style: none;
   max-width: 100%;
   overflow: hidden;
+  height: 100px;
 }
 
 .slickThumbsLink {
@@ -110,6 +111,10 @@
   .slickImageCaption {
     font-size: 0.8em;
     padding: 5px 10px;
+  }
+
+  .slickThumbs {
+    height: 60px;
   }
 
   .slickThumbs img {
