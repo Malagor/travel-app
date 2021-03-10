@@ -4,9 +4,9 @@ import 'moment/locale/ru';
 import moment from 'moment-timezone';
 import React, {FC, useState, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
-import { Clock } from './components/Clock/Clock';
-import { DigitalWatch } from './components/DigitalWatch/DigitalWatch';
-import { DateString } from './components/Date/DateString';
+import { Clock } from './components/Clock';
+import { DigitalWatch } from './components/DigitalWatch';
+import { DateString } from './components/Date';
 import classes from './ClockWidget.module.scss';
 
  

@@ -3,9 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { Layout } from '../Layout/Layout';
 
-
-
-
 export function App() {
   return (
     <Layout>
