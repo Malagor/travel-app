@@ -5,15 +5,18 @@ const DEGREASE = 6;
 
 type TClockProps = {
   time: {
-    hour:number;
-    min: number;
-    sec: number;
-  };
+    hour: number; 
+    min: number; 
+    sec: number
+  }; 
   theme: string;
 };
 
 export const Clock: FC<TClockProps> = ({time, theme}) => {
+  console.log('time', typeof time)
+
   const { hour, min, sec } = time
+ 
 
   const hourClock = hour * 30
   const minClock = min * DEGREASE
