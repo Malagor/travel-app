@@ -6,5 +6,7 @@
     "wind": "wind",
     "humidity": "humidity",
     "metersPerSecond": "m/s"
-  }
+  },
+  "Search Placeholder": "Enter country",
+  "Wrong Search Input": "Input is incorrect. Enter country or capital name in English."
 }

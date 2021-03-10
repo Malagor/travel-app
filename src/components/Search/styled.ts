@@ -68,5 +68,9 @@ export const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
     },
+    tooltip: {
+      backgroundColor: theme.palette.warning.dark,
+      fontSize: '0.9em',
+    },
   })
 );
