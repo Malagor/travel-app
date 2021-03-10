@@ -6,10 +6,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { LanguagesType, StateCountry } from 'types';
+import { LanguagesType, CountryType } from 'types';
 
 type CountryCardProps = {
-  country: StateCountry;
+  country: CountryType;
   lang: string;
 };
 
