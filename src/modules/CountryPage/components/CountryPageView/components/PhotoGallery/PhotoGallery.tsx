@@ -10,11 +10,11 @@ import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-import { LanguagesType, StateCountry } from 'types';
+import { LanguagesType, SliderDataType } from 'types';
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
-  country: StateCountry;
+  sliderData: SliderDataType[];
   lang: string;
 };
 
@@ -66,7 +66,7 @@ function PrevArrow({
   );
 }
 
-export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
+export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   const settings = {
@@ -78,11 +78,9 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
           className={classes.slickThumbsLink}
         >
           <img
-            src={country.attractions ? country.attractions[i].photo : ''}
+            src={sliderData ? sliderData[i].photo : ''}
             alt={
-              country.attractions
-                ? country.attractions[i].name[lang as keyof LanguagesType]
-                : ''
+              sliderData ? sliderData[i].name[lang as keyof LanguagesType] : ''
             }
           />
         </button>
@@ -138,19 +136,19 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ country, lang }) => {
     };
   }, []);
 
-  const slides = country.attractions
-    ? country.attractions.map((attraction) => (
-        <div className={classes.slickImage} key={attraction.photo}>
+  const slides = sliderData
+    ? sliderData.map((slide) => (
+        <div className={classes.slickImage} key={slide.photo}>
           <img
-            src={attraction.photo}
-            alt={attraction.name[lang as keyof LanguagesType]}
+            src={slide.photo}
+            alt={slide.name[lang as keyof LanguagesType]}
           />
           <div className={classes.slickImageCaption}>
             <p className={classes.slickImageTitle}>
-              {attraction.name[lang as keyof LanguagesType]}
+              {slide.name[lang as keyof LanguagesType]}
             </p>
             <p className={classes.slickImageDescription}>
-              {attraction.description[lang as keyof LanguagesType]}
+              {slide.description[lang as keyof LanguagesType]}
             </p>
           </div>
         </div>

@@ -71,7 +71,7 @@ export type LanguagesType = {
   be?: string;
 };
 
-export type AttractionsType = {
+export type SliderDataType = {
   photo: string;
   name: LanguagesType;
   description: LanguagesType;
@@ -90,7 +90,7 @@ export type StateCountry = {
   photos?: string[];
   locale?: string;
   timeZone?: string;
-  attractions?: AttractionsType[];
+  attractions?: SliderDataType[];
 };
 
 export type State = {

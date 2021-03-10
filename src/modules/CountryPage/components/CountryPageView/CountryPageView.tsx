@@ -52,7 +52,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
           {country.attractions && (
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <PhotoGallery country={country} lang={lang} />
+                <PhotoGallery sliderData={country.attractions} lang={lang} />
               </Paper>
             </Grid>
           )}
