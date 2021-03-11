@@ -6,6 +6,8 @@ import { State } from 'types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
 import { StringMap } from 'i18next';
 import { useStyles } from './styled';
 
@@ -72,6 +74,9 @@ export const Search: FC<SearchProps> = () => {
           onChange={(evt) => setCurrentInput(evt.target.value)}
         />
       </Tooltip>
+      <IconButton color="inherit" onClick={() => setCurrentInput('')}>
+        <ClearIcon />
+      </IconButton>
     </div>
   );
 };
