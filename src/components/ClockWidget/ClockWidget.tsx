@@ -17,7 +17,11 @@ const getTimeForClock = (date: moment.Moment) => {
 }
 
 const getCountryTime = (date: moment.Moment) => date.format('hh: mm: ss')
-const getCountryDate = (date: moment.Moment) => date.format('dddd, ll')
+const getCountryDate = (date: moment.Moment) => {
+  const day = date.format('dddd')
+  const season = date.format('ll')
+  return { day, season }
+}
 
 
 type TClockWidgetProps = {
@@ -67,7 +71,7 @@ export const ClockWidget: FC<TClockWidgetProps> = ({data, theme}) => {
             {localeDate && <DigitalWatch time={getCountryTime(localeDate)}  theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            {localeDate && <DateString day={getCountryDate(localeDate)} theme={theme}/>}
+            {localeDate && <DateString date={getCountryDate(localeDate)} theme={theme}/>}
           </div>
         </div>
 
@@ -78,7 +82,7 @@ export const ClockWidget: FC<TClockWidgetProps> = ({data, theme}) => {
             {otherDate && <DigitalWatch time={getCountryTime(otherDate)} theme={theme}/>}
           </div>
           <div className={classes.timeBlock__time}>
-            {otherDate && <DateString day={getCountryDate(otherDate)} theme={theme}/>}
+            {otherDate && <DateString date={getCountryDate(otherDate)} theme={theme}/>}
           </div>
         </div>
 

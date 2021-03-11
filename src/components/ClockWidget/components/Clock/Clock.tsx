@@ -13,11 +13,8 @@ type TClockProps = {
 };
 
 export const Clock: FC<TClockProps> = ({time, theme}) => {
-  console.log('time', typeof time)
-
   const { hour, min, sec } = time
  
-
   const hourClock = hour * 30
   const minClock = min * DEGREASE
   const secClock = sec * DEGREASE

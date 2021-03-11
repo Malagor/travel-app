@@ -3,12 +3,20 @@ import classes from './DateString.module.scss';
 
 
 type TDateProps = {
-  day: string;
+  date: {
+    day: string;
+    season: string;
+  };
   theme: string;
 };
 
-export const DateString: FC<TDateProps> = ({day, theme}) => ( 
-  <div className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>
-    { day }
+export const DateString: FC<TDateProps> = ({date, theme}) => ( 
+  <div className={`${theme === 'light' ? classes.lightTheme : classes.darkTheme} ${ classes.wrapper}`}>
+    <div className={classes.day}>
+      { date.day }
+    </div>
+    <div>
+      { date.season }
+    </div>
   </div>
 )
