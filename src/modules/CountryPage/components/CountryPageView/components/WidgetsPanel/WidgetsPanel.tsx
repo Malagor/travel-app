@@ -17,10 +17,10 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
     <Container className={classes.container}>
       <Paper className={classes.paper}>
         <Clock theme={theme} />
-        <CurrencyRate
-          currentCountry="russia"
-          preferredCurrencies={Object.keys(currencies)}
-        />
+        {/* <CurrencyRate */}
+        {/*  currentCountry="russia" */}
+        {/*  preferredCurrencies={Object.keys(currencies)} */}
+        {/* /> */}
       </Paper>
     </Container>
   );

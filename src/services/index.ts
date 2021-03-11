@@ -1,1 +1,1 @@
-export { database } from './database';
+export { database } from './mongodb';

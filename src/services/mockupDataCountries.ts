@@ -1,6 +1,4 @@
-import { CountryType } from 'types';
-
-export const countries: CountryType[] = [
+export const countries = [
   {
     id: 1,
     name: {

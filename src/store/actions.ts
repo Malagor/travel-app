@@ -1,6 +1,7 @@
 import {
   SET_COUNTRIES_LIST,
   SET_COUNTRY,
+  SET_USER,
   SET_USER_LANGUAGE,
 } from 'appConstants';
 import { CountryType } from '../types';
@@ -20,6 +21,11 @@ export const setLanguage = (payload: string) => ({
   payload,
 });
 
+export const setUserInfo = (payload: string) => ({
+  type: SET_USER,
+  payload,
+});
+
 export const loadCountryList = () => async (
   dispatch: (func: unknown) => void
 ) => {
@@ -27,8 +33,8 @@ export const loadCountryList = () => async (
 
   fetch(url)
     .then((res) => res.json())
-    .then(countries => {
-      dispatch(setCountriesList(countries))
+    .then((countries) => {
+      dispatch(setCountriesList(countries));
     })
     .catch((err) => {
       console.error(err);
@@ -42,8 +48,23 @@ export const loadCountry = (id: string) => async (
 
   fetch(url)
     .then((res) => res.json())
-    .then(country => {
-      dispatch(setCountry(country))
+    .then((country) => {
+      dispatch(setCountry(country));
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+export const loadUserInfo = (id: string) => async (
+  dispatch: (func: unknown) => void
+) => {
+  const url = `http://localhost:3001/user/${id}`;
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((user) => {
+      dispatch(setUserInfo(user));
     })
     .catch((err) => {
       console.error(err);

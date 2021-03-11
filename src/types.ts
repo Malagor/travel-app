@@ -72,7 +72,7 @@ export type CountryType = {
   id: string | number;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: string;
+  currency: CurrencyType;
   description?: LanguagesType;
   population?: number;
   area?: number;

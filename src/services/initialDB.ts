@@ -1,5 +1,4 @@
 import { CurrencyType, CountryType } from 'types';
-import { countries } from './mockupDataCountries';
 
 export type DBUser = {
   id: string;
@@ -27,7 +26,7 @@ export const initialDB: DatabaseType = {
       lang: 'ru',
     },
   ],
-  countriesList: countries,
+  countriesList: [],
   currenciesList: {
     RUB: {
       nameRu: 'Российский рубль',

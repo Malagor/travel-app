@@ -28,6 +28,7 @@ export const initialState = () => {
         be: '',
         en: '',
       },
+      currency: {}
     },
   };
 
