@@ -58,11 +58,8 @@ export type UserInfo = {
   name: string;
   avatar: string;
   lang: string;
-};
-
-export type SettingsType = {
   theme: string;
-  currencyList: CurrencyType;
+  currencies: string[];
 };
 
 export type LanguagesType = {
@@ -75,7 +72,7 @@ export type CountryType = {
   id: string | number;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: string;
+  currency?: CurrencyType;
   description?: LanguagesType;
   population?: number;
   area?: number;
@@ -87,7 +84,6 @@ export type CountryType = {
 };
 
 export type State = {
-  settings: SettingsType;
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];

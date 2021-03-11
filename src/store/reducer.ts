@@ -56,12 +56,12 @@ export const appReducer: Reducer<State, Action> = (
     case SET_USER_CURRENCIES_LIST:
       return {
         ...state,
-        settings: { ...state.settings, currencyList: action.payload },
+        userInfo: { ...state.userInfo, currencyList: action.payload },
       };
     case SET_THEME:
       return {
         ...state,
-        settings: { ...state.settings, theme: action.payload },
+        userInfo: { ...state.userInfo, theme: action.payload },
       };
 
     default:
