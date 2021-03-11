@@ -3,12 +3,13 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
-import { LanguagesType, StateCountry } from 'types';
+import { LanguagesType, CountryType } from 'types';
 import { VideoPlayer } from '../VideoPlayer';
 import { useStyles } from './styled';
+import { WidgetsPanel } from './components/WidgetsPanel';
 
 type CountryPageProps = {
-  country: StateCountry;
+  country: CountryType;
   lang: string;
 };
 
@@ -16,6 +17,8 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
   const classes = useStyles();
 
   return (
+    <Grid container>
+      <Grid item xs={8}>
     <Container maxWidth="lg" className={classes.container}>
       {country ? (
         <Paper className={classes.paper}>
@@ -53,5 +56,10 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
         <Typography variant="h2">Country Page</Typography>
       )}
     </Container>
+      </Grid>
+      <Grid item xs={4}>
+        <WidgetsPanel />
+      </Grid>
+    </Grid>
   );
 };
