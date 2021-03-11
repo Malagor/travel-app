@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat'
   },
   logoSchool: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 
 }));
