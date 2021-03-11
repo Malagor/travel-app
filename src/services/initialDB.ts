@@ -1,4 +1,4 @@
-import { CurrencyType, StateCountry } from 'types';
+import { CurrencyType, CountryType } from 'types';
 import { countries } from './mockupDataCountries';
 
 export type DBUser = {
@@ -12,7 +12,7 @@ export type DBUser = {
 
 export type DatabaseType = {
   users: DBUser[];
-  countriesList: StateCountry[];
+  countriesList: CountryType[];
   currenciesList: CurrencyType;
 };
 

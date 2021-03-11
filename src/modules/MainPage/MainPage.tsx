@@ -5,16 +5,17 @@ import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { State, StateCountry } from 'types';
+import { State, CountryType } from 'types';
 import { database } from 'services/database';
 import { setCountriesList } from 'store/actions';
+import Paper from '@material-ui/core/Paper';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
 export const MainPage: FC = () => {
   const classes = useStyles();
 
-  const countryList: StateCountry[] = useSelector(
+  const countryList: CountryType[] = useSelector(
     (state: State) => state.countryList
   );
   const lang = useSelector((state: State) => state.userInfo.lang);
@@ -27,6 +28,7 @@ export const MainPage: FC = () => {
 
   return (
     <Container maxWidth="lg" className={classes.container}>
+      <Paper className={classes.paper}>
       <Typography variant="h2">Main Page</Typography>
 
       <Grid container spacing={3}>
@@ -38,6 +40,7 @@ export const MainPage: FC = () => {
           </Grid>
         ))}
       </Grid>
+      </Paper>
     </Container>
   );
 };

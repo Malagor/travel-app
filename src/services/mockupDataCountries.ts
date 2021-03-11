@@ -1,6 +1,6 @@
-import { StateCountry } from 'types';
+import { CountryType } from 'types';
 
-export const countries: StateCountry[] = [
+export const countries: CountryType[] = [
   {
     id: 1,
     name: {
@@ -13,6 +13,7 @@ export const countries: StateCountry[] = [
       ru: 'Минск',
       be: 'Мiнск',
     },
+    currency: 'BYN',
     description: {
       en:
         'The Republic of Belarus is located in the center of Europe. The shortest transport links connecting the CIS countries with the states of Western Europe run through its territory. Belarus shares borders with Poland, Lithuania, Latvia, Russia and Ukraine.',
@@ -24,6 +25,7 @@ export const countries: StateCountry[] = [
     photos: [
       `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/400/300`,
     ],
+    videos: ['https://www.youtube-nocookie.com/embed/vE9S-6DNM5k'],
     attractions: [
       {
         photo: 'https://i.ibb.co/sy3mLbP/1.jpg',
@@ -184,6 +186,7 @@ export const countries: StateCountry[] = [
       ru: 'Киев',
       be: 'Кiев',
     },
+    currency: 'UAH',
     description: {
       en:
         'Ukraine is a large country in Eastern Europe, known for its Orthodox churches, Black Sea resorts, and wooded mountains. In Kiev, the capital of the country, there is the St. Sophia Cathedral, decorated with golden domes, mosaics of the XI century and frescoes. Above the Dnieper River rises the monastery of the Kiev-Pechersk Lavra, a place of pilgrimage for many Orthodox Christians. Religious relics are kept in its monasteries, and the mummified remains of Orthodox monks are kept in the catacombs.',
@@ -195,6 +198,7 @@ export const countries: StateCountry[] = [
     photos: [
       `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/400/300`,
     ],
+    videos: ['https://www.youtube-nocookie.com/embed/3sR_13IyHXg'],
     attractions: [
       {
         photo: 'https://i.ibb.co/j8SKYKW/1.jpg',

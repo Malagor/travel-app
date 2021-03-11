@@ -53,14 +53,14 @@ export type CurrencyType = {
   [key: string]: { nameRu: string; nameEn: string; nameBe: string };
 };
 
-export type StateUserInfo = {
+export type UserInfo = {
   id: string;
   name: string;
   avatar: string;
   lang: string;
 };
 
-export type StateSettings = {
+export type SettingsType = {
   theme: string;
   currencyList: CurrencyType;
 };
@@ -77,11 +77,11 @@ export type SliderDataType = {
   description: LanguagesType;
 };
 
-export type StateCountry = {
+export type CountryType = {
   id: string | number;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: CurrencyType;
+  currency?: string;
   description?: LanguagesType;
   population?: number;
   area?: number;
@@ -94,10 +94,10 @@ export type StateCountry = {
 };
 
 export type State = {
-  settings: StateSettings;
-  userInfo: StateUserInfo;
-  country: StateCountry;
-  countryList: StateCountry[] | [];
+  settings: SettingsType;
+  userInfo: UserInfo;
+  country: CountryType;
+  countryList: CountryType[] | [];
 };
 
 export type CurrencyRatesInfo = {
