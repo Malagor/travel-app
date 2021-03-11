@@ -10,8 +10,8 @@ type WidgetsPanelProps = {};
 
 export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   const classes = useStyles();
-  const theme = useSelector((state: State) => state.settings.theme);
-  const currencies = useSelector((state: State) => state.settings.currencyList);
+  const theme = useSelector((state: State) => state.userInfo.theme);
+  const currencies = useSelector((state: State) => state.userInfo.currencyList);
 
   return (
     <Container className={classes.container}>

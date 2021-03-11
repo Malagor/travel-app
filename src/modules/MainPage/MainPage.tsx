@@ -6,8 +6,7 @@ import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, CountryType } from 'types';
-import { database } from 'services/database';
-import { setCountriesList } from 'store/actions';
+import { loadCountryList } from 'store/actions';
 import Paper from '@material-ui/core/Paper';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
@@ -22,24 +21,29 @@ export const MainPage: FC = () => {
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(setCountriesList(database.getCountriesList()));
+  // }, [dispatch]);
+
+
   useEffect(() => {
-    dispatch(setCountriesList(database.getCountriesList()));
+    dispatch(loadCountryList())
   }, [dispatch]);
 
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Paper className={classes.paper}>
-      <Typography variant="h2">Main Page</Typography>
+        <Typography variant="h2">Main Page</Typography>
 
-      <Grid container spacing={3}>
-        {countryList.map((country) => (
-          <Grid key={country.id} item xs={12} md={6} lg={4}>
-            <NavLink to={`/country/${country.id}`} className={classes.link}>
-              <CountryCard country={country} lang={lang} />
-            </NavLink>
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container spacing={3}>
+          {countryList.map((country) => (
+            <Grid key={country.id} item xs={12} md={6} lg={4}>
+              <NavLink to={`/country/${country.id}`} className={classes.link}>
+                <CountryCard country={country} lang={lang} />
+              </NavLink>
+            </Grid>
+          ))}
+        </Grid>
       </Paper>
     </Container>
   );

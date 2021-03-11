@@ -15,7 +15,6 @@ type CountryPageProps = {
 
 export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
   const classes = useStyles();
-
   return (
     <Grid container>
       <Grid item xs={8}>
@@ -25,7 +24,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography variant="h2">
-                {country?.name[lang as keyof LanguagesType]}
+                {country.name[lang as keyof LanguagesType]}
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -34,19 +33,19 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                   <Grid item xs={12} md={6} lg={4}>
                     <img
                       className={classes.image}
-                      src={country?.photos[0]}
-                      alt={country?.name[lang as keyof LanguagesType]}
+                      src={country.photos[0]}
+                      alt={country.name[lang as keyof LanguagesType]}
                     />
                   </Grid>
                 )}
                 <Grid item xs={12} md={6} lg={8}>
                   <p>
-                    {country?.description &&
+                    {country.description &&
                       country.description[lang as keyof LanguagesType]}
                   </p>
                 </Grid>
                 <Grid item xs={12} md={7} lg={7}>
-                  <VideoPlayer url={country?.videos?.[0] || ''} />
+                  <VideoPlayer url={country.videos?.[0] || ''} />
                 </Grid>
               </Grid>
             </Grid>
