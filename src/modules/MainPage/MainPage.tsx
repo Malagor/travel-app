@@ -5,16 +5,17 @@ import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { State, StateCountry, LanguagesType } from 'types';
+import { State, CountryType, LanguagesType } from 'types';
 import { database } from 'services/database';
 import { setCountriesList, setFirstCardRef } from 'store/actions';
+import Paper from '@material-ui/core/Paper';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
 export const MainPage: FC = () => {
   const classes = useStyles();
 
-  const countryList: StateCountry[] = useSelector(
+  const countryList: CountryType[] = useSelector(
     (state: State) => state.countryList
   );
   const lang = useSelector((state: State) => state.userInfo.lang);
@@ -45,24 +46,26 @@ export const MainPage: FC = () => {
 
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <Typography variant="h2">Main Page</Typography>
+      <Paper className={classes.paper}>
+        <Typography variant="h2">Main Page</Typography>
 
-      <Grid container spacing={3}>
-        {filteredCountryList.map((country, index) => (
-          <Grid
-            key={country.id}
-            item
-            xs={12}
-            md={6}
-            lg={4}
-            ref={index === 0 ? firstCardRef : null}
-          >
-            <NavLink to={`/country/${country.id}`} className={classes.link}>
-              <CountryCard country={country} lang={lang} />
-            </NavLink>
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container spacing={3}>
+          {filteredCountryList.map((country, index) => (
+            <Grid
+              key={country.id}
+              item
+              xs={12}
+              md={6}
+              lg={4}
+              ref={index === 0 ? firstCardRef : null}
+            >
+              <NavLink to={`/country/${country.id}`} className={classes.link}>
+                <CountryCard country={country} lang={lang} />
+              </NavLink>
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
     </Container>
   );
 };

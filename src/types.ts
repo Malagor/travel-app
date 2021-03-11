@@ -53,14 +53,14 @@ export type CurrencyType = {
   [key: string]: { nameRu: string; nameEn: string; nameBe: string };
 };
 
-export type StateUserInfo = {
+export type UserInfo = {
   id: string;
   name: string;
   avatar: string;
   lang: string;
 };
 
-export type StateSettings = {
+export type SettingsType = {
   theme: string;
   currencyList: CurrencyType;
 };
@@ -71,11 +71,17 @@ export type LanguagesType = {
   be?: string;
 };
 
-export type StateCountry = {
+export type SliderDataType = {
+  photo: string;
+  name: LanguagesType;
+  description: LanguagesType;
+};
+
+export type CountryType = {
   id: string | number;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: CurrencyType;
+  currency?: string;
   description?: LanguagesType;
   population?: number;
   area?: number;
@@ -84,13 +90,14 @@ export type StateCountry = {
   photos?: string[];
   locale?: string;
   timeZone?: string;
+  attractions?: SliderDataType[];
 };
 
 export type State = {
-  settings: StateSettings;
-  userInfo: StateUserInfo;
-  country: StateCountry;
-  countryList: StateCountry[] | [];
+  settings: SettingsType;
+  userInfo: UserInfo;
+  country: CountryType;
+  countryList: CountryType[] | [];
   search: string;
   firstCardRef: React.RefObject<HTMLDivElement> | null;
 };

@@ -5,14 +5,14 @@ import {
   SET_SEARCH,
   SET_FIRST_CARD_REF,
 } from 'appConstants';
-import { StateCountry } from '../types';
+import { CountryType } from '../types';
 
-export const setCountry = (payload: StateCountry) => ({
+export const setCountry = (payload: CountryType) => ({
   type: SET_COUNTRY,
   payload,
 });
 
-export const setCountriesList = (payload: StateCountry[]) => ({
+export const setCountriesList = (payload: CountryType[]) => ({
   type: SET_COUNTRIES_LIST,
   payload,
 });
