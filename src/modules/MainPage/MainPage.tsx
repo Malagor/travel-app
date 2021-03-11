@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, StateCountry, LanguagesType } from 'types';
 import { database } from 'services/database';
-import { setCountriesList } from 'store/actions';
+import { setCountriesList, setFirstCardRef } from 'store/actions';
 import { CountryCard } from './components/CountryCard';
 import { useStyles } from './styled';
 
@@ -19,6 +19,7 @@ export const MainPage: FC = () => {
   );
   const lang = useSelector((state: State) => state.userInfo.lang);
   const search = useSelector((state: State) => state.search);
+  const firstCardRef = useRef<HTMLDivElement>(null);
 
   const filteredCountryList = countryList.filter((country) => {
     const searchString = search.toLowerCase().trim();
@@ -38,13 +39,24 @@ export const MainPage: FC = () => {
     dispatch(setCountriesList(database.getCountriesList()));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(setFirstCardRef(firstCardRef));
+  }, [dispatch, firstCardRef]);
+
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Typography variant="h2">Main Page</Typography>
 
       <Grid container spacing={3}>
-        {filteredCountryList.map((country) => (
-          <Grid key={country.id} item xs={12} md={6} lg={4}>
+        {filteredCountryList.map((country, index) => (
+          <Grid
+            key={country.id}
+            item
+            xs={12}
+            md={6}
+            lg={4}
+            ref={index === 0 ? firstCardRef : null}
+          >
             <NavLink to={`/country/${country.id}`} className={classes.link}>
               <CountryCard country={country} lang={lang} />
             </NavLink>

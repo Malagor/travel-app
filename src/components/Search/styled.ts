@@ -19,7 +19,16 @@ export const useStyles = makeStyles((theme: Theme) =>
         display: 'block',
       },
     },
+    searchContainer: {
+      display: 'grid',
+      gridGap: '5px',
+      gridTemplateColumns: '1fr 100px',
+      alignItems: 'center',
+      marginRight: theme.spacing(2),
+      marginLeft: theme.spacing(2),
+    },
     search: {
+      display: 'flex',
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),

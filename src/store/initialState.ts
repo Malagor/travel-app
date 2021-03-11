@@ -28,6 +28,7 @@ export const initialState = () => {
       avatar: userInfo.avatar,
     },
     search: '',
+    firstCardRef: null,
   };
 
   return state;

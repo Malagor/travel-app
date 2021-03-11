@@ -3,6 +3,7 @@ import {
   SET_COUNTRY,
   SET_USER_LANGUAGE,
   SET_SEARCH,
+  SET_FIRST_CARD_REF,
 } from 'appConstants';
 import { StateCountry } from '../types';
 
@@ -23,5 +24,12 @@ export const setLanguage = (payload: string) => ({
 
 export const setSearch = (payload: string) => ({
   type: SET_SEARCH,
+  payload,
+});
+
+export const setFirstCardRef = (
+  payload: React.RefObject<HTMLDivElement> | null
+) => ({
+  type: SET_FIRST_CARD_REF,
   payload,
 });

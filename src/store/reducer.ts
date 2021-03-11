@@ -9,6 +9,7 @@ import {
   SET_USER_AVATAR,
   SET_USER_NAME,
   SET_SEARCH,
+  SET_FIRST_CARD_REF,
 } from 'appConstants';
 import { State } from 'types';
 import { initialState } from './initialState';
@@ -68,6 +69,11 @@ export const appReducer: Reducer<State, Action> = (
       return {
         ...state,
         search: action.payload,
+      };
+    case SET_FIRST_CARD_REF:
+      return {
+        ...state,
+        firstCardRef: action.payload,
       };
 
     default:

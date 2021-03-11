@@ -92,6 +92,7 @@ export type State = {
   country: StateCountry;
   countryList: StateCountry[] | [];
   search: string;
+  firstCardRef: React.RefObject<HTMLDivElement> | null;
 };
 
 export type CurrencyRatesInfo = {
