@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { State, CountryType, LanguagesType } from 'types';
 import { database } from 'services/database';
 import { setCountriesList, setFirstCardRef } from 'store/actions';
@@ -14,6 +15,7 @@ import { useStyles } from './styled';
 
 export const MainPage: FC = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const countryList: CountryType[] = useSelector(
     (state: State) => state.countryList
@@ -50,20 +52,26 @@ export const MainPage: FC = () => {
         <Typography variant="h2">Main Page</Typography>
 
         <Grid container spacing={3}>
-          {filteredCountryList.map((country, index) => (
-            <Grid
-              key={country.id}
-              item
-              xs={12}
-              md={6}
-              lg={4}
-              ref={index === 0 ? firstCardRef : null}
-            >
-              <NavLink to={`/country/${country.id}`} className={classes.link}>
-                <CountryCard country={country} lang={lang} />
-              </NavLink>
+          {filteredCountryList.length !== 0 ? (
+            filteredCountryList.map((country, index) => (
+              <Grid
+                key={country.id}
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                ref={index === 0 ? firstCardRef : null}
+              >
+                <NavLink to={`/country/${country.id}`} className={classes.link}>
+                  <CountryCard country={country} lang={lang} />
+                </NavLink>
+              </Grid>
+            ))
+          ) : (
+            <Grid item xs={12} md={6} lg={4}>
+              <Typography variant="body1">{t('Nothing Was Found')}</Typography>
             </Grid>
-          ))}
+          )}
         </Grid>
       </Paper>
     </Container>
