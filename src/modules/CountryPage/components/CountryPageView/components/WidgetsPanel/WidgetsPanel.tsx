@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Clock, CurrencyRate } from 'components';
+import { /* Clock, */ CurrencyRate } from 'components';
 import { useSelector } from 'react-redux';
 import { State } from 'types';
 import { Container } from '@material-ui/core';
@@ -16,7 +16,7 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper}>
-        <Clock theme={theme} />
+       {/*  <Clock theme={theme} /> */}
         <CurrencyRate
           currentCountry="russia"
           preferredCurrencies={Object.keys(currencies)}
