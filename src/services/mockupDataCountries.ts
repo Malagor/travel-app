@@ -24,6 +24,7 @@ export const countries: CountryType[] = [
       Math.random() * 1000
     )}/400/300`
     ],
+    videos: ['https://www.youtube-nocookie.com/embed/vE9S-6DNM5k'],
   },
   {
     id: 2,
@@ -46,5 +47,6 @@ export const countries: CountryType[] = [
     photos: [`https://picsum.photos/id/${Math.floor(
       Math.random() * 1000
     )}/400/300`],
+    videos: ['https://www.youtube-nocookie.com/embed/3sR_13IyHXg'],
   }
 ];
