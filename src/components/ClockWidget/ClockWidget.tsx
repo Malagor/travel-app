@@ -55,7 +55,7 @@ export const ClockWidget: FC<TClockWidgetProps> = ({ data, theme }) => {
 
     setLocaleDate(dateLocaleCityNow);
     setOtherDate(dateOtherCityNow);
-  }, [data]);
+  }, [data, i18n]);
 
   useEffect(() => {
     const timer = setInterval(tick, 1000);
