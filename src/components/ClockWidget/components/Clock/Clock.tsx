@@ -1,23 +1,23 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { ClockRound, HourHand, MinuteHand, SecondHand } from './styled';
 
 const DEGREASE = 6;
 
 type TClockProps = {
   time: {
-    hour: number; 
-    min: number; 
-    sec: number
-  }; 
+    hour: number;
+    min: number;
+    sec: number;
+  };
   theme: string;
 };
 
-export const Clock: FC<TClockProps> = ({time, theme}) => {
-  const { hour, min, sec } = time
- 
-  const hourClock = hour * 30
-  const minClock = min * DEGREASE
-  const secClock = sec * DEGREASE
+export const Clock: FC<TClockProps> = ({ time, theme }) => {
+  const { hour, min, sec } = time;
+
+  const hourClock = hour * 30;
+  const minClock = min * DEGREASE;
+  const secClock = sec * DEGREASE;
 
   return (
     <ClockRound theme={theme}>
@@ -32,4 +32,4 @@ export const Clock: FC<TClockProps> = ({time, theme}) => {
       </div>
     </ClockRound>
   );
-}
+};
