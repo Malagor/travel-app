@@ -4,11 +4,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { CURRENCY_MAP } from 'appConstants/currencyMap';
+import { CURRENCY_NAMES } from 'appConstants/currencyNames';
 
 type CurrencyRateViewProps = {
-  currentCountry: string;
+  countryCurrency: string;
   rates: [string, number][];
+  lang: string;
 };
 
 function createData(rate: number, currencyCode: string) {
@@ -20,8 +21,9 @@ function createRows(ratesList: [string, number][]) {
 }
 
 export const CurrencyRateView: FC<CurrencyRateViewProps> = ({
-  currentCountry,
+  countryCurrency,
   rates,
+  lang,
 }) => {
   const rows = createRows(rates);
 
@@ -30,7 +32,8 @@ export const CurrencyRateView: FC<CurrencyRateViewProps> = ({
       <TableHead>
         <TableRow>
           <TableCell align="center" colSpan={2}>
-            {`1 ${CURRENCY_MAP[currentCountry]} =`}
+            <div>{`1 ${countryCurrency}`}</div>
+            <div>{`(${CURRENCY_NAMES[countryCurrency][lang]})`}</div>
           </TableCell>
         </TableRow>
       </TableHead>
@@ -40,7 +43,9 @@ export const CurrencyRateView: FC<CurrencyRateViewProps> = ({
             <TableCell component="th" scope="row" align="right">
               {row.rate}
             </TableCell>
-            <TableCell>{row.currencyCode}</TableCell>
+            <TableCell title={CURRENCY_NAMES[row.currencyCode][lang]}>
+              {row.currencyCode}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
