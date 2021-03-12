@@ -33,15 +33,15 @@ export const Search: FC<SearchProps> = () => {
     const searchString = search.trim();
     switch (lang) {
       case 'en':
-        if (/[^a-z\- ]/i.test(searchString)) setInputIsWrong(true);
+        if (/[^a-z\-' ]/i.test(searchString)) setInputIsWrong(true);
         else setInputIsWrong(false);
         break;
       case 'ru':
-        if (/[^а-я\- ]/i.test(searchString)) setInputIsWrong(true);
+        if (/[^а-я\-' ]/i.test(searchString)) setInputIsWrong(true);
         else setInputIsWrong(false);
         break;
       case 'be':
-        if (/([^а-яiў\- ]|[щъи])/i.test(searchString)) setInputIsWrong(true);
+        if (/([^а-яiў\-' ]|[щъи])/i.test(searchString)) setInputIsWrong(true);
         else setInputIsWrong(false);
         break;
       default:
