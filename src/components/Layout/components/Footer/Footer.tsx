@@ -33,21 +33,36 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.grey[200]
         : theme.palette.grey[800],
   },
-  wrapperAuthor: {
+  wrapperContent: {},
+  nameApp: {
+    [theme.breakpoints.down('sm')]: {
+      order: '1',
+    },
+  },
+  authorsContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
     textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      order: '3',
+    },
+  },
+  logoSchool: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'flex-end',
+      order: '2',
+    },
   },
   imageSchool: {
     width: '55px',
     height: '20px ',
     backgroundRepeat: 'no-repeat',
   },
-  logoSchool: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   gtiLogoImg: {
-    width: '15px',
+    width: '12px',
     margin: '3px',
   },
 }));
@@ -61,29 +76,23 @@ export const Footer = () => {
         direction="row"
         justify="space-between"
         alignItems="center"
+        className={classes.wrapperContent}
       >
-        <Grid item xs={3}>
+        <Grid item sm={6} md={2} className={classes.nameApp}>
           <ButtonBase focusRipple href="https://github.com/Malagor/travel-app">
             <Typography variant="h6">Go-Go Travel</Typography>
           </ButtonBase>
         </Grid>
 
-        <Grid item xs={6} className={classes.wrapperAuthor}>
-          <Grid container spacing={1}>
+        <Grid item md={8} xs={12} className={classes.authorsContent}>
+          <Grid container justify="space-between">
             {authors.map((author) => (
-              <Grid
-                item
-                sm={12}
-                md={6}
-                lg={3}
-                key={author.name}
-                justify="center"
-              >
+              <Grid item md={3} key={author.name} justify="center">
                 <ButtonBase focusRipple href={author.gitHub}>
                   <span>
                     <Typography
                       component="span"
-                      variant="subtitle1"
+                      variant="subtitle2"
                       color="inherit"
                     >
                       {author.name}
@@ -100,22 +109,23 @@ export const Footer = () => {
           </Grid>
         </Grid>
 
-        <Grid item xs={3} className={classes.logoSchool}>
-          <Grid container sm={12} md={10} lg={6} spacing={1}>
-            <Grid item sm={12} md={6} justify="center">
-              <ButtonBase focusRipple href="https://rs.school/js/">
-                <span
-                  className={classes.imageSchool}
-                  style={{
-                    backgroundImage: `url('https://rs.school/images/rs_school_js.svg')`,
-                  }}
-                />
-              </ButtonBase>
-            </Grid>
-            <Grid item sm={12} md={6}>
-              <Typography>© 2021</Typography>
-            </Grid>
-          </Grid>
+        <Grid
+          item
+          sm={6}
+          md={2}
+          justify="center"
+          className={classes.logoSchool}
+        >
+          <ButtonBase focusRipple href="https://rs.school/js/">
+            <span
+              className={classes.imageSchool}
+              style={{
+                margin: '8px',
+                backgroundImage: `url('https://rs.school/images/rs_school_js.svg')`,
+              }}
+            />
+          </ButtonBase>
+          <Typography>© 2021</Typography>
         </Grid>
       </Grid>
     </footer>
