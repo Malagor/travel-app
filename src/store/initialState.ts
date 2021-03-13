@@ -9,7 +9,7 @@ export const initialState = () => {
       avatar: '',
       lang: 'ru',
       theme: 'light',
-      currencyList: ['USD', 'EUR', 'BYN'],
+      currencies: ['USD', 'EUR', 'BYN'],
     },
     country: {
       id: '',
@@ -29,7 +29,7 @@ export const initialState = () => {
         be: '',
         en: '',
       },
-      currency: {}
+      currency: ''
     },
     offset: 0,
     geo: {}

@@ -59,7 +59,7 @@ export type UserInfo = {
   avatar: string;
   lang: string;
   theme: string;
-  currencyList: string[];
+  currencies: string[];
 };
 
 export type LanguagesType = {
@@ -79,7 +79,7 @@ export type CountryType = {
   iso3: string;
   name: LanguagesType;
   capital: LanguagesType;
-  currency: CurrencyType;
+  currency: string;
   description?: LanguagesType;
   population?: number;
   area?: number;

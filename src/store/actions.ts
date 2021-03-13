@@ -84,12 +84,11 @@ export const loadUserInfo = (id: string) => async (
     });
 };
 
-
-
 export const loadGeo = () => async (
   dispatch: (func: unknown) => void) => {
   database.getGeo()
-    .then((geoData: GeoType) => dispatch(setGeo(geoData)))
+    .then((geoData: [GeoType]) => geoData[0])
+    .then((geoData) => dispatch(setGeo(geoData)))
     .catch((err) => {
       throw new Error(`Can not read Geo data. ${err}`);
     });

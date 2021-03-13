@@ -32,7 +32,7 @@ class MongoDatabase {
   getCurrenciesList = async (): Promise<CurrencyType> =>
     fetch(`${this.URL}/currency`).then((data) => data.json());
 
-  getGeo = async (): Promise<GeoType> =>
+  getGeo = async (): Promise<[GeoType]> =>
     fetch(`${this.URL}/geo`).then((data) => data.json());
 }
 
