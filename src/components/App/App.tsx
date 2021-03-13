@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
 import { loadUserInfo } from 'store/actions';
-import { Layout } from '../Layout';
+import { Layout } from 'components';
 
 export function App() {
   const dispatch = useDispatch();

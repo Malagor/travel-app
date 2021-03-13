@@ -8,6 +8,7 @@ import {
   SET_USER_CURRENCIES_LIST,
   SET_USER_AVATAR,
   SET_USER_NAME,
+  SET_OFFSET,
 } from 'appConstants';
 import { State } from 'types';
 import { initialState } from './initialState';
@@ -63,10 +64,13 @@ export const appReducer: Reducer<State, Action> = (
         ...state,
         userInfo: { ...state.userInfo, theme: action.payload },
       };
+    case SET_OFFSET:
+      return {
+        ...state,
+        offset: action.payload,
+      };
 
     default:
       return state;
   }
 };
-
-

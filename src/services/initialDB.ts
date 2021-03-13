@@ -1,13 +1,4 @@
-import { CurrencyType, CountryType } from 'types';
-
-export type DBUser = {
-  id: string;
-  name: string;
-  avatar: string;
-  lang: string;
-  theme: string;
-  currencies: string[];
-};
+import { CurrencyType, CountryType, DBUser } from 'types';
 
 export type DatabaseType = {
   users: DBUser[];

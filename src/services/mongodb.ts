@@ -1,36 +1,34 @@
-import { CurrencyType, CountryType } from 'types';
+import { CurrencyType, CountryType, DBUser } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
-import { DBUser } from './initialDB';
 
-class Database {
-  // private DB: DatabaseType;
-
+class MongoDatabase {
   private readonly URL: string;
 
   constructor() {
-    // this.DB = initialDB;
-    this.URL = 'http://localhost:3001';
+    // this.URL = 'http://localhost:3001'; // local url for tests
+    this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
   }
 
-  static create(): Database {
-    return new Database();
+  static create(): MongoDatabase {
+    return new MongoDatabase();
   }
 
   getCountriesList = async (
     count: number = COUNTRY_PER_PAGE,
-    offset: number = 0
+    offset: number = 0,
+    filter: string = '',
+    lang: string = 'ru'
   ): Promise<CountryType[]> =>
-    fetch(`${this.URL}/country`).then((data) => data.json());
+    fetch(`${this.URL}/country?count=${count}&offset=${offset}&filter=${filter}&lang=${lang}`).then((data) => data.json());
 
-  // getCountryById = async (id: number): Promise<CountryType> =>
-  //   this.DB.countriesList[id];
+  getCountryById = async (id: string): Promise<CountryType> =>
+    fetch(`${this.URL}/country/${id}`).then((data) => data.json());
 
   getUserInfo = async (id: string): Promise<DBUser> =>
     fetch(`${this.URL}/user/${id}`).then((data) => data.json());
-  // this.DB.users.filter((user: DBUser) => user.id === id)[0];
 
   getCurrenciesList = async (): Promise<CurrencyType> =>
     fetch(`${this.URL}/currency`).then((data) => data.json());
 }
 
-export const database = Database.create();
+export const database = MongoDatabase.create();

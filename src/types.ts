@@ -87,6 +87,7 @@ export type State = {
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
+  offset: number
 };
 
 export type CurrencyRatesInfo = {
@@ -99,4 +100,13 @@ export type CurrencyRatesInfo = {
   time_last_update_utc: string;
   time_next_update_unix: number;
   time_next_update_utc: string;
+};
+
+export type DBUser = {
+  id: string;
+  name: string;
+  avatar: string;
+  lang: string;
+  theme: string;
+  currencies: string[];
 };

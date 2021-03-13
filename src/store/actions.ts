@@ -1,10 +1,12 @@
 import {
+  COUNTRY_PER_PAGE,
   SET_COUNTRIES_LIST,
   SET_COUNTRY,
   SET_USER,
   SET_USER_LANGUAGE,
 } from 'appConstants';
-import { CountryType } from '../types';
+import { CountryType, DBUser } from 'types';
+import { database } from 'services';
 
 export const setCountry = (payload: CountryType) => ({
   type: SET_COUNTRY,
@@ -21,52 +23,57 @@ export const setLanguage = (payload: string) => ({
   payload,
 });
 
-export const setUserInfo = (payload: string) => ({
+export const setUserInfo = (payload: DBUser) => ({
   type: SET_USER,
   payload,
 });
 
-export const loadCountryList = () => async (
-  dispatch: (func: unknown) => void
-) => {
-  const url = 'http://localhost:3001/country';
-
-  fetch(url)
-    .then((res) => res.json())
+export const loadCountryList = (option: {
+  offset: number;
+  count: number;
+  filter: string;
+  lang: string;
+}) => async (dispatch: (func: unknown) => void) => {
+  const { lang, filter, offset, count } = option;
+  database
+    .getCountriesList(count, offset, filter, lang)
     .then((countries) => {
       dispatch(setCountriesList(countries));
     })
     .catch((err) => {
-      console.error(err);
+      // console.error(err);
+      throw new Error(`Can not read countries list data. ${err}`);
     });
 };
 
 export const loadCountry = (id: string) => async (
   dispatch: (func: unknown) => void
 ) => {
-  const url = `http://localhost:3001/country/${id}`;
-
-  fetch(url)
-    .then((res) => res.json())
+  database
+    .getCountryById(id)
     .then((country) => {
       dispatch(setCountry(country));
     })
     .catch((err) => {
-      console.error(err);
+      throw new Error(`Can not read country data. ${err}`);
     });
 };
 
 export const loadUserInfo = (id: string) => async (
   dispatch: (func: unknown) => void
 ) => {
-  const url = `http://localhost:3001/user/${id}`;
-
-  fetch(url)
-    .then((res) => res.json())
+  database
+    .getUserInfo(id)
     .then((user) => {
       dispatch(setUserInfo(user));
     })
     .catch((err) => {
-      console.error(err);
+      throw new Error(`Can not read UserInfo. ${err}`);
     });
 };
+
+//  payload = page of countryList
+export const setPageCountry = (payload: number) => ({
+  type: SET_USER_LANGUAGE,
+  payload: (payload - 1) * COUNTRY_PER_PAGE,
+});

@@ -30,6 +30,7 @@ export const initialState = () => {
       },
       currency: {}
     },
+    offset: 0
   };
 
   return state;

@@ -6,3 +6,4 @@ export { LanguageToggle } from './LanguageToggle';
 export { Search } from './Search';
 export { Loader } from './Loader';
 export { CurrencyRate } from './CurrencyRate';
+export { Layout } from './Layout';
