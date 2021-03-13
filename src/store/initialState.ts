@@ -13,6 +13,7 @@ export const initialState = () => {
     },
     country: {
       id: '',
+      iso3: '',
       name: {
         ru: '',
         be: '',
@@ -30,7 +31,8 @@ export const initialState = () => {
       },
       currency: {}
     },
-    offset: 0
+    offset: 0,
+    geo: {}
   };
 
   return state;

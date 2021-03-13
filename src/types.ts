@@ -75,7 +75,8 @@ export type SliderDataType = {
 };
 
 export type CountryType = {
-  id: string | number;
+  id: string;
+  iso3: string;
   name: LanguagesType;
   capital: LanguagesType;
   currency: CurrencyType;
@@ -94,7 +95,8 @@ export type State = {
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
-  offset: number
+  offset: number;
+  geo: GeoType
 };
 
 export type CurrencyRatesInfo = {
@@ -116,4 +118,17 @@ export type DBUser = {
   lang: string;
   theme: string;
   currencies: string[];
+};
+
+type GeoPointType = [number, number];
+
+export type GeoType = {
+  [key: string]: {
+    type: string;
+    coordinates: [
+      [
+        GeoPointType[]
+      ]
+    ];
+  };
 };

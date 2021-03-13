@@ -3,7 +3,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
-import { LanguagesType, CountryType } from 'types';
+import { LanguagesType, CountryType, State } from 'types';
+import { useSelector } from 'react-redux';
 import { VideoPlayer } from '../VideoPlayer';
 import { useStyles } from './styled';
 import { PhotoGallery } from './components';
@@ -16,6 +17,13 @@ type CountryPageProps = {
 
 export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
   const classes = useStyles();
+
+  const { iso3 } = country;
+
+  const geo = useSelector((state: State) => state.geo[iso3]);
+  console.log(`geo ${country.name.ru} =>`, geo);
+
+  console.log('country', country);
   return (
     <Grid container>
       <Grid item xs={8}>

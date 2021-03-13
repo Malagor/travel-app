@@ -1,4 +1,4 @@
-import { CurrencyType, CountryType, DBUser } from 'types';
+import { CurrencyType, CountryType, DBUser, GeoType } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
 class MongoDatabase {
@@ -19,7 +19,9 @@ class MongoDatabase {
     filter: string = '',
     lang: string = 'ru'
   ): Promise<CountryType[]> =>
-    fetch(`${this.URL}/country?count=${count}&offset=${offset}&filter=${filter}&lang=${lang}`).then((data) => data.json());
+    fetch(
+      `${this.URL}/country?count=${count}&offset=${offset}&filter=${filter}&lang=${lang}`
+    ).then((data) => data.json());
 
   getCountryById = async (id: string): Promise<CountryType> =>
     fetch(`${this.URL}/country/${id}`).then((data) => data.json());
@@ -29,6 +31,9 @@ class MongoDatabase {
 
   getCurrenciesList = async (): Promise<CurrencyType> =>
     fetch(`${this.URL}/currency`).then((data) => data.json());
+
+  getGeo = async (): Promise<GeoType> =>
+    fetch(`${this.URL}/geo`).then((data) => data.json());
 }
 
 export const database = MongoDatabase.create();

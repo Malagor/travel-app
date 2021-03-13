@@ -1,11 +1,11 @@
 import {
   COUNTRY_PER_PAGE,
   SET_COUNTRIES_LIST,
-  SET_COUNTRY,
+  SET_COUNTRY, SET_GEO,
   SET_USER,
   SET_USER_LANGUAGE,
 } from 'appConstants';
-import { CountryType, DBUser } from 'types';
+import { CountryType, DBUser, GeoType } from 'types';
 import { database } from 'services';
 
 export const setCountry = (payload: CountryType) => ({
@@ -27,6 +27,18 @@ export const setUserInfo = (payload: DBUser) => ({
   type: SET_USER,
   payload,
 });
+
+export const setGeo = (payload: GeoType) => ({
+  type: SET_GEO,
+  payload,
+});
+
+//  payload = page of countryList
+export const setPageCountry = (payload: number) => ({
+  type: SET_USER_LANGUAGE,
+  payload: (payload - 1) * COUNTRY_PER_PAGE,
+});
+
 
 export const loadCountryList = (option: {
   offset: number;
@@ -72,8 +84,14 @@ export const loadUserInfo = (id: string) => async (
     });
 };
 
-//  payload = page of countryList
-export const setPageCountry = (payload: number) => ({
-  type: SET_USER_LANGUAGE,
-  payload: (payload - 1) * COUNTRY_PER_PAGE,
-});
+
+
+export const loadGeo = () => async (
+  dispatch: (func: unknown) => void) => {
+  database.getGeo()
+    .then((geoData: GeoType) => dispatch(setGeo(geoData)))
+    .catch((err) => {
+      throw new Error(`Can not read Geo data. ${err}`);
+    });
+};
+
