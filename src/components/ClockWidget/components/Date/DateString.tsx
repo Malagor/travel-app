@@ -4,7 +4,7 @@ import classes from './DateString.module.scss';
 type TDateProps = {
   date: {
     dayOfWeek: string;
-    monthDayYear: string;
+    fullDate: string;
   };
   theme: string;
 };
@@ -16,6 +16,6 @@ export const DateString: FC<TDateProps> = ({ date, theme }) => (
     }`}
   >
     <div className={classes.day}>{date.dayOfWeek}</div>
-    <div>{date.monthDayYear}</div>
+    <div>{date.fullDate}</div>
   </div>
 );

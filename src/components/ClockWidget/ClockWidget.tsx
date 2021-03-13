@@ -18,8 +18,8 @@ const getTimeForClock = (date: moment.Moment) => {
 const getCountryTime = (date: moment.Moment) => date.format('hh: mm: ss');
 const getCountryDate = (date: moment.Moment) => {
   const dayOfWeek = date.format('dddd');
-  const monthDayYear = date.format('ll');
-  return { dayOfWeek, monthDayYear };
+  const fullDate = date.format('ll');
+  return { dayOfWeek, fullDate };
 };
 
 type TClockWidgetProps = {
@@ -55,7 +55,7 @@ export const ClockWidget: FC<TClockWidgetProps> = ({ data, theme }) => {
 
     setLocaleDate(dateLocaleCityNow);
     setOtherDate(dateOtherCityNow);
-  }, [data, i18n]);
+  }, [data, i18n.language]);
 
   useEffect(() => {
     const timer = setInterval(tick, 1000);
