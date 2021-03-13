@@ -21,6 +21,7 @@ const clockWidgetData = {
 
 export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   const classes = useStyles();
+  const countryCurrency = useSelector((state: State) => state.country.currency);
   const theme = useSelector((state: State) => state.userInfo.theme);
   const currencies = useSelector((state: State) => state.userInfo.currencyList);
   const lang = useSelector((state: State) => state.userInfo.lang);
@@ -37,10 +38,13 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
       <Paper className={classes.paper}>
         <Weather city={weatherLocation} />
         <ClockWidget data={clockWidgetData} theme={theme} />
-        {/* <CurrencyRate */}
-        {/* currentCountry="russia" */}
-        {/* preferredCurrencies={currencies} */}
-        {/* /> */}
+        {countryCurrency && (
+          <CurrencyRate
+            countryCurrency={countryCurrency}
+            preferredCurrencies={Object.keys(currencies)}
+            lang={lang}
+          />
+        )}
       </Paper>
     </Container>
   );
