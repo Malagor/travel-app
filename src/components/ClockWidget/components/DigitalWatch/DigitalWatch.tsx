@@ -1,13 +1,13 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import classes from './DigitalWatch.module.scss';
 
 type TDigitalWatchProps = {
-  time: string; 
+  time: string;
   theme: string;
-}
+};
 
-export const DigitalWatch: FC<TDigitalWatchProps> = ({time, theme}) => (
+export const DigitalWatch: FC<TDigitalWatchProps> = ({ time, theme }) => (
   <div className={theme === 'light' ? classes.lightTheme : classes.darkTheme}>
-    { time }
+    {time}
   </div>
-)
+);

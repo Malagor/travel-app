@@ -8,8 +8,7 @@ import { useStyles } from './styled';
 
 type WidgetsPanelProps = {};
 
-// input data for ClockWidget should pass in props
-const data = {
+const clockWidgetData = {
   localeCity: {
     name: 'Minsk',
     timezone: 'Europe/Minsk',
@@ -30,7 +29,7 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper}>
-        <ClockWidget data={data} theme={theme} />
+        <ClockWidget data={clockWidgetData} theme={theme} />
         {countryCurrency && (
           <CurrencyRate
             countryCurrency={countryCurrency}

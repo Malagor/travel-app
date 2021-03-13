@@ -1,1 +1,1 @@
-export { DigitalWatch } from './DigitalWatch'
+export { DigitalWatch } from './DigitalWatch';
