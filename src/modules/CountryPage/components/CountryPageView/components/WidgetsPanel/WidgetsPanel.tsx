@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { /* Clock, */ CurrencyRate } from 'components';
+import { ClockWidget, CurrencyRate } from 'components';
 import { useSelector } from 'react-redux';
 import { State } from 'types';
 import { Container } from '@material-ui/core';
@@ -7,6 +7,17 @@ import Paper from '@material-ui/core/Paper';
 import { useStyles } from './styled';
 
 type WidgetsPanelProps = {};
+
+const clockWidgetData = {
+  localeCity: {
+    name: 'Minsk',
+    timezone: 'Europe/Minsk',
+  },
+  otherCity: {
+    name: 'New York',
+    timezone: 'America/New_York',
+  },
+};
 
 export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   const classes = useStyles();
@@ -16,7 +27,7 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper}>
-       {/*  <Clock theme={theme} /> */}
+        <ClockWidget data={clockWidgetData} theme={theme} />
         <CurrencyRate
           currentCountry="russia"
           preferredCurrencies={Object.keys(currencies)}
