@@ -20,7 +20,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
 
   const { iso3 } = country;
 
-  const geo = useSelector((state: State) => state.geo);
+  const geo = useSelector((state: State) => state.geo[iso3]);
 
   return (
     <Grid container>
