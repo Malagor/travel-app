@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
       order: '3',
+      marginTop: theme.spacing(1),
     },
   },
   logoSchool: {
