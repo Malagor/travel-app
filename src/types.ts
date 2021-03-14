@@ -60,6 +60,7 @@ export type UserInfo = {
   lang: string;
   theme: string;
   currencies: string[];
+  attractionRates: { attrId: string; rating: number }[];
 };
 
 export type LanguagesType = {
@@ -72,6 +73,10 @@ export type SliderDataType = {
   photo: string;
   name: LanguagesType;
   description: LanguagesType;
+  rating: {
+    sum: number;
+    count: number;
+  };
 };
 
 export type CountryType = {

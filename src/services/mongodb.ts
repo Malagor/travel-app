@@ -1,4 +1,4 @@
-import { CurrencyType, CountryType, DBUser, GeoType } from 'types';
+import { CountryType, CurrencyType, DBUser, GeoType, UserInfo } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
 class MongoDatabase {
@@ -34,6 +34,28 @@ class MongoDatabase {
 
   getGeo = async (): Promise<[GeoType]> =>
     fetch(`${this.URL}/geo`).then((data) => data.json());
+
+  setRaiting = async (
+    countryId: string,
+    attractionId: string,
+    userId: string,
+    rating: number
+  ): Promise<[UserInfo, CountryType]> => {
+    const url = `${this.URL}/country/${countryId}/attraction`;
+    const data = {
+      attractionId,
+      userId,
+      rating,
+    };
+
+    return fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
+  };
 }
 
 export const database = MongoDatabase.create();
