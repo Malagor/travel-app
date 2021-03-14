@@ -35,7 +35,7 @@ class MongoDatabase {
   getGeo = async (): Promise<[GeoType]> =>
     fetch(`${this.URL}/geo`).then((data) => data.json());
 
-  setRaiting = async (
+  setRating = async (
     countryId: string,
     attractionId: string,
     userId: string,

@@ -21,7 +21,6 @@ import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { database } from 'services';
 import classes from './PhotoGallery.module.scss';
-import { log } from 'util';
 
 type PhotoGalleryProps = {
   sliderData: SliderDataType[];
@@ -142,7 +141,7 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
 
   const setRating = (attrId: string, rating: number) => {
     database
-      .setRaiting(countryId, attrId, userId, rating)
+      .setRating(countryId, attrId, userId, rating)
       .then((data: [UserInfo, CountryType]) => {
         // в ответе получаем данные пользователя и данные текущей страны.
         // Возможно это излишняя инфа и я попробую ее сократить до минимальной информации.
