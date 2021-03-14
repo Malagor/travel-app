@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { ClockWidget, CurrencyRate, Weather } from 'components';
 import { useSelector } from 'react-redux';
 import { LanguagesType, State } from 'types';
-import { Container } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import { Container, Paper } from '@material-ui/core';
 import { useStyles } from './styled';
 
 type WidgetsPanelProps = {};
