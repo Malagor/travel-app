@@ -1,12 +1,15 @@
 import {
   COUNTRY_PER_PAGE,
   SET_COUNTRIES_LIST,
-  SET_COUNTRY, SET_GEO,
+  SET_COUNTRY,
+  SET_GEO,
   SET_USER,
   SET_USER_LANGUAGE,
 } from 'appConstants';
-import { CountryType, DBUser, GeoType } from 'types';
+import { CountryType, DBUser, GeoType, State } from 'types';
 import { database } from 'services';
+import { ThunkAction } from 'redux-thunk';
+import { Action } from 'redux';
 
 export const setCountry = (payload: CountryType) => ({
   type: SET_COUNTRY,
@@ -39,7 +42,6 @@ export const setPageCountry = (payload: number) => ({
   payload: (payload - 1) * COUNTRY_PER_PAGE,
 });
 
-
 export const loadCountryList = (option: {
   offset: number;
   count: number;
@@ -58,9 +60,9 @@ export const loadCountryList = (option: {
     });
 };
 
-export const loadCountry = (id: string) => async (
-  dispatch: (func: unknown) => void
-) => {
+export const loadCountry = (
+  id: string
+): ThunkAction<void, State, unknown, Action<string>> => async (dispatch) => {
   database
     .getCountryById(id)
     .then((country) => {
@@ -71,9 +73,9 @@ export const loadCountry = (id: string) => async (
     });
 };
 
-export const loadUserInfo = (id: string) => async (
-  dispatch: (func: unknown) => void
-) => {
+export const loadUserInfo = (
+  id: string
+): ThunkAction<void, State, unknown, Action<string>> => async (dispatch) => {
   database
     .getUserInfo(id)
     .then((user) => {
@@ -84,13 +86,17 @@ export const loadUserInfo = (id: string) => async (
     });
 };
 
-export const loadGeo = () => async (
-  dispatch: (func: unknown) => void) => {
-  database.getGeo()
+export const loadGeo = (): ThunkAction<
+  void,
+  State,
+  unknown,
+  Action<string>
+> => async (dispatch) => {
+  database
+    .getGeo()
     .then((geoData: [GeoType]) => geoData[0])
     .then((geoData) => dispatch(setGeo(geoData)))
     .catch((err) => {
       throw new Error(`Can not read Geo data. ${err}`);
     });
 };
-

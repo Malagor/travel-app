@@ -19,6 +19,7 @@ type Action = {
   payload: any;
 };
 
+
 export const appReducer: Reducer<State, Action> = (
   state = initialState(),
   action
