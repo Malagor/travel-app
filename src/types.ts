@@ -70,6 +70,7 @@ export type LanguagesType = {
 };
 
 export type SliderDataType = {
+  id: string;
   photo: string;
   name: LanguagesType;
   description: LanguagesType;
