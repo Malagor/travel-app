@@ -1,6 +1,4 @@
-import { CountryType } from 'types';
-
-export const countries: CountryType[] = [
+export const countries = [
   {
     id: 1,
     name: {
@@ -23,7 +21,7 @@ export const countries: CountryType[] = [
         'Рэспубліка Беларусь размешчана ў цэнтры Еўропы. Па яе тэрыторыі пралягаюць самыя кароткія транспартныя камунікацыі, якія звязваюць краіны СНД з дзяржавамі Заходняй Еўропы. Беларусь мае агульную мяжу з Польшчай, Літвой, Латвіяй, Расіяй і Украінай.',
     },
     photos: [
-      `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/400/300`,
+      `https://picsum.photos/id/500/400/300`
     ],
     videos: ['https://www.youtube-nocookie.com/embed/vE9S-6DNM5k'],
     attractions: [
@@ -195,9 +193,7 @@ export const countries: CountryType[] = [
       be:
         'Украіна-гэта вялікая краіна ва Усходняй Еўропе, вядомая праваслаўнымі цэрквамі, чарнаморскімі курортамі і лясістымі гарамі. У Кіеве, сталіцы краіны, размешчаны Сафійскі сабор, упрыгожаны залатымі купаламі, мазаікай XI стагоддзя і фрэскамі. Над ракой Днепр узвышаецца манастыр Кіева-Пячэрская лаўра, месца паломніцтва многіх праваслаўных хрысціян. У яе скіт захоўваюцца рэлігійныя рэліквіі, а ў катакомбах – муміфікавалі астанкі праваслаўных манахаў.',
     },
-    photos: [
-      `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/400/300`,
-    ],
+    photos: [`https://picsum.photos/id/600/400/300`],
     videos: ['https://www.youtube-nocookie.com/embed/3sR_13IyHXg'],
     attractions: [
       {

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { ClockWidget, CurrencyRate } from 'components';
+import { ClockWidget, CurrencyRate, Weather } from 'components';
 import { useSelector } from 'react-redux';
-import { State } from 'types';
+import { LanguagesType, State } from 'types';
 import { Container } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from './styled';
@@ -21,19 +21,28 @@ const clockWidgetData = {
 
 export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   const classes = useStyles();
-  const theme = useSelector((state: State) => state.settings.theme);
-  const currencies = useSelector((state: State) => state.settings.currencyList);
-  const countryCurrency = useSelector((state: State) => state.country.currency);
-  const lang: string = useSelector((state: State) => state.userInfo.lang);
 
+  const theme = useSelector((state: State) => state.userInfo.theme);
+  const lang = useSelector((state: State) => state.userInfo.lang);
+  const countryCurrency = useSelector((state: State) => state.country.currency);
+  const currencies = useSelector((state: State) => state.userInfo.currencies);
+  const city: string | undefined = useSelector(
+    (state: State) => state.country.capital[lang as keyof LanguagesType]
+  );
+  const countryName = useSelector(
+    (state: State) => state.country.name[lang as keyof LanguagesType]
+  );
+
+  const weatherLocation: string = city || countryName || '';
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper}>
+        <Weather city={weatherLocation} />
         <ClockWidget data={clockWidgetData} theme={theme} />
         {countryCurrency && (
           <CurrencyRate
             countryCurrency={countryCurrency}
-            preferredCurrencies={Object.keys(currencies)}
+            preferredCurrencies={currencies}
             lang={lang}
           />
         )}
