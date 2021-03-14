@@ -1,12 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import { Grid, Paper, Container } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { State, CountryType } from 'types';
 import { loadCountryList } from 'store/actions';
-import Paper from '@material-ui/core/Paper';
 import { ErrorMessage, Loader } from 'components';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 import { CountryCard } from './components';
@@ -41,7 +39,7 @@ export const MainPage: FC = () => {
       setIsLoading(false);
       setIsError(true);
     }
-      setIsLoading(false);
+    setIsLoading(false);
   }, [dispatch, count, lang, filter, offset]);
 
   const hasContent = !(isLoading || isError);

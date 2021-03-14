@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
+import { Typography, Paper, Grid } from '@material-ui/core';
 import { LanguagesType, CountryType, State } from 'types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
