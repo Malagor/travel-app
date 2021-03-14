@@ -75,16 +75,21 @@
   background-color:rgba(255, 255, 255, 1);
 }
 
-.slickImageCaption {
+.slickImageInfo {
   padding-left: 20px;
 }
 
-.slickContainerFullScreen .slickImageCaption {
+.slickContainerFullScreen .slickImageInfo {
   padding: 20px;
+}
+
+.slickImageCaption {
+  margin-bottom: 5px;
 }
 
 .slickImageTitle {
   margin: 0;
+  margin-bottom: 5px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -111,16 +116,36 @@
   height: 100px;
 }
 
+.slickAttractionRatingStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.slickAttractionRatingHeader {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.slickAttractionRatingValue {
+  margin: 0;
+  font-size: 1.2em;
+}
+
 @media(max-width: 1280px) {
+  .slickArrow {
+    top: 25%;
+  }
+
   .slickNextArrow {
     right: 0;
   }
 
-  .slickImageCaption {
+  .slickImageInfo {
     padding: 10px 0;
   }
 
-  .slickContainerFullScreen .slickImageCaption {
+  .slickContainerFullScreen .slickImageInfo {
     padding: 10px;
   }
 
@@ -131,7 +156,7 @@
 }
 
 @media (max-width: 768px) {
-  .slickImageCaption {
+  .slickImageInfo {
     font-size: 0.8em;
     padding: 5px 0;
   }
@@ -149,12 +174,8 @@
     display: none !important;
   }
 
-  .slickImageCaption {
-    position: relative;
+  .slickImageInfo {
     width: 100%;
-    background: rgba(255,255,255,1);
-    color:rgba(0,0,0,0.8);
-    padding: 5px;
   }
 
   .slickArrow {

@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
@@ -10,6 +11,7 @@ import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Grid from '@material-ui/core/Grid';
+import Rating from '@material-ui/lab/Rating';
 
 import { LanguagesType, SliderDataType } from 'types';
 import classes from './PhotoGallery.module.scss';
@@ -69,6 +71,7 @@ function PrevArrow({
 
 export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
   const [fullScreen, setFullScreen] = useState(false);
+  const { t } = useTranslation();
 
   const settings = {
     customPaging(i: number) {
@@ -128,7 +131,7 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
               alt={slide.name[lang as keyof LanguagesType]}
             />
           </Grid>
-          <Grid item md={12} lg={5}>
+          <Grid item md={12} lg={5} className={classes.slickImageInfo}>
             <div className={classes.slickImageCaption}>
               <p className={classes.slickImageTitle}>
                 {slide.name[lang as keyof LanguagesType]}
@@ -136,6 +139,32 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
               <p className={classes.slickImageDescription}>
                 {slide.description[lang as keyof LanguagesType]}
               </p>
+            </div>
+            <div className={classes.slickImageRating}>
+              <p className={classes.slickAttractionRatingHeader}>
+                {t('Rate This Place')}
+              </p>
+              <Rating
+                name="attraction-rating"
+                defaultValue={3.5}
+                precision={0.5}
+                max={5}
+                size="large"
+              />
+              <div className={classes.slickAttractionRatingStats}>
+                <div>
+                  <p className={classes.slickAttractionRatingHeader}>
+                    {t('Rating')}
+                  </p>
+                  <p className={classes.slickAttractionRatingValue}>3.5</p>
+                </div>
+                <div>
+                  <p className={classes.slickAttractionRatingHeader}>
+                    {t('Voted')}
+                  </p>
+                  <p className={classes.slickAttractionRatingValue}>10</p>
+                </div>
+              </div>
             </div>
           </Grid>
         </Grid>

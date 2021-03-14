@@ -6,5 +6,8 @@
     "wind": "wind",
     "humidity": "humidity",
     "metersPerSecond": "m/s"
-  }
+  },
+  "Rate This Place": "Rate the place",
+  "Rating": "Rating",
+  "Voted": "Voted"
 }

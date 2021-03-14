@@ -6,5 +6,8 @@
     "wind": "ветер",
     "humidity": "влажность",
     "metersPerSecond": "м/с"
-  }
+  },
+  "Rate This Place": "Оцените место",
+  "Rating": "Рейтинг",
+  "Voted": "Проголосовало"
 }
