@@ -4,7 +4,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Header, Footer, SideBar } from './components';
 import { useStyles } from './styled';
 
-export const Layout: FC = ({ children }) => {
+type LayoutProps = {
+  pathname: string;
+};
+
+export const Layout: FC<LayoutProps> = ({ children, pathname }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -17,7 +21,11 @@ export const Layout: FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+      <Header
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        pathname={pathname}
+      />
       <SideBar open={open} handleDrawerClose={handleDrawerClose} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

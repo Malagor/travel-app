@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
 import { loadGeo, loadUserInfo } from 'store/actions';
 import { Layout } from 'components';
 
 export function App() {
+  const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function App() {
   }, [dispatch]);
 
   return (
-    <Layout>
+    <Layout pathname={location.pathname}>
       <Switch>
         <Route path="/country/:id" component={CountryPage} />
         <Route path="/country" component={CountryPage} />

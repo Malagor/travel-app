@@ -8,7 +8,10 @@ import {
   SET_USER_CURRENCIES_LIST,
   SET_USER_AVATAR,
   SET_USER_NAME,
-  SET_OFFSET, SET_GEO,
+  SET_SEARCH,
+  SET_FIRST_CARD_REF,
+  SET_OFFSET,
+  SET_GEO,
 } from 'appConstants';
 import { State } from 'types';
 import { initialState } from './initialState';
@@ -18,7 +21,6 @@ type Action = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any;
 };
-
 
 export const appReducer: Reducer<State, Action> = (
   state = initialState(),
@@ -75,6 +77,16 @@ export const appReducer: Reducer<State, Action> = (
       return {
         ...state,
         geo: action.payload,
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload,
+      };
+    case SET_FIRST_CARD_REF:
+      return {
+        ...state,
+        firstCardRef: action.payload,
       };
 
     default:

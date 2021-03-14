@@ -29,10 +29,12 @@ export const initialState = () => {
         be: '',
         en: '',
       },
-      currency: ''
+      currency: '',
     },
+    search: '',
+    firstCardRef: null,
     offset: 0,
-    geo: {}
+    geo: {},
   };
 
   return state;

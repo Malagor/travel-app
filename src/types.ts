@@ -95,8 +95,10 @@ export type State = {
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
+  search: string;
+  firstCardRef: React.RefObject<HTMLDivElement> | null;
   offset: number;
-  geo: GeoType
+  geo: GeoType;
 };
 
 export type CurrencyRatesInfo = {
@@ -125,10 +127,6 @@ type GeoPointType = [number, number];
 export type GeoType = {
   [key: string]: {
     type: string;
-    coordinates: [
-      [
-        GeoPointType[]
-      ]
-    ];
+    coordinates: [[GeoPointType[]]];
   };
 };

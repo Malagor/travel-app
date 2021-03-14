@@ -14,9 +14,14 @@ import { Logo } from './components/Logo';
 type HeaderProps = {
   open: boolean;
   handleDrawerOpen: () => void;
+  pathname: string;
 };
 
-export const Header: FC<HeaderProps> = ({ open, handleDrawerOpen }) => {
+export const Header: FC<HeaderProps> = ({
+  open,
+  handleDrawerOpen,
+  pathname,
+}) => {
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
 
@@ -37,7 +42,7 @@ export const Header: FC<HeaderProps> = ({ open, handleDrawerOpen }) => {
         </IconButton>
         <Logo />
         <div className={classes.grow} />
-        <Search />
+        {pathname === '/' && <Search />}
         <LanguageToggle />
         <Avatar
           alt={userInfo.name}

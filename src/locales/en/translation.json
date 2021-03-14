@@ -7,5 +7,9 @@
     "humidity": "humidity",
     "metersPerSecond": "m/s"
   },
+  "Search Placeholder": "Enter country",
+  "Search Button": "Search",
+  "Wrong Search Input": "Input is incorrect. Enter country or capital name in English.",
+  "Nothing Was Found": "Sorry, we found nothing.",
   "Capital:": "Capital:"
 }

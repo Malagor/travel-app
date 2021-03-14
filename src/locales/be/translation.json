@@ -7,5 +7,9 @@
     "humidity": "вільготнасць",
     "metersPerSecond": "м/с"
   },
+  "Search Placeholder": "Увядзіце краіну",
+  "Search Button": "Пошук",
+  "Wrong Search Input": "Некарэктны ўвод. Калі ласка, увядзіце назву краіны або сталіцы на беларускай мове.",
+  "Nothing Was Found": "Выбачайце, нічога не знойдзена.",
   "Capital:": "Сталіца:"
 }

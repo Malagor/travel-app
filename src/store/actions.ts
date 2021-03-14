@@ -5,6 +5,8 @@ import {
   SET_GEO,
   SET_USER,
   SET_USER_LANGUAGE,
+  SET_SEARCH,
+  SET_FIRST_CARD_REF,
 } from 'appConstants';
 import { CountryType, DBUser, GeoType, State } from 'types';
 import { database } from 'services';
@@ -26,6 +28,17 @@ export const setLanguage = (payload: string) => ({
   payload,
 });
 
+export const setSearch = (payload: string) => ({
+  type: SET_SEARCH,
+  payload,
+});
+
+export const setFirstCardRef = (
+  payload: React.RefObject<HTMLDivElement> | null
+) => ({
+  type: SET_FIRST_CARD_REF,
+  payload,
+});
 export const setUserInfo = (payload: DBUser) => ({
   type: SET_USER,
   payload,
