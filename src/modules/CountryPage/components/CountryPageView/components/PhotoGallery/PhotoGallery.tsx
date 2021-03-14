@@ -9,6 +9,7 @@ import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import Grid from '@material-ui/core/Grid';
 
 import { LanguagesType, SliderDataType } from 'types';
 import classes from './PhotoGallery.module.scss';
@@ -94,26 +95,8 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
     slidesToScroll: 1,
     speed: 500,
     className: fullScreen ? classes.slickFullScreen : classes.slickSlider,
-    centerMode: true,
-    variableWidth: true,
     nextArrow: <NextArrow onClick={() => {}} />,
     prevArrow: <PrevArrow onClick={() => {}} />,
-    responsive: [
-      {
-        breakpoint: 501,
-        settings: {
-          centerMode: true,
-          variableWidth: true,
-        },
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          centerMode: false,
-          variableWidth: false,
-        },
-      },
-    ],
   };
 
   const handleFullScreen = () => {
@@ -138,20 +121,24 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
 
   const slides = sliderData
     ? sliderData.map((slide) => (
-        <div className={classes.slickImage} key={slide.photo}>
-          <img
-            src={slide.photo}
-            alt={slide.name[lang as keyof LanguagesType]}
-          />
-          <div className={classes.slickImageCaption}>
-            <p className={classes.slickImageTitle}>
-              {slide.name[lang as keyof LanguagesType]}
-            </p>
-            <p className={classes.slickImageDescription}>
-              {slide.description[lang as keyof LanguagesType]}
-            </p>
-          </div>
-        </div>
+        <Grid container className={classes.slickImage} key={slide.photo}>
+          <Grid item md={12} lg={7}>
+            <img
+              src={slide.photo}
+              alt={slide.name[lang as keyof LanguagesType]}
+            />
+          </Grid>
+          <Grid item md={12} lg={5}>
+            <div className={classes.slickImageCaption}>
+              <p className={classes.slickImageTitle}>
+                {slide.name[lang as keyof LanguagesType]}
+              </p>
+              <p className={classes.slickImageDescription}>
+                {slide.description[lang as keyof LanguagesType]}
+              </p>
+            </div>
+          </Grid>
+        </Grid>
       ))
     : null;
 
