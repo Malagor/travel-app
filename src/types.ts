@@ -104,3 +104,22 @@ export type CurrencyRatesInfo = {
   time_next_update_unix: number;
   time_next_update_utc: string;
 };
+
+export type YandexMapsGeocodeResponse = {
+  geoObjects: {
+    get: (
+      n: number
+    ) => {
+      options: {
+        set: (preset: string, icon: string) => void;
+      };
+      properties: { set: (preset: string, icon: string) => void };
+      getAddressLine: () => string;
+    };
+  };
+};
+
+export type YandexMapsPanoramaManager = {
+  enableLookup: () => void;
+  disableLookup: () => void;
+};

@@ -5,11 +5,15 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { LanguagesType, StateCountry } from 'types';
 import { useStyles } from './styled';
+import { Map } from '../Map';
+import geoJson from '../../../../services/countriesGeo.json';
 
 type CountryPageProps = {
   country: StateCountry;
   lang: string;
 };
+
+const geo = JSON.parse(geoJson);
 
 export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
   const classes = useStyles();
@@ -42,6 +46,12 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                   </p>
                 </Grid>
               </Grid>
+            </Grid>
+            <Grid item xs={12} md={8} lg={6} style={{ minHeight: '400px' }}>
+              <Map
+                geo={country.name.en === 'Belarus' ? geo.BLR : geo.UKR}
+                capital={country.name.en === 'Belarus' ? 'Minsk' : 'Kiev'}
+              />
             </Grid>
           </Grid>
         </Paper>
