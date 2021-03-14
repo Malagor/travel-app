@@ -1,16 +1,14 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import { Typography } from '@material-ui/core';
+import { Grid, Paper, Container, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { State, CountryType, LanguagesType } from 'types';
-import { database } from 'services/database';
-import { setCountriesList, setFirstCardRef } from 'store/actions';
-import Paper from '@material-ui/core/Paper';
-import { CountryCard } from './components/CountryCard';
+import { setFirstCardRef, loadCountryList } from 'store/actions';
+import { ErrorMessage, Loader } from 'components';
+import { COUNTRY_PER_PAGE } from 'appConstants';
+import { CountryCard } from './components';
 import { useStyles } from './styled';
 
 export const MainPage: FC = () => {
@@ -36,43 +34,69 @@ export const MainPage: FC = () => {
     );
   });
 
-  const dispatch = useDispatch();
+  const count = COUNTRY_PER_PAGE;
+  const offset = useSelector((state: State) => state.offset);
+  const filter = '';
 
-  useEffect(() => {
-    dispatch(setCountriesList(database.getCountriesList()));
-  }, [dispatch]);
+  const dispatch = useDispatch();
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(setFirstCardRef(firstCardRef));
   }, [dispatch, firstCardRef]);
 
+  useEffect(() => {
+    try {
+      const options = {
+        offset,
+        count,
+        filter,
+        lang,
+      };
+      dispatch(loadCountryList(options));
+    } catch (e) {
+      setIsLoading(false);
+      setIsError(true);
+    }
+    setIsLoading(false);
+  }, [dispatch, count, lang, filter, offset]);
+
+  const hasContent = !(isLoading || isError);
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Paper className={classes.paper}>
-        <Typography variant="h2">Main Page</Typography>
-
-        <Grid container spacing={3}>
-          {filteredCountryList.length !== 0 ? (
-            filteredCountryList.map((country, index) => (
-              <Grid
-                key={country.id}
-                item
-                xs={12}
-                md={6}
-                lg={4}
-                ref={index === 0 ? firstCardRef : null}
-              >
-                <NavLink to={`/country/${country.id}`} className={classes.link}>
-                  <CountryCard country={country} lang={lang} />
-                </NavLink>
+        {isLoading && <Loader />}
+        {isError && <ErrorMessage />}
+        {hasContent && (
+          <Grid container spacing={3}>
+            {filteredCountryList.length !== 0 ? (
+              filteredCountryList.map((country, index) => (
+                <Grid
+                  key={country.id}
+                  item
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  ref={index === 0 ? firstCardRef : null}
+                >
+                  <NavLink
+                    to={`/country/${country.id}`}
+                    className={classes.link}
+                  >
+                    <CountryCard country={country} lang={lang} />
+                  </NavLink>
+                </Grid>
+              ))
+            ) : (
+              <Grid item xs={12} md={6} lg={4}>
+                <Typography variant="body1">
+                  {t('Nothing Was Found')}
+                </Typography>
               </Grid>
-            ))
-          ) : (
-            <Grid item xs={12} md={6} lg={4}>
-              <Typography variant="body1">{t('Nothing Was Found')}</Typography>
-            </Grid>
-          )}
-        </Grid>
+            )}
+          </Grid>
+        )}
       </Paper>
     </Container>
   );

@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { CURRENCY_MAP } from 'appConstants/currencyMap';
 import { CURRENCY_API_KEY } from 'appConstants/api';
 import { Loader, ErrorMessage } from 'components';
 import { Paper } from '@material-ui/core';
@@ -8,20 +7,21 @@ import classes from './CurrencyRate.module.scss';
 import { CurrencyRateView } from './components/CurrencyRateView';
 
 type CurrencyRateProps = {
-  currentCountry: string;
+  countryCurrency: string;
   preferredCurrencies: string[];
+  lang: string;
 };
 
 export const CurrencyRate: FC<CurrencyRateProps> = ({
-  currentCountry,
+  countryCurrency,
   preferredCurrencies,
+  lang,
 }) => {
   const [rates, setRates] = useState<[string, number][]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const baseCurrency = CURRENCY_MAP[currentCountry];
-  const apiUrl = `https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${baseCurrency}`;
+  const apiUrl = `https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${countryCurrency}`;
 
   const storeCurrencyData = useCallback(
     (data: CurrencyRatesInfo) => {
@@ -37,14 +37,14 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({
 
       if (storageData) {
         const parsedStorageData = JSON.parse(storageData);
-        parsedStorageData[currentCountry] = currentRates;
+        parsedStorageData[countryCurrency] = currentRates;
         localStorage.setItem('TA-currency', JSON.stringify(parsedStorageData));
       } else {
-        const newStorageData = { [currentCountry]: currentRates };
+        const newStorageData = { [countryCurrency]: currentRates };
         localStorage.setItem('TA-currency', JSON.stringify(newStorageData));
       }
     },
-    [currentCountry]
+    [countryCurrency]
   );
 
   const getCurrencyRateData = useCallback(
@@ -82,13 +82,13 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({
       const now = new Date();
       const currentDate = `${now.getDate()}-${now.getMonth()}-${now.getFullYear()}`;
       if (
-        parsedStorageData[currentCountry] &&
-        parsedStorageData[currentCountry].update === currentDate
+        parsedStorageData[countryCurrency] &&
+        parsedStorageData[countryCurrency].update === currentDate
       ) {
         setRates(
           preferredCurrencies.map((currency) => [
             currency,
-            parsedStorageData[currentCountry].rates[currency],
+            parsedStorageData[countryCurrency].rates[currency],
           ])
         );
         setIsError(false);
@@ -97,7 +97,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({
         getCurrencyRateData().catch(onError);
       }
     },
-    [preferredCurrencies, currentCountry, getCurrencyRateData]
+    [preferredCurrencies, countryCurrency, getCurrencyRateData]
   );
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({
       getCurrencyRateData().catch(onError);
     }
   }, [
-    currentCountry,
+    countryCurrency,
     apiUrl,
     preferredCurrencies,
     getCurrencyRateData,
@@ -125,7 +125,11 @@ export const CurrencyRate: FC<CurrencyRateProps> = ({
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {hasData && (
-        <CurrencyRateView currentCountry={currentCountry} rates={rates} />
+        <CurrencyRateView
+          countryCurrency={countryCurrency}
+          rates={rates}
+          lang={lang}
+        />
       )}
     </Paper>
   );

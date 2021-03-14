@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
-import { LanguagesType, CountryType } from 'types';
-import { VideoPlayer } from '../VideoPlayer';
+import { Typography, Paper, Grid } from '@material-ui/core';
+import { LanguagesType, CountryType, State } from 'types';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useStyles } from './styled';
-import { PhotoGallery } from './components';
-import { WidgetsPanel } from './components/WidgetsPanel';
+import { PhotoGallery, WidgetsPanel, VideoPlayer } from './components';
 
 type CountryPageProps = {
   country: CountryType;
@@ -16,6 +14,11 @@ type CountryPageProps = {
 
 export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
   const classes = useStyles();
+  const [t] = useTranslation();
+
+  const { iso3 } = country;
+
+  const geo = useSelector((state: State) => state.geo[iso3]);
 
   return (
     <Grid container>
@@ -29,6 +32,14 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                     <Grid item xs={12}>
                       <Typography variant="h2">
                         {country?.name[lang as keyof LanguagesType]}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="h4">
+                        {t('Capital:')}
+                        <span>
+                          {country?.capital[lang as keyof LanguagesType]}
+                        </span>
                       </Typography>
                     </Grid>
                     <Grid item xs={12}>

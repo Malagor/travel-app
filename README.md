@@ -38,7 +38,8 @@ https://travel-app-react-524c7.web.app/
 ### App description:  
 
 
-Backend repo:  
+Backend repo: https://github.com/Malagor/travel-app-be
+
 MindMap: https://www.mindmeister.com/1793586080/travel-app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

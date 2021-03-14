@@ -11,3 +11,5 @@ export const SET_USER_CURRENCIES_LIST = 'SET_USER_CURRENCIES_LIST';
 export const SET_THEME = 'SET_THEME';
 export const SET_SEARCH = 'SET_SEARCH';
 export const SET_FIRST_CARD_REF = 'SET_FIRST_CARD_REF';
+export const SET_OFFSET = 'SET_OFFSET';
+export const SET_GEO = 'SET_GEO';
