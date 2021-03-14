@@ -1,6 +1,6 @@
-import { CurrencyType, CountryType } from 'types';
+import { CurrencyType, CountryType, DBUser } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
-import { DatabaseType, DBUser, initialDB } from './initialDB';
+import { DatabaseType, initialDB } from './initialDB';
 
 class Database {
   private DB: DatabaseType;

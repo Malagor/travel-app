@@ -58,11 +58,8 @@ export type UserInfo = {
   name: string;
   avatar: string;
   lang: string;
-};
-
-export type SettingsType = {
   theme: string;
-  currencyList: CurrencyType;
+  currencies: string[];
 };
 
 export type LanguagesType = {
@@ -78,10 +75,11 @@ export type SliderDataType = {
 };
 
 export type CountryType = {
-  id: string | number;
+  id: string;
+  iso3: string;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: string;
+  currency: string;
   description?: LanguagesType;
   population?: number;
   area?: number;
@@ -94,10 +92,13 @@ export type CountryType = {
 };
 
 export type State = {
-  settings: SettingsType;
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
+  search: string;
+  firstCardRef: React.RefObject<HTMLDivElement> | null;
+  offset: number;
+  geo: GeoType;
 };
 
 export type CurrencyRatesInfo = {
@@ -110,4 +111,22 @@ export type CurrencyRatesInfo = {
   time_last_update_utc: string;
   time_next_update_unix: number;
   time_next_update_utc: string;
+};
+
+export type DBUser = {
+  id: string;
+  name: string;
+  avatar: string;
+  lang: string;
+  theme: string;
+  currencies: string[];
+};
+
+type GeoPointType = [number, number];
+
+export type GeoType = {
+  [key: string]: {
+    type: string;
+    coordinates: [[GeoPointType[]]];
+  };
 };
