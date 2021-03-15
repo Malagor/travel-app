@@ -72,14 +72,20 @@
 
 .slickContainerFullScreen .slickImage {
   flex-wrap: nowrap;
-  background-color:rgba(255, 255, 255, 1);
 }
 
 .slickImageInfo {
   padding-left: 20px;
 }
 
+.slickContainerFullScreen .slickImageInfoWrapper {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
 .slickContainerFullScreen .slickImageInfo {
+  display: grid;
+  align-content: center;
   padding: 20px;
 }
 
@@ -116,20 +122,19 @@
   height: 100px;
 }
 
-.slickAttractionRatingStats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .slickAttractionRatingHeader {
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.slickAttractionRatingValue {
-  margin: 0;
-  font-size: 1.2em;
+.slickAttractionRatingStars {
+  margin-bottom: 15px;
+}
+
+.slickAttractionRatingStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 @media(max-width: 1280px) {
@@ -145,6 +150,14 @@
     padding: 10px 0;
   }
 
+  .slickContainerFullScreen .slickArrow {
+    top: 40%;
+  }
+
+  .slickContainerFullScreen .slickImageInfoWrapper {
+    padding: 10px;
+  }
+
   .slickContainerFullScreen .slickImageInfo {
     padding: 10px;
   }
@@ -156,18 +169,22 @@
 }
 
 @media (max-width: 768px) {
+  .slickContainerFullScreen .slickImage {
+    flex-wrap: wrap;
+  }
+
   .slickImageInfo {
     font-size: 0.8em;
     padding: 5px 0;
   }
 
+  .slickContainerFullScreen .slickImageInfo {
+    padding: 0;
+  }
+
   .slickThumbs,
   .slickThumbs img {
     height: 60px;
-  }
-
-  .slickFullScreenButton {
-    display: none !important;
   }
 
   .slickThumbs {
