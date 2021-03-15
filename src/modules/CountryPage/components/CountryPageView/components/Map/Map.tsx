@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { YMaps, Map as YMap, YMapsApi, MapOptions } from 'react-yandex-maps';
 import { GeoPointType, YandexMapsPanoramaManager } from 'types';
 import {
@@ -39,7 +34,7 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
       return;
     }
     const layer = new ymaps!.Layer('', {
-      projection: ymaps!.projection.wgs84Mercator,
+      projection: ymaps!.projection.sphericalMercator,
     });
     layer.getTileUrl = (tileNumber: number[], zoom: number) => {
       const actualZoom = Math.max(zoom - 1, 0);
@@ -152,7 +147,7 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
 
   const modules = [
     'Layer',
-    'projection.wgs84Mercator',
+    'projection.sphericalMercator',
     'borders',
     'ObjectManager',
     'geocode',
