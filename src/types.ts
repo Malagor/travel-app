@@ -131,21 +131,8 @@ export type GeoType = {
   };
 };
 
-export type YandexMapsGeocodeResponse = {
-  geoObjects: {
-    get: (
-      n: number
-    ) => {
-      options: {
-        set: (preset: string, icon: string) => void;
-      };
-      properties: { set: (preset: string, icon: string) => void };
-      getAddressLine: () => string;
-    };
-  };
-};
-
 export type YandexMapsPanoramaManager = {
   enableLookup: () => void;
   disableLookup: () => void;
+  isLookupEnabled: () => boolean;
 };

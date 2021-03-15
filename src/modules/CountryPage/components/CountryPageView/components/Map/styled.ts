@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     width: '100%',
     height: '100%',
+    paddingTop: '56.25%',
   },
   overlay: {
     position: 'absolute',

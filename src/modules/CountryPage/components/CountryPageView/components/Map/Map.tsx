@@ -1,11 +1,16 @@
-import React, { FC, useCallback, useLayoutEffect, useState } from 'react';
+import React, {
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { YMaps, Map as YMap, YMapsApi, MapOptions } from 'react-yandex-maps';
+import { GeoPointType, YandexMapsPanoramaManager } from 'types';
 import {
-  GeoPointType,
-  YandexMapsGeocodeResponse,
-  YandexMapsPanoramaManager,
-} from 'types';
-import { YANDEX_MAPS_API_KEY, MAPBOX_TILES_STRING } from 'appConstants/api';
+  MAPBOX_SEARCH_URL,
+  MAPBOX_TILES_URL,
+  YANDEX_MAPS_API_KEY,
+} from 'appConstants/api';
 import { ErrorMessage, Loader } from 'components';
 import { useStyles } from './styled';
 
@@ -21,19 +26,24 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
   const classes = useStyles();
   const [ymaps, setYmaps] = useState<YMapsApi | null>(null);
   const [mapElement, setMapElement] = useState<YMapsApi | null>(null);
-  const [manager, setManager] = useState<YandexMapsPanoramaManager | null>(
-    null
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const addMapboxLayer = useCallback(() => {
+  const onError = () => {
+    setIsError(true);
+    setIsLoading(false);
+  };
+
+  useLayoutEffect(() => {
+    if (!ymaps || !mapElement) {
+      return;
+    }
     const layer = new ymaps!.Layer('', {
       projection: ymaps!.projection.wgs84Mercator,
     });
     layer.getTileUrl = (tileNumber: number[], zoom: number) => {
       const actualZoom = Math.max(zoom - 1, 0);
-      return MAPBOX_TILES_STRING.replace('%z', actualZoom.toString())
+      return MAPBOX_TILES_URL.replace('%z', actualZoom.toString())
         .replace('%x', Math.max(tileNumber[0], 0).toString())
         .replace('%y', Math.max(tileNumber[1], 0).toString());
     };
@@ -41,39 +51,8 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
     mapElement!.layers.add(layer);
   }, [ymaps, mapElement]);
 
-  const addPanorama = useCallback(() => {
-    mapElement!
-      .getPanoramaManager()
-      .then((panoramaManager: YandexMapsPanoramaManager) => {
-        setManager(panoramaManager);
-        panoramaManager.enableLookup();
-      })
-      .catch();
-  }, [mapElement]);
-
-  const addPlacemark = useCallback(() => {
-    if (!capital) {
-      return;
-    }
-    ymaps!
-      .geocode(capital, {
-        results: 1,
-      })
-      .then((res: YandexMapsGeocodeResponse) => {
-        if (ymaps && mapElement) {
-          const city = res.geoObjects.get(0);
-          if (city) {
-            city.options.set('preset', 'islands#darkBlueDotIconWithCaption');
-            city.properties.set('iconCaption', city.getAddressLine());
-            mapElement.geoObjects.add(city);
-          }
-        }
-      })
-      .catch();
-  }, [ymaps, mapElement, capital]);
-
-  const selectCountry = useCallback(() => {
-    if (!geo) {
+  useLayoutEffect(() => {
+    if (!ymaps || !mapElement || !geo) {
       return;
     }
     const objectManager = new ymaps!.ObjectManager();
@@ -99,31 +78,72 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
     mapElement!.setBounds(mapElement!.geoObjects.getBounds(), {
       checkZoomRange: true,
     });
-  }, [ymaps, mapElement, geo]);
+  }, [geo, ymaps, mapElement]);
 
   useLayoutEffect(() => {
-    if (ymaps && mapElement) {
-      addMapboxLayer();
-      selectCountry();
-      addPanorama();
-      addPlacemark();
+    const controller = new AbortController();
+
+    if (!ymaps || !mapElement || !capital) {
+      return () => {
+        controller.abort();
+      };
     }
+    const { signal } = controller;
+    fetch(MAPBOX_SEARCH_URL.replace('%r', capital), { signal })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('response error');
+        }
+        return resp.json();
+      })
+      .then(({ features: [{ center, text }] }) => {
+        setIsLoading(false);
+        if (!mapElement || !ymaps) {
+          return;
+        }
+        mapElement.geoObjects.add(
+          new ymaps.Placemark(
+            center,
+            { iconCaption: text },
+            {
+              preset: 'islands#dotIcon',
+              iconColor: '#3f51b5',
+              cursor: 'default',
+            }
+          )
+        );
+      })
+      .catch(onError);
+
+    return () => {
+      controller.abort();
+    };
+  }, [ymaps, mapElement, capital]);
+
+  useLayoutEffect(() => {
+    if (!mapElement) {
+      return () => {};
+    }
+    let manager: YandexMapsPanoramaManager | null = null;
+    mapElement
+      .getPanoramaManager()
+      .then((panoramaManager: YandexMapsPanoramaManager) => {
+        manager = panoramaManager;
+        manager.enableLookup();
+      })
+      .catch(onError);
     return () => {
       manager?.disableLookup();
+    };
+  }, [mapElement]);
+
+  useEffect(
+    () => () => {
       setMapElement(null);
       setYmaps(null);
-    };
-  }, [
-    capital,
-    geo,
-    ymaps,
-    mapElement,
-    manager,
-    addMapboxLayer,
-    selectCountry,
-    addPanorama,
-    addPlacemark,
-  ]);
+    },
+    []
+  );
 
   const mapBoundaries = [
     [-179, -85],
@@ -138,7 +158,9 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
     'geocode',
     'control.ZoomControl',
     'control.FullscreenControl',
+    'Placemark',
     'GeoObject',
+    'geoObject.addon.balloon',
   ].join(',');
 
   const isNotLoaded = isError || isLoading;
@@ -165,7 +187,13 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
             zoom: 9,
             controls: ['zoomControl', 'fullscreenControl'],
           }}
-          style={{ width: '100%', height: '100%' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
           instanceRef={setMapElement}
           onLoad={(api) => {
             setYmaps(api);
@@ -173,10 +201,7 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
             setIsError(false);
           }}
           options={{ restrictMapArea: mapBoundaries as unknown } as MapOptions}
-          onError={() => {
-            setIsError(true);
-            setIsLoading(false);
-          }}
+          onError={onError}
         />
       </YMaps>
     </div>
