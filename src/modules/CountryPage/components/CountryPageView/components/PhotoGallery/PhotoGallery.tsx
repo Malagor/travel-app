@@ -11,15 +11,9 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import {
-  CountryType,
   LanguagesType,
   SliderDataType,
-  State,
-  UserInfo,
 } from 'types';
-import { Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { database } from 'services';
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
@@ -136,30 +130,6 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
     }
   };
 
-  const userId = useSelector((state: State) => state.userInfo.id);
-  const countryId = useSelector((state: State) => state.country.id);
-
-  const setRating = (attrId: string, rating: number) => {
-    database
-      .setRating(countryId, attrId, userId, rating)
-      .then((data: [UserInfo, CountryType]) => {
-        // в ответе получаем данные пользователя и данные текущей страны.
-        // Возможно это излишняя инфа и я попробую ее сократить до минимальной информации.
-        // в любом случае, там можно увидеть измененные рейтинги у пльзователя и у страны
-        // мы можем показывать пользователю не только общую ойценку, но и как он оценил
-        // в стране храниться сумма и количество голосовавших. Среднее нужно вычислять
-        // У пользователя храниться его оценка просто.
-        // Подробней насчет типов описано в типах
-
-        const [user, country] = data;
-        console.log(
-          'User rating',
-          user.attractionRates.find((value) => value.attrId === attrId)
-        );
-        console.log('country', country);
-      });
-  };
-
   useEffect(() => {
     document.onfullscreenchange = () => {
       setFullScreen(document.fullscreenElement === sliderRef.current);
@@ -183,24 +153,6 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
             <p className={classes.slickImageDescription}>
               {slide.description[lang as keyof LanguagesType]}
             </p>
-            <p style={{ fontSize: '20px', color: 'red' }}>
-              Рейтинг сумма: {slide.rating.sum}, количество,{' '}
-              {slide.rating.count}
-            </p>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setRating(slide.id, 5)}
-            >
-              Рейтинг 5
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => setRating(slide.id, 1)}
-            >
-              Рейтинг 1
-            </Button>
           </div>
         </div>
       ))

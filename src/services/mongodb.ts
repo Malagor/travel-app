@@ -1,11 +1,16 @@
-import { CountryType, CurrencyType, DBUser, GeoType, UserInfo } from 'types';
+import {
+  CountryType,
+  CurrencyType,
+  DBUser,
+  GeoType,
+  RatingServerResponse,
+} from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
 class MongoDatabase {
   private readonly URL: string;
 
   constructor() {
-    // this.URL = 'http://localhost:3001'; // local url for tests
     this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
   }
 
@@ -40,7 +45,7 @@ class MongoDatabase {
     attractionId: string,
     userId: string,
     rating: number
-  ): Promise<[UserInfo, CountryType]> => {
+  ): Promise<RatingServerResponse> => {
     const url = `${this.URL}/country/${countryId}/attraction`;
     const data = {
       attractionId,

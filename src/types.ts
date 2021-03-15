@@ -136,3 +136,14 @@ export type GeoType = {
     coordinates: [[GeoPointType[]]];
   };
 };
+
+export type RatingServerResponse = {
+  attrId: string;
+  countryId: string;
+  userId: string;
+  userRating: number;
+  attrRating: {
+    sum: number;
+    count: number;
+  };
+};
