@@ -6,5 +6,10 @@
     "wind": "ветер",
     "humidity": "влажность",
     "metersPerSecond": "м/с"
-  }
+  },
+  "Search Placeholder": "Введите страну",
+  "Search Button": "Поиск",
+  "Wrong Search Input": "Некорректный ввод. Введите название страны или столицы на русском языке.",
+  "Nothing Was Found": "Извините, ничего не найдено.",
+  "Capital:": "Столица:"
 }

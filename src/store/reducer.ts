@@ -8,6 +8,10 @@ import {
   SET_USER_CURRENCIES_LIST,
   SET_USER_AVATAR,
   SET_USER_NAME,
+  SET_SEARCH,
+  SET_FIRST_CARD_REF,
+  SET_OFFSET,
+  SET_GEO,
 } from 'appConstants';
 import { State } from 'types';
 import { initialState } from './initialState';
@@ -56,12 +60,33 @@ export const appReducer: Reducer<State, Action> = (
     case SET_USER_CURRENCIES_LIST:
       return {
         ...state,
-        settings: { ...state.settings, currencyList: action.payload },
+        userInfo: { ...state.userInfo, currencyList: action.payload },
       };
     case SET_THEME:
       return {
         ...state,
-        settings: { ...state.settings, theme: action.payload },
+        userInfo: { ...state.userInfo, theme: action.payload },
+      };
+    case SET_OFFSET:
+      return {
+        ...state,
+        offset: action.payload,
+      };
+
+    case SET_GEO:
+      return {
+        ...state,
+        geo: action.payload,
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload,
+      };
+    case SET_FIRST_CARD_REF:
+      return {
+        ...state,
+        firstCardRef: action.payload,
       };
 
     default:

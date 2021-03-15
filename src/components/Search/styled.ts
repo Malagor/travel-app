@@ -1,4 +1,9 @@
-import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+  createStyles,
+  fade,
+  makeStyles,
+  Theme,
+} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,7 +19,16 @@ export const useStyles = makeStyles((theme: Theme) =>
         display: 'block',
       },
     },
+    searchContainer: {
+      display: 'grid',
+      gridGap: '5px',
+      gridTemplateColumns: '1fr 100px',
+      alignItems: 'center',
+      marginRight: theme.spacing(2),
+      marginLeft: theme.spacing(2),
+    },
     search: {
+      display: 'flex',
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -62,6 +76,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
+    },
+    tooltip: {
+      backgroundColor: theme.palette.warning.dark,
+      fontSize: '0.9em',
     },
   })
 );

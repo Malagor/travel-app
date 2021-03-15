@@ -53,16 +53,13 @@ export type CurrencyType = {
   [key: string]: { nameRu: string; nameEn: string; nameBe: string };
 };
 
-export type StateUserInfo = {
+export type UserInfo = {
   id: string;
   name: string;
   avatar: string;
   lang: string;
-};
-
-export type StateSettings = {
   theme: string;
-  currencyList: CurrencyType;
+  currencies: string[];
 };
 
 export type LanguagesType = {
@@ -71,11 +68,18 @@ export type LanguagesType = {
   be?: string;
 };
 
-export type StateCountry = {
-  id: string | number;
+export type SliderDataType = {
+  photo: string;
+  name: LanguagesType;
+  description: LanguagesType;
+};
+
+export type CountryType = {
+  id: string;
+  iso3: string;
   name: LanguagesType;
   capital: LanguagesType;
-  currency?: CurrencyType;
+  currency: string;
   description?: LanguagesType;
   population?: number;
   area?: number;
@@ -84,13 +88,17 @@ export type StateCountry = {
   photos?: string[];
   locale?: string;
   timeZone?: string;
+  attractions?: SliderDataType[];
 };
 
 export type State = {
-  settings: StateSettings;
-  userInfo: StateUserInfo;
-  country: StateCountry;
-  countryList: StateCountry[] | [];
+  userInfo: UserInfo;
+  country: CountryType;
+  countryList: CountryType[] | [];
+  search: string;
+  firstCardRef: React.RefObject<HTMLDivElement> | null;
+  offset: number;
+  geo: GeoType;
 };
 
 export type CurrencyRatesInfo = {
@@ -103,6 +111,24 @@ export type CurrencyRatesInfo = {
   time_last_update_utc: string;
   time_next_update_unix: number;
   time_next_update_utc: string;
+};
+
+export type DBUser = {
+  id: string;
+  name: string;
+  avatar: string;
+  lang: string;
+  theme: string;
+  currencies: string[];
+};
+
+export type GeoPointType = [number, number];
+
+export type GeoType = {
+  [key: string]: {
+    type: string;
+    coordinates: [[GeoPointType[]]];
+  };
 };
 
 export type YandexMapsGeocodeResponse = {

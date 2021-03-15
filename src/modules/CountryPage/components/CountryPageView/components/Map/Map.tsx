@@ -1,19 +1,20 @@
 import React, { FC, useCallback, useLayoutEffect, useState } from 'react';
+import { YMaps, Map as YMap, YMapsApi, MapOptions } from 'react-yandex-maps';
 import {
-  YMaps,
-  Map as YMap,
-  YMapsApi,
-  GeoObjectGeometry,
-  MapOptions,
-} from 'react-yandex-maps';
-import { YandexMapsGeocodeResponse, YandexMapsPanoramaManager } from 'types';
+  GeoPointType,
+  YandexMapsGeocodeResponse,
+  YandexMapsPanoramaManager,
+} from 'types';
 import { YANDEX_MAPS_API_KEY, MAPBOX_TILES_STRING } from 'appConstants/api';
 import { ErrorMessage, Loader } from 'components';
 import { useStyles } from './styled';
 
 type MapProps = {
-  geo: GeoObjectGeometry;
-  capital: string;
+  geo: {
+    type: string;
+    coordinates: [[GeoPointType[]]];
+  };
+  capital?: string;
 };
 
 export const Map: FC<MapProps> = ({ geo, capital }) => {
@@ -51,6 +52,9 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
   }, [mapElement]);
 
   const addPlacemark = useCallback(() => {
+    if (!capital) {
+      return;
+    }
     ymaps!
       .geocode(capital, {
         results: 1,
@@ -69,26 +73,27 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
   }, [ymaps, mapElement, capital]);
 
   const selectCountry = useCallback(() => {
+    if (!geo) {
+      return;
+    }
     const objectManager = new ymaps!.ObjectManager();
     objectManager.add(
-      (geo.coordinates as number[][][]).map(
-        (polygon: number[][], id: number) => ({
-          id,
-          geometry: {
-            type: 'Polygon',
-            coordinates: polygon,
-          },
-          type: 'Feature',
-          options: {
-            cursor: 'default',
-            fillColor: '#3f51b5',
-            fillOpacity: 0.5,
-            strokeColor: '#3f51b5',
-            strokeOpacity: 0.5,
-            strokeWidth: 5,
-          },
-        })
-      )
+      geo.coordinates.map((polygon, id) => ({
+        id,
+        geometry: {
+          type: 'Polygon',
+          coordinates: polygon,
+        },
+        type: 'Feature',
+        options: {
+          cursor: 'default',
+          fillColor: '#3f51b5',
+          fillOpacity: 0.5,
+          strokeColor: '#3f51b5',
+          strokeOpacity: 0.5,
+          strokeWidth: 5,
+        },
+      }))
     );
     mapElement!.geoObjects.add(objectManager);
     mapElement!.setBounds(mapElement!.geoObjects.getBounds(), {
@@ -109,6 +114,8 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
       setYmaps(null);
     };
   }, [
+    capital,
+    geo,
     ymaps,
     mapElement,
     manager,

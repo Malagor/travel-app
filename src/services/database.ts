@@ -1,6 +1,6 @@
-import { CurrencyType, StateCountry } from 'types';
+import { CurrencyType, CountryType, DBUser } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
-import { DatabaseType, DBUser, initialDB } from './initialDB';
+import { DatabaseType, initialDB } from './initialDB';
 
 class Database {
   private DB: DatabaseType;
@@ -16,14 +16,14 @@ class Database {
   getCountriesList = (
     count: number = COUNTRY_PER_PAGE,
     offset: number = 0
-  ): StateCountry[] => {
+  ): CountryType[] => {
     if (count === 0) {
       return this.DB.countriesList.slice(offset)
     }
     return this.DB.countriesList.slice(offset, offset + count);
   };
 
-  getCountryById = (id: number): StateCountry => this.DB.countriesList[id];
+  getCountryById = (id: number): CountryType => this.DB.countriesList[id];
 
   getUserInfo = (id: string): DBUser =>
     this.DB.users.filter((user: DBUser) => user.id === id)[0];
