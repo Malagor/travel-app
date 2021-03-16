@@ -18,6 +18,10 @@
     "email": "Электронная почта",
     "password": "Пароль",
     "showPassword": "Показать пароль",
-    "singUp": "Регистрация"
+    "singUp": "Регистрация",
+    "signIn": "Вход",
+    "signOut": "Выйти",
+    "textIsHaveAcc": "Нет аккаунта?",
+    "createAccount": "Создать аккаунт"
   }
 }

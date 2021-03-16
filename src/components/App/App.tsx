@@ -32,7 +32,7 @@ export function App() {
         <Route path="/country" component={CountryPage} />
         <Route exact path="/" component={MainPage} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/login" component={Registration} />
+        <Route exact path="/registration" component={Registration} />
       </Switch>
     </Layout>
   );

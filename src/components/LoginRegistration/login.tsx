@@ -11,14 +11,16 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import firebase from 'firebase';
 import googleLogo from 'assets/svg/google-logo.svg.png';
+import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
-  wrapperLogin: {
+  wrapperEmail: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '300px',
-    height: '400px',
+    minHeight: '400px',
     margin: '40px auto',
     backgroundColor:
       theme.palette.type === 'light'
@@ -44,53 +46,79 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Login() {
-  const [login, setLogin] = useState<string>('');
+  const [t] = useTranslation();
+
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const makeLogin = () => {
-    console.log('login', login);
-    console.log('password', password);
+  const [stateErrorField, setStateErrorField] = React.useState(false);
 
-    /* firebase.auth.createUserWithEmailAndPassword() */
+  const makeLogin = async () => {
+    const getLogin = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
+
+    console.log('getlogin', getLogin);
+
+    if (getLogin) {
+      if (getLogin.operationType === 'signIn') {
+        // go redirect
+        console.log('user made Login: ok');
+      }
+    } else {
+      setStateErrorField(true);
+    }
   };
 
-  const singInByGoogle = () => {
+  const singInByGoogle = async () => {
     console.log('singInByGoogle');
   };
 
   const classes = useStyles();
   return (
     <Grid>
-      <Paper elevation={10} className={classes.wrapperLogin}>
+      <Paper elevation={10} className={classes.wrapperEmail}>
         <Avatar className={classes.logo}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant="h5">Sing in</Typography>
+        <Typography variant="h5">{t('Registration.signIn')}</Typography>
 
         <Grid className={classes.inputGroup}>
           <TextField
-            value={login}
-            onChange={handleLogin}
-            id="loginEnter"
-            label="login"
+            error={stateErrorField}
+            value={email}
+            onChange={handleEmail}
+            id="email"
+            label={t('Registration.email')}
           />
 
           <TextField
+            error={stateErrorField}
             onChange={handlePassword}
-            id="passwordEnter"
+            id="password"
             value={password}
-            label="Password"
+            label={t('Registration.password')}
             type="password"
             autoComplete="current-password"
           />
+        </Grid>
+        <Grid>
+          <Typography>{t('Registration.textIsHaveAcc')}</Typography>
+          <NavLink to="/registration">
+            {t('Registration.createAccount')}
+          </NavLink>
         </Grid>
         <Grid>
           <Button onClick={singInByGoogle}>
@@ -98,6 +126,7 @@ export function Login() {
               style={{
                 width: '20px',
                 height: '20px',
+                marginTop: '10px',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundImage: `url(${googleLogo})`,
@@ -113,7 +142,7 @@ export function Login() {
             disableElevation
             className={classes.buttonSingIn}
           >
-            Sing in
+            {t('Registration.signIn')}
           </Button>
         </Grid>
       </Paper>

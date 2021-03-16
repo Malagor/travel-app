@@ -18,6 +18,10 @@
     "email": "Email",
     "password": "Password",
     "showPassword": "Show password",
-    "singUp": "Sing up"
+    "singUp": "Sing up",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "textIsHaveAcc": "Don't have an account?",
+    "createAccount": "Create account"
   }
 }

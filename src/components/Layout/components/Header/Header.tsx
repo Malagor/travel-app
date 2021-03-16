@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import firebase from 'firebase';
 import clsx from 'clsx';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { LanguageToggle, Search } from 'components';
 import { useSelector } from 'react-redux';
 import { State } from 'types';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
 
@@ -23,9 +25,23 @@ export const Header: FC<HeaderProps> = ({
   handleDrawerOpen,
   pathname,
 }) => {
+  const [t] = useTranslation();
+
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
   const isUser = false; // значение из стейта есть юзер илил нет
+
+  const singOut = async () => {
+    console.log('singOut');
+    const getSingOut = await firebase
+      .auth()
+      .signOut()
+      .then((error) => {
+        console.log('error', error);
+      });
+
+    console.log('getSingOut', getSingOut);
+  };
 
   return (
     <AppBar
@@ -49,23 +65,22 @@ export const Header: FC<HeaderProps> = ({
 
         {isUser ? (
           <NavLink to="/#" style={{ textDecoration: 'none' }}>
-            <Button variant="contained" color="primary" disableElevation>
-              Sing Out
+            <Button
+              onClick={singOut}
+              variant="contained"
+              color="primary"
+              disableElevation
+            >
+              {t('Registration.signOut')}
             </Button>
           </NavLink>
         ) : (
           <NavLink to="/login" style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="primary" disableElevation>
-              login
+              {t('Registration.signIn')}
             </Button>
           </NavLink>
         )}
-
-        {/*        <Avatar
-          alt={userInfo.name}
-          src={userInfo.avatar}
-          style={{ marginLeft: '10px' }}
-        /> */}
       </Toolbar>
     </AppBar>
   );

@@ -157,7 +157,7 @@ export const Registration = () => {
             <Avatar className={classes.logo}>
               <PlaylistAddCheckIcon />
             </Avatar>
-            <Typography variant="h5">{t('Registration.singUp')}</Typography>
+            <Typography variant="h5">{t('Registration.signUp')}</Typography>
           </Grid>
 
           <Grid container xs={12} className={classes.wrapperContainer}>
@@ -227,7 +227,7 @@ export const Registration = () => {
               disableElevation
               className={classes.buttonSingIn}
             >
-              {t('Registration.singUp')}
+              {t('Registration.signUp')}
             </Button>
           </Grid>
         </Grid>
