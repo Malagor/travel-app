@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +9,6 @@ import Badge from '@material-ui/core/Badge';
 
 import { LanguagesType, SliderDataType, State } from 'types';
 import { database } from 'services';
-import { loadCountry, loadUserInfo } from 'store/actions';
 import classes from '../PhotoGallery.module.scss';
 
 type SlideProps = {
@@ -18,15 +17,31 @@ type SlideProps = {
 };
 
 export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
-  const userRates = useSelector(
+  const userRatesData = useSelector(
     (state: State) => state.userInfo.attractionRates
   );
   const countryId = useSelector((state: State) => state.country.id);
   const userId = useSelector((state: State) => state.userInfo.id);
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const userRate = userRates.find((rate) => rate.attrId === slideData.id);
+  const userRateData = userRatesData.find(
+    (rate) => rate.attrId === slideData.id
+  );
+  const userRating = userRateData ? userRateData.rating : 0;
+
+  const [currentUserRating, setCurrentUserRating] = useState(userRating);
+  const [currentRatingSum, setCurrentRatingSum] = useState(
+    slideData.rating.sum
+  );
+  const [currentRatingCount, setCurrentRatingCount] = useState(
+    slideData.rating.count
+  );
+
+  useEffect(() => {
+    setCurrentUserRating(userRateData ? userRateData.rating : 0);
+    setCurrentRatingSum(slideData.rating.sum);
+    setCurrentRatingCount(slideData.rating.count);
+  }, [userRateData, slideData.rating.sum, slideData.rating.count]);
 
   const onRatingChange = (
     evt: React.ChangeEvent<HTMLInputElement>,
@@ -35,8 +50,9 @@ export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
     database
       .setRating(countryId, evt.target.name, userId, value as number)
       .then((res) => {
-        dispatch(loadCountry(countryId));
-        dispatch(loadUserInfo(userId));
+        setCurrentUserRating(res.userRating);
+        setCurrentRatingSum(res.attrRating.sum);
+        setCurrentRatingCount(res.attrRating.count);
       })
       .catch((err) => err);
   };
@@ -67,7 +83,7 @@ export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
                 </p>
                 <Rating
                   name={slideData.id}
-                  value={userRate ? userRate.rating : 0}
+                  value={currentUserRating}
                   precision={0.5}
                   max={5}
                   size="large"
@@ -84,18 +100,15 @@ export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
             <div className={classes.slickAttractionRatingStats}>
               <Badge
                 badgeContent={
-                  slideData.rating.count
-                    ? (slideData.rating.sum / slideData.rating.count).toFixed(1)
+                  currentRatingCount
+                    ? (currentRatingSum / currentRatingCount).toFixed(1)
                     : '0'
                 }
                 color="secondary"
               >
                 <Chip label={t('Rating')} />
               </Badge>
-              <Badge
-                badgeContent={slideData.rating.count || '0'}
-                color="primary"
-              >
+              <Badge badgeContent={currentRatingCount || '0'} color="primary">
                 <Chip label={t('Voted')} />
               </Badge>
             </div>
