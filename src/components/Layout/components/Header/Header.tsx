@@ -34,11 +34,10 @@ export const Header: FC<HeaderProps> = ({
   const loginHandler = async () => {
     try{
       const user = await database.createUser('ihruih324urbu3ybub34rbu3bf', 'Malagor', i18n.language );
-      console.log(user);
       dispatch(setUserInfo(user));
       dispatch(setLoginStatus(true));
     } catch (e) {
-      console.log('Ошибка создания пользователяю', e);
+      console.log('User create Error!', e);
     }
 
   };
@@ -66,7 +65,7 @@ export const Header: FC<HeaderProps> = ({
         <Button
           variant="outlined"
           className={classes.loginButton}
-          onClick={() => loginHandler()}
+          onClick={loginHandler}
         >
           {isLogin ? 'Выйти' : 'Войти'}
         </Button>

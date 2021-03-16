@@ -12,7 +12,8 @@ class MongoDatabase {
   private readonly URL: string;
 
   constructor() {
-    this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
+    this.URL = 'http://localhost:3001';
+    // this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
   }
 
   static create(): MongoDatabase {
@@ -75,16 +76,17 @@ class MongoDatabase {
       lang,
       avatar: '',
       theme: 'light',
-      currencies: [],
+      currencies: ['USD', 'EUR', 'BYN', 'RUB'],
       attractionRates: [],
     };
 
+    const body = JSON.stringify(userData);
+
     return fetch(url, {
-      method: 'PUSH',
-      body: JSON.stringify(userData),
+      method: 'POST',
+      body,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Methods': 'POST',
+        'Content-Type': 'application/json',
       },
     }).then((res) => res.json());
   };
