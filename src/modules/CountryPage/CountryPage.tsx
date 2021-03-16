@@ -11,17 +11,21 @@ export const CountryPage: FC = () => {
   const params: { id: string } = useParams();
   const { id } = params;
 
-  const country: CountryType = useSelector(
-    (state: State) => state.country
-  );
+  const country: CountryType = useSelector((state: State) => state.country);
 
   const lang: string = useSelector((state: State) => state.userInfo.lang);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadCountry(id));
-    // updateCountryInfo(+id - 1);
+    let cancel = false;
+    const countryInfo = loadCountry(id);
+    if (!cancel) {
+      dispatch(countryInfo);
+    }
+    return () => {
+      cancel = true;
+    };
   }, [dispatch, id]);
 
-  return  <CountryPageView country={country} lang={lang} />;
+  return <CountryPageView country={country} lang={lang} />;
 };
