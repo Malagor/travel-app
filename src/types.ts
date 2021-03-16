@@ -128,11 +128,19 @@ export type GeoType = {
   [key: string]: {
     type: string;
     coordinates: [[GeoPointType[]]];
+    properties: {
+      capital: GeoPointType;
+    };
   };
 };
 
-export type YandexMapsPanoramaManager = {
+export type YMapsPanoramaManager = {
   enableLookup: () => void;
   disableLookup: () => void;
   isLookupEnabled: () => boolean;
+};
+
+export type YMapsLayer = {
+  getTileUrl: (tileNumber: number[], zoom: number) => string;
+  getTileSize: () => [number, number];
 };

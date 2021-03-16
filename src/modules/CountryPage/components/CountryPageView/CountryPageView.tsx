@@ -65,7 +65,10 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                       <VideoPlayer url={country?.videos?.[0] || ''} />
                     </Grid>
                     <Grid item xs={12}>
-                      <Map geo={geo} capital={country.capital.en} />
+                      <Map
+                        geo={geo}
+                        capital={country?.capital[lang as keyof LanguagesType]}
+                      />
                     </Grid>
                   </Grid>
                 </Paper>
