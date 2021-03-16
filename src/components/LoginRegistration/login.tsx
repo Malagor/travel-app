@@ -9,9 +9,9 @@ import {
   Button,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
 import firebase from 'firebase';
-/* import { Context } from '../../index'; */
+import googleLogo from 'assets/svg/google-logo.svg.png';
+
 const useStyles = makeStyles((theme) => ({
   wrapperLogin: {
     display: 'flex',
@@ -44,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Login() {
-  /*   const loginTextField = createRef<HTMLDivElement>();
-  const passwordTextField = createRef<HTMLDivElement>(); */
-
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -63,6 +60,10 @@ export function Login() {
     console.log('password', password);
 
     /* firebase.auth.createUserWithEmailAndPassword() */
+  };
+
+  const singInByGoogle = () => {
+    console.log('singInByGoogle');
   };
 
   const classes = useStyles();
@@ -91,24 +92,30 @@ export function Login() {
             autoComplete="current-password"
           />
         </Grid>
-        <Button
-          onClick={makeLogin}
-          variant="contained"
-          color="primary"
-          disableElevation
-          className={classes.buttonSingIn}
-        >
-          Sing in
-        </Button>
-
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-          className={classes.buttonSingIn}
-        >
-          goggle
-        </Button>
+        <Grid>
+          <Button onClick={singInByGoogle}>
+            <span
+              style={{
+                width: '20px',
+                height: '20px',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundImage: `url(${googleLogo})`,
+              }}
+            />
+          </Button>
+        </Grid>
+        <Grid>
+          <Button
+            onClick={makeLogin}
+            variant="contained"
+            color="primary"
+            disableElevation
+            className={classes.buttonSingIn}
+          >
+            Sing in
+          </Button>
+        </Grid>
       </Paper>
     </Grid>
   );

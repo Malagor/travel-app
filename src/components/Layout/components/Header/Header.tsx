@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Avatar } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import { LanguageToggle, Search } from 'components';
 import { useSelector } from 'react-redux';
@@ -24,6 +25,7 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
+  const isUser = false; // значение из стейта есть юзер илил нет
 
   return (
     <AppBar
@@ -44,11 +46,26 @@ export const Header: FC<HeaderProps> = ({
         <div className={classes.grow} />
         {pathname === '/' && <Search />}
         <LanguageToggle />
-        <Avatar
+
+        {isUser ? (
+          <NavLink to="/#" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" disableElevation>
+              Sing Out
+            </Button>
+          </NavLink>
+        ) : (
+          <NavLink to="/login" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" disableElevation>
+              login
+            </Button>
+          </NavLink>
+        )}
+
+        {/*        <Avatar
           alt={userInfo.name}
           src={userInfo.avatar}
           style={{ marginLeft: '10px' }}
-        />
+        /> */}
       </Toolbar>
     </AppBar>
   );

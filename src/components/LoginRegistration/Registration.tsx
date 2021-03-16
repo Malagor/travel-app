@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   imageIcon: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
     width: '20px',
     height: '20px',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
 }));
 
@@ -141,7 +141,7 @@ export const Registration = () => {
     const { user } = result;
     console.log('user', user);
     if (user) {
-      // полчили  user.uid
+      // получили  user.uid
       console.log('userID', user.uid);
     } else {
       console.log('Error: uid is not defined');

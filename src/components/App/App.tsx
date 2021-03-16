@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
 import { loadGeo, loadUserInfo } from 'store/actions';
-import { Layout, Registration } from 'components';
+import { Layout, Registration, Login } from 'components';
 import firebase from 'firebase';
 import FIREBASE_CONFIG from 'appConstants/firedaseConfig';
 
@@ -24,13 +24,16 @@ export function App() {
   }, []);
 
   return (
-    <Registration />
-    /*     <Layout pathname={location.pathname}>
+    /* <Registration /> */
+
+    <Layout pathname={location.pathname}>
       <Switch>
         <Route path="/country/:id" component={CountryPage} />
         <Route path="/country" component={CountryPage} />
         <Route exact path="/" component={MainPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={Registration} />
       </Switch>
-    </Layout> */
+    </Layout>
   );
 }
