@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(6),
     height: theme.spacing(6),
     backgroundColor: 'green',
-    margin: theme.spacing(4),
-    marginLeft: '0px',
+    margin: theme.spacing(2),
+    marginTop: theme.spacing(4),
   },
   inputGroup: {
     display: 'flex',
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(4),
   },
-  buttonsignIn: {
+  buttonSignIn: {
     margin: theme.spacing(3),
   },
   inputText: {
@@ -140,6 +140,9 @@ export const Registration = () => {
             <Avatar className={classes.logo}>
               <PlaylistAddCheckIcon />
             </Avatar>
+          </Grid>
+
+          <Grid item xs={12} className={classes.wrapperContainer}>
             <Typography variant="h5">{t('Registration.signUp')}</Typography>
           </Grid>
 
@@ -208,7 +211,7 @@ export const Registration = () => {
               variant="contained"
               color="primary"
               disableElevation
-              className={classes.buttonsignIn}
+              className={classes.buttonSignIn}
             >
               {t('Registration.signUp')}
             </Button>

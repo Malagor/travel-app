@@ -21,4 +21,4 @@ const signInByGoogle = async () => {
   }
 };
 
-export default singInByGoogle;
+export default signInByGoogle;

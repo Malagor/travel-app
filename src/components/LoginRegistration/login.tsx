@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(4),
   },
-  buttonSingIn: {
+  buttonSignIn: {
     margin: theme.spacing(3),
   },
 }));
@@ -137,7 +137,7 @@ export function Login() {
             variant="contained"
             color="primary"
             disableElevation
-            className={classes.buttonsignIn}
+            className={classes.buttonSignIn}
           >
             {t('Registration.signIn')}
           </Button>
