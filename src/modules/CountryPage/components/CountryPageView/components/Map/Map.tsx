@@ -68,7 +68,7 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
     return () => {
       manager?.disableLookup();
     };
-  }, [mapElement, manager, countryPolygon]);
+  }, [mapElement, manager, countryPolygon, capital]);
 
   useEffect(() => {
     if (ymaps && mapElement) {
