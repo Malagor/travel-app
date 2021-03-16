@@ -10,6 +10,7 @@ export const initialState = () => {
       lang: 'ru',
       theme: 'light',
       currencies: ['USD', 'EUR', 'BYN'],
+      attractionRates: []
     },
     country: {
       id: '',
