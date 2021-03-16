@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { State, CountryType } from 'types';
-import { setFirstCardRef, loadCountryList } from 'store/actions';
+import { setFirstCardRef, loadCountryList, setCountry } from 'store/actions';
 import { ErrorMessage, Loader } from 'components';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 import { CountryCard } from './components';
@@ -28,6 +28,17 @@ export const MainPage: FC = () => {
   const dispatch = useDispatch();
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const clearCountry = {
+      id: '',
+      iso3: '',
+      name: {},
+      capital: {},
+      currency: '',
+    };
+    dispatch(setCountry(clearCountry));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setFirstCardRef(firstCardRef));
