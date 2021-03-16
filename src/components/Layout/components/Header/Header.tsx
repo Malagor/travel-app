@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'types';
 import { database } from 'services';
 import i18n from 'i18n';
+import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
-import { setLoginStatus, setUserInfo } from '../../../../store/actions';
 
 type HeaderProps = {
   open: boolean;
@@ -39,7 +39,6 @@ export const Header: FC<HeaderProps> = ({
     } catch (e) {
       console.log('User create Error!', e);
     }
-
   };
 
   return (

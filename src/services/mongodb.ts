@@ -12,8 +12,8 @@ class MongoDatabase {
   private readonly URL: string;
 
   constructor() {
-    this.URL = 'http://localhost:3001';
-    // this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
+    // this.URL = 'http://localhost:3001';
+    this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
   }
 
   static create(): MongoDatabase {
