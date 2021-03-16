@@ -13,6 +13,7 @@ import firebase from 'firebase';
 import googleLogo from 'assets/svg/google-logo.svg.png';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import singInByGoogle from './utils/singInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
   wrapperEmail: {
@@ -61,7 +62,7 @@ export function Login() {
 
   const [stateErrorField, setStateErrorField] = React.useState(false);
 
-  const makeLogin = async () => {
+  const makeLoginEmail = async () => {
     const getLogin = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -80,10 +81,6 @@ export function Login() {
     } else {
       setStateErrorField(true);
     }
-  };
-
-  const singInByGoogle = async () => {
-    console.log('singInByGoogle');
   };
 
   const classes = useStyles();
@@ -136,7 +133,7 @@ export function Login() {
         </Grid>
         <Grid>
           <Button
-            onClick={makeLogin}
+            onClick={makeLoginEmail}
             variant="contained"
             color="primary"
             disableElevation

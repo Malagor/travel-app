@@ -16,6 +16,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import { MIN_LENGTH_PASSWORD } from 'appConstants/index';
 import googleLogo from 'assets/svg/google-logo.svg.png';
+import singInByGoogle from './utils/singInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
   wrapperEmail: {
@@ -130,24 +131,6 @@ export const Registration = () => {
     }
   };
 
-  const createAccountByGoogle = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    const result = await firebase.auth().signInWithPopup(provider);
-
-    console.log(' dataUser', result);
-    const dataUser = result.additionalUserInfo;
-
-    const { user } = result;
-    console.log('user', user);
-    if (user) {
-      // получили  user.uid
-      console.log('userID', user.uid);
-    } else {
-      console.log('Error: uid is not defined');
-    }
-  };
-
   const classes = useStyles();
   return (
     <Grid>
@@ -209,7 +192,7 @@ export const Registration = () => {
           </Grid>
 
           <Grid item xs={12} className={classes.wrapperContainer}>
-            <Button onClick={createAccountByGoogle}>
+            <Button onClick={singInByGoogle}>
               <span
                 className={classes.imageIcon}
                 style={{
