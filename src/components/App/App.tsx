@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
 import { loadGeo, loadUserInfo } from 'store/actions';
-import { Layout } from 'components';
+import { Layout, Registration } from 'components';
 
 export function App() {
   const location = useLocation();
@@ -18,12 +18,13 @@ export function App() {
   }, [dispatch]);
 
   return (
-    <Layout pathname={location.pathname}>
+    <Registration />
+    /*     <Layout pathname={location.pathname}>
       <Switch>
         <Route path="/country/:id" component={CountryPage} />
         <Route path="/country" component={CountryPage} />
         <Route exact path="/" component={MainPage} />
       </Switch>
-    </Layout>
+    </Layout> */
   );
 }

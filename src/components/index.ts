@@ -7,3 +7,5 @@ export { Search } from './Search';
 export { Loader } from './Loader';
 export { CurrencyRate } from './CurrencyRate';
 export { Layout } from './Layout';
+export { Login } from './LoginRegistration';
+export { Registration } from './LoginRegistration';

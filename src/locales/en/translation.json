@@ -11,5 +11,13 @@
   "Search Button": "Search",
   "Wrong Search Input": "Input is incorrect. Enter country or capital name in English.",
   "Nothing Was Found": "Sorry, we found nothing.",
-  "Capital:": "Capital:"
+  "Capital:": "Capital:",
+
+  "Registration": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "singUp": "Sing up"
+  }
 }
