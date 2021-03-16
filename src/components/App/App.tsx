@@ -4,6 +4,8 @@ import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
 import { loadGeo, loadUserInfo } from 'store/actions';
 import { Layout, Registration } from 'components';
+import firebase from 'firebase';
+import FIREBASE_CONFIG from 'appConstants/firedaseConfig';
 
 export function App() {
   const location = useLocation();
@@ -16,6 +18,10 @@ export function App() {
   useEffect(() => {
     dispatch(loadGeo());
   }, [dispatch]);
+
+  useEffect(() => {
+    firebase.initializeApp(FIREBASE_CONFIG);
+  }, []);
 
   return (
     <Registration />
