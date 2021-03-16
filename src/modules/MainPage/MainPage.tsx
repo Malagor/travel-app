@@ -4,7 +4,7 @@ import { Grid, Paper, Container, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { State, CountryType, LanguagesType } from 'types';
+import { State, CountryType } from 'types';
 import { setFirstCardRef, loadCountryList } from 'store/actions';
 import { ErrorMessage, Loader } from 'components';
 import { COUNTRY_PER_PAGE } from 'appConstants';
@@ -19,24 +19,11 @@ export const MainPage: FC = () => {
     (state: State) => state.countryList
   );
   const lang = useSelector((state: State) => state.userInfo.lang);
-  const search = useSelector((state: State) => state.search);
   const firstCardRef = useRef<HTMLDivElement>(null);
-
-  const filteredCountryList = countryList.filter((country) => {
-    const searchString = search.toLowerCase().trim();
-    return (
-      country.name[lang as keyof LanguagesType]!.toLowerCase().includes(
-        searchString
-      ) ||
-      country.capital[lang as keyof LanguagesType]!.toLowerCase().includes(
-        searchString
-      )
-    );
-  });
 
   const count = COUNTRY_PER_PAGE;
   const offset = useSelector((state: State) => state.offset);
-  const filter = '';
+  const filter = useSelector((state: State) => state.search);
 
   const dispatch = useDispatch();
   const [isError, setIsError] = useState<boolean>(false);
@@ -70,8 +57,8 @@ export const MainPage: FC = () => {
         {isError && <ErrorMessage />}
         {hasContent && (
           <Grid container spacing={3}>
-            {filteredCountryList.length !== 0 ? (
-              filteredCountryList.map((country, index) => (
+            {countryList.length !== 0 ? (
+              countryList.map((country, index) => (
                 <Grid
                   key={country.id}
                   item
