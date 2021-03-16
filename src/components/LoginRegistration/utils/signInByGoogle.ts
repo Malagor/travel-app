@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const singInByGoogle = async () => {
+const signInByGoogle = async () => {
   console.log('singInByGoogle');
 
   const provider = new firebase.auth.GoogleAuthProvider();

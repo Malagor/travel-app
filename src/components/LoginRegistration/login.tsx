@@ -13,7 +13,7 @@ import firebase from 'firebase';
 import googleLogo from 'assets/svg/google-logo.svg.png';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import singInByGoogle from './utils/singInByGoogle';
+import signInByGoogle from './utils/signInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
   wrapperEmail: {
@@ -118,7 +118,7 @@ export function Login() {
           </NavLink>
         </Grid>
         <Grid>
-          <Button onClick={singInByGoogle}>
+          <Button onClick={signInByGoogle}>
             <span
               style={{
                 width: '20px',
@@ -137,7 +137,7 @@ export function Login() {
             variant="contained"
             color="primary"
             disableElevation
-            className={classes.buttonSingIn}
+            className={classes.buttonsignIn}
           >
             {t('Registration.signIn')}
           </Button>

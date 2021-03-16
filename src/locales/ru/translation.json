@@ -18,7 +18,7 @@
     "email": "Электронная почта",
     "password": "Пароль",
     "showPassword": "Показать пароль",
-    "singUp": "Регистрация",
+    "signUp": "Регистрация",
     "signIn": "Вход",
     "signOut": "Выйти",
     "textIsHaveAcc": "Нет аккаунта?",

@@ -16,7 +16,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import { MIN_LENGTH_PASSWORD } from 'appConstants/index';
 import googleLogo from 'assets/svg/google-logo.svg.png';
-import singInByGoogle from './utils/singInByGoogle';
+import signInByGoogle from './utils/signInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
   wrapperEmail: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(4),
   },
-  buttonSingIn: {
+  buttonsignIn: {
     margin: theme.spacing(3),
   },
   inputText: {
@@ -192,7 +192,7 @@ export const Registration = () => {
           </Grid>
 
           <Grid item xs={12} className={classes.wrapperContainer}>
-            <Button onClick={singInByGoogle}>
+            <Button onClick={signInByGoogle}>
               <span
                 className={classes.imageIcon}
                 style={{
@@ -208,7 +208,7 @@ export const Registration = () => {
               variant="contained"
               color="primary"
               disableElevation
-              className={classes.buttonSingIn}
+              className={classes.buttonsignIn}
             >
               {t('Registration.signUp')}
             </Button>
