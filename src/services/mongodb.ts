@@ -4,6 +4,7 @@ import {
   DBUser,
   GeoType,
   RatingServerResponse,
+  UserInfo,
 } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
@@ -58,6 +59,32 @@ class MongoDatabase {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
+  };
+
+  createUser = async (
+    id: string,
+    name: string,
+    lang: string = 'ru'
+  ): Promise<UserInfo> => {
+    const url = `${this.URL}/user`;
+    const userData: UserInfo = {
+      id,
+      name,
+      lang,
+      avatar: '',
+      theme: 'light',
+      currencies: [],
+      attractionRates: [],
+    };
+
+    return fetch(url, {
+      method: 'PUSH',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Access-Control-Allow-Methods': 'POST',
       },
     }).then((res) => res.json());
   };

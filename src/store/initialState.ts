@@ -2,6 +2,7 @@ import { State } from 'types';
 
 export const initialState = () => {
   const state: State = {
+    userIsLogin: false,
     countryList: [],
     userInfo: {
       id: '',
