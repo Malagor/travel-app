@@ -3,7 +3,7 @@ import {
   CurrencyType,
   DBUser,
   GeoType,
-  RatingServerResponse,
+  RatingServerResponse, SliderDataType,
 } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
@@ -30,6 +30,10 @@ class MongoDatabase {
 
   getCountryById = async (id: string): Promise<CountryType> =>
     fetch(`${this.URL}/country/${id}`).then((data) => data.json());
+
+  getAttractions = async (id: string): Promise<SliderDataType[]> =>
+    fetch(`${this.URL}/country/${id}/attraction`).then((data) => data.json());
+
 
   getUserInfo = async (id: string): Promise<DBUser> =>
     fetch(`${this.URL}/user/${id}`).then((data) => data.json());

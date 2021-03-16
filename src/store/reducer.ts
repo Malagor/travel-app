@@ -12,6 +12,7 @@ import {
   SET_FIRST_CARD_REF,
   SET_OFFSET,
   SET_GEO,
+  SET_ATTRACTIONS,
 } from 'appConstants';
 import { State } from 'types';
 import { initialState } from './initialState';
@@ -87,6 +88,15 @@ export const appReducer: Reducer<State, Action> = (
       return {
         ...state,
         firstCardRef: action.payload,
+      };
+
+    case SET_ATTRACTIONS:
+      return {
+        ...state,
+        country: {
+          ...state.country,
+          attractions: action.payload,
+        },
       };
 
     default:

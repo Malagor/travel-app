@@ -6,9 +6,9 @@ import {
   SET_USER,
   SET_USER_LANGUAGE,
   SET_SEARCH,
-  SET_FIRST_CARD_REF,
+  SET_FIRST_CARD_REF, SET_ATTRACTIONS,
 } from 'appConstants';
-import { CountryType, DBUser, GeoType, State } from 'types';
+import { CountryType, DBUser, GeoType, SliderDataType, State } from 'types';
 import { database } from 'services';
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
@@ -53,6 +53,11 @@ export const setGeo = (payload: GeoType) => ({
 export const setPageCountry = (payload: number) => ({
   type: SET_USER_LANGUAGE,
   payload: (payload - 1) * COUNTRY_PER_PAGE,
+});
+
+export const setAttractions = (payload: SliderDataType[]) => ({
+  type: SET_ATTRACTIONS,
+  payload
 });
 
 export const loadCountryList = (option: {
@@ -111,5 +116,18 @@ export const loadGeo = (): ThunkAction<
     .then((geoData) => dispatch(setGeo(geoData)))
     .catch((err) => {
       throw new Error(`Can not read Geo data. ${err}`);
+    });
+};
+
+export const loadAttractions = (
+  id: string
+): ThunkAction<void, State, unknown, Action<string>> => async (dispatch) => {
+  database
+    .getAttractions(id)
+    .then((attractionsArray) => {
+      dispatch(setAttractions(attractionsArray));
+    })
+    .catch((err) => {
+      throw new Error(`Can not read Attractions data. ${err}`);
     });
 };
