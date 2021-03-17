@@ -5,7 +5,7 @@ import { LanguagesType, CountryType, State } from 'types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useStyles } from './styled';
-import { PhotoGallery, WidgetsPanel, VideoPlayer } from './components';
+import { PhotoGallery, VideoPlayer } from './components';
 
 type CountryPageProps = {
   country: CountryType;
@@ -22,7 +22,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
 
   return (
     <Grid container>
-      <Grid item xs={8}>
+      <Grid item xs={12}>
         <Container maxWidth="lg" className={classes.container}>
           {country ? (
             <Grid container spacing={3}>
@@ -45,7 +45,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                     <Grid item xs={12}>
                       <Grid container spacing={3}>
                         {country?.photos && (
-                          <Grid item xs={12} md={6} lg={4}>
+                          <Grid item xs={12} md={6}>
                             <img
                               className={classes.image}
                               src={country?.photos[0]}
@@ -53,7 +53,7 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                             />
                           </Grid>
                         )}
-                        <Grid item xs={12} md={6} lg={8}>
+                        <Grid item xs={12} md={6}>
                           <p>
                             {country?.description &&
                               country.description[lang as keyof LanguagesType]}
@@ -82,9 +82,6 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
             <Typography variant="h2">Country Page</Typography>
           )}
         </Container>
-      </Grid>
-      <Grid item xs={4}>
-        <WidgetsPanel />
       </Grid>
     </Grid>
   );

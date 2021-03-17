@@ -1,9 +1,8 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
 export const useStyles = makeStyles((theme) => ({
-
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -20,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    padding: '0 20px',
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -31,5 +31,9 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9),
     },
-  }
+    padding: '0',
+  },
+  divided: {
+    marginBottom: '20px',
+  },
 }));

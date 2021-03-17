@@ -93,7 +93,7 @@ export type CountryType = {
   videos?: string[];
   photos?: string[];
   locale?: string;
-  timeZone?: string;
+  timeZone: string;
   attractions?: SliderDataType[];
 };
 
