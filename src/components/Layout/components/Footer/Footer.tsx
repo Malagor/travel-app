@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'flex-start',
       order: '1',
     },
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      justifyContent: 'center',
+      order: '1',
+    },
   },
   authorsContent: {
     display: 'flex',
@@ -90,7 +95,7 @@ export const Footer = () => {
         className={classes.wrapperContent}
         spacing={3}
       >
-        <Grid item xs={4} sm={7} md={2} className={classes.nameApp}>
+        <Grid item xs={12} sm={7} md={2} className={classes.nameApp}>
           <ButtonBase focusRipple href="https://github.com/Malagor/travel-app">
             <Typography variant="h6">Go-Go Travel</Typography>
           </ButtonBase>
@@ -156,7 +161,7 @@ export const Footer = () => {
                 }}
               />
             </ButtonBase>
-            <Typography>© 2021</Typography>
+            <Typography style={{ whiteSpace: 'nowrap' }}>© 2021</Typography>
           </Grid>
         </Grid>
       </Grid>
