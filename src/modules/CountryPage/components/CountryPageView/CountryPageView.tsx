@@ -5,7 +5,7 @@ import { LanguagesType, CountryType, State } from 'types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useStyles } from './styled';
-import { PhotoGallery, WidgetsPanel, VideoPlayer, Map } from './components';
+import { PhotoGallery, VideoPlayer, Map } from './components';
 
 type CountryPageProps = {
   country: CountryType;

@@ -51,7 +51,8 @@ export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
           <ClockWidget data={clockWidgetData} theme={user.theme} />
           <Divider className={classes.divided} />
           <Weather
-            city={country.capital[user.lang as keyof LanguagesType] || ''}
+            title={country.capital[user.lang as keyof LanguagesType] || ''}
+            location={country.capital[user.lang as keyof LanguagesType] || ''}
           />
           <Divider className={classes.divided} />
           <CurrencyRate
