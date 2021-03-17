@@ -61,26 +61,41 @@
 }
 
 .slickNextArrow {
-  right: 0;
+  right: 42%;
 }
 
 .slickImage {
   position: relative;
+  display: flex !important;
+  outline: none;
+}
+
+.slickContainerFullScreen .slickImage {
+  flex-wrap: nowrap;
+}
+
+.slickImageInfo {
+  padding-left: 20px;
+}
+
+.slickContainerFullScreen .slickImageInfoWrapper {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.slickContainerFullScreen .slickImageInfo {
+  display: grid;
+  align-content: center;
+  padding: 20px;
 }
 
 .slickImageCaption {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  background: rgba(0,0,0,0.4);
-  color:rgba(225, 225, 225, 1);
-  padding: 10px 20px;
+  margin-bottom: 5px;
 }
 
 .slickImageTitle {
   margin: 0;
+  margin-bottom: 5px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -107,39 +122,81 @@
   height: 100px;
 }
 
-@media (max-width: 768px) {
-  .slickImageCaption {
-    font-size: 0.8em;
-    padding: 5px 10px;
+.slickAttractionRatingHeader {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.slickAttractionRatingStars {
+  margin-bottom: 15px;
+}
+
+.slickAttractionRatingStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media(max-width: 1280px) {
+  .slickArrow {
+    top: 25%;
   }
 
-  .slickThumbs {
-    height: 60px;
+  .slickNextArrow {
+    right: 0;
   }
 
+  .slickImageInfo {
+    padding: 10px 0;
+  }
+
+  .slickContainerFullScreen .slickArrow {
+    top: 40%;
+  }
+
+  .slickContainerFullScreen .slickImageInfoWrapper {
+    padding: 10px;
+  }
+
+  .slickContainerFullScreen .slickImageInfo {
+    padding: 10px;
+  }
+
+  .slickThumbs,
   .slickThumbs img {
-    height: 60px;
+    height: 80px;
   }
 }
 
-@media (max-width: 500px) {
-  .slickFullScreenButton {
-    display: none !important;
+@media (max-width: 768px) {
+  .slickContainerFullScreen .slickImage {
+    flex-wrap: wrap;
+  }
+
+  .slickImageInfo {
+    font-size: 0.8em;
+    padding: 5px 0;
+  }
+
+  .slickContainerFullScreen .slickImageInfo {
+    padding: 0;
+  }
+
+  .slickThumbs,
+  .slickThumbs img {
+    height: 60px;
   }
 
   .slickThumbs {
     display: none !important;
   }
 
-  .slickImageCaption {
-    position: relative;
+  .slickImageInfo {
     width: 100%;
-    background: rgba(255,255,255,1);
-    color:rgba(0,0,0,0.8);
-    padding: 5px;
   }
 
   .slickArrow {
     width: 60px;
   }
 }
+
