@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'types';
 import { database } from 'services';
 import i18n from 'i18n';
+import { useTranslation } from 'react-i18next';
 import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
@@ -25,6 +26,7 @@ export const Header: FC<HeaderProps> = ({
   handleDrawerOpen,
   pathname,
 }) => {
+  const [t] = useTranslation();
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
   const isLogin = useSelector((state: State) => state.userIsLogin);
@@ -32,8 +34,12 @@ export const Header: FC<HeaderProps> = ({
   const dispatch = useDispatch();
 
   const loginHandler = async () => {
-    try{
-      const user = await database.createUser('ihruih324urbu3ybub34rbu3bf', 'Malagor', i18n.language );
+    try {
+      const user = await database.createUser(
+        'ihruih324urbu3ybub34rbu3bf',
+        'Malagor',
+        i18n.language
+      );
       dispatch(setUserInfo(user));
       dispatch(setLoginStatus(true));
     } catch (e) {
@@ -66,7 +72,7 @@ export const Header: FC<HeaderProps> = ({
           className={classes.loginButton}
           onClick={loginHandler}
         >
-          {isLogin ? 'Выйти' : 'Войти'}
+          {isLogin ? t('Registration.signOut') : t('Registration.signIn')}
         </Button>
       </Toolbar>
     </AppBar>
