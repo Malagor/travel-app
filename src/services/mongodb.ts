@@ -67,14 +67,15 @@ class MongoDatabase {
   createUser = async (
     id: string,
     name: string,
-    lang: string = 'ru'
+    lang: string = 'ru',
+    avatar: string = ''
   ): Promise<UserInfo> => {
     const url = `${this.URL}/user`;
     const userData: UserInfo = {
       id,
       name,
       lang,
-      avatar: '',
+      avatar,
       theme: 'light',
       currencies: ['USD', 'EUR', 'BYN', 'RUB'],
       attractionRates: [],
