@@ -60,6 +60,7 @@ export type UserInfo = {
   lang: string;
   theme: string;
   currencies: string[];
+  attractionRates: { attrId: string; rating: number }[];
 };
 
 export type LanguagesType = {
@@ -69,9 +70,14 @@ export type LanguagesType = {
 };
 
 export type SliderDataType = {
+  id: string;
   photo: string;
   name: LanguagesType;
   description: LanguagesType;
+  rating: {
+    sum: number;
+    count: number;
+  };
 };
 
 export type CountryType = {
@@ -143,4 +149,15 @@ export type YMapsPanoramaManager = {
 export type YMapsLayer = {
   getTileUrl: (tileNumber: number[], zoom: number) => string;
   getTileSize: () => [number, number];
+};
+
+export type RatingServerResponse = {
+  attrId: string;
+  countryId: string;
+  userId: string;
+  userRating: number;
+  attrRating: {
+    sum: number;
+    count: number;
+  };
 };

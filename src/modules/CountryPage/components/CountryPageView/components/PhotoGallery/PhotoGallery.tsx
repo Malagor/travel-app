@@ -10,7 +10,10 @@ import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-import { LanguagesType, SliderDataType } from 'types';
+import {
+  LanguagesType,
+  SliderDataType,
+} from 'types';
 import classes from './PhotoGallery.module.scss';
 
 type PhotoGalleryProps = {
@@ -138,7 +141,7 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
 
   const slides = sliderData
     ? sliderData.map((slide) => (
-        <div className={classes.slickImage} key={slide.photo}>
+        <div className={classes.slickImage} key={slide.id}>
           <img
             src={slide.photo}
             alt={slide.name[lang as keyof LanguagesType]}
