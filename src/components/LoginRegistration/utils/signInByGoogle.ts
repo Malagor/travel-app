@@ -1,13 +1,10 @@
 import firebase from 'firebase';
 
 const signInByGoogle = async () => {
-  console.log('singInByGoogle');
-
   const provider = new firebase.auth.GoogleAuthProvider();
 
   const result = await firebase.auth().signInWithPopup(provider);
 
-  console.log(' dataUser', result);
   const dataUser = result.additionalUserInfo;
 
   const { user } = result;

@@ -24,8 +24,6 @@ export function App() {
   }, []);
 
   return (
-    /* <Registration /> */
-
     <Layout pathname={location.pathname}>
       <Switch>
         <Route path="/country/:id" component={CountryPage} />

@@ -86,7 +86,6 @@ export const Registration = () => {
       .auth()
       .createUserWithEmailAndPassword(state.email, state.password);
 
-    console.log('user', user);
     if (user) {
       console.log('uid', user.uid);
       // go to DB
@@ -119,7 +118,6 @@ export const Registration = () => {
     setStateValidationField({ ...stateValidationField, email, name, password });
 
     if (!email && !name && !password) {
-      console.log('go create acc');
       createAccountByEmail().catch((e) => {
         if (e.code === 'auth/email-already-in-use') {
           setStateValidationField({ ...stateValidationField, ['email']: true });

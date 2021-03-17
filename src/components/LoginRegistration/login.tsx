@@ -71,8 +71,6 @@ export function Login() {
         console.log(error.message);
       });
 
-    console.log('getlogin', getLogin);
-
     if (getLogin) {
       if (getLogin.operationType === 'signIn') {
         // go redirect
