@@ -162,7 +162,7 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
           {geo?.coordinates &&
             geo.coordinates.map((polygon) => (
               <Polygon
-                key={1}
+                key={JSON.stringify(polygon)}
                 geometry={polygon}
                 options={{
                   geodesic: true,
