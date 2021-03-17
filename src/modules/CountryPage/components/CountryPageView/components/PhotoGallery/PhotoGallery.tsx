@@ -7,14 +7,10 @@ import styled from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-import {
-  LanguagesType,
-  SliderDataType,
-} from 'types';
+import { LanguagesType, SliderDataType } from 'types';
 import classes from './PhotoGallery.module.scss';
+import { PrevArrow, NextArrow, Slide } from './components';
 
 type PhotoGalleryProps = {
   sliderData: SliderDataType[];
@@ -36,38 +32,6 @@ const SliderContainer = styled('div')`
     opacity: 0.5;
   }
 `;
-
-function NextArrow({
-  onClick,
-}: {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}) {
-  return (
-    <button
-      type="button"
-      className={`${classes.slickArrow} ${classes.slickNextArrow}`}
-      onClick={onClick}
-    >
-      <ArrowForwardIosIcon fontSize="large" />
-    </button>
-  );
-}
-
-function PrevArrow({
-  onClick,
-}: {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}) {
-  return (
-    <button
-      type="button"
-      className={`${classes.slickArrow} ${classes.slickPrevArrow}`}
-      onClick={onClick}
-    >
-      <ArrowBackIosIcon fontSize="large" />
-    </button>
-  );
-}
 
 export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
   const [fullScreen, setFullScreen] = useState(false);
@@ -97,26 +61,8 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
     slidesToScroll: 1,
     speed: 500,
     className: fullScreen ? classes.slickFullScreen : classes.slickSlider,
-    centerMode: true,
-    variableWidth: true,
     nextArrow: <NextArrow onClick={() => {}} />,
     prevArrow: <PrevArrow onClick={() => {}} />,
-    responsive: [
-      {
-        breakpoint: 501,
-        settings: {
-          centerMode: true,
-          variableWidth: true,
-        },
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          centerMode: false,
-          variableWidth: false,
-        },
-      },
-    ],
   };
 
   const handleFullScreen = () => {
@@ -140,21 +86,8 @@ export const PhotoGallery: FC<PhotoGalleryProps> = ({ sliderData, lang }) => {
   }, []);
 
   const slides = sliderData
-    ? sliderData.map((slide) => (
-        <div className={classes.slickImage} key={slide.id}>
-          <img
-            src={slide.photo}
-            alt={slide.name[lang as keyof LanguagesType]}
-          />
-          <div className={classes.slickImageCaption}>
-            <p className={classes.slickImageTitle}>
-              {slide.name[lang as keyof LanguagesType]}
-            </p>
-            <p className={classes.slickImageDescription}>
-              {slide.description[lang as keyof LanguagesType]}
-            </p>
-          </div>
-        </div>
+    ? sliderData.map((slideData) => (
+        <Slide key={slideData.id} slideData={slideData} lang={lang} />
       ))
     : null;
 

@@ -1,2 +1,7 @@
-export const WEATHER_API_KEY = 'ba9de510a3e2a4d46ec87d0716c2e01e';
-export const CURRENCY_API_KEY = '4b1c63d88f7f09c5e8b03ab5';
+export const WEATHER_API_KEY = '0dd4c70fbcb17123e868e6d308f9906a';
+export const YANDEX_MAPS_API_KEY = 'a5a87e2f-34af-429b-860f-a0683d585a85';
+const MAPBOX_API_KEY =
+  'pk.eyJ1IjoibGl6YTQyMDIzIiwiYSI6ImNrbTlpYTE5djBvN2EydnBoOXlyMXJ1cXQifQ.khyuqXvCRNkSZG_jlSA-_w';
+const MAPBOX_STYLE_ID = 'ckmbzmog48rpd17q3ps2mt3vs';
+export const MAPBOX_TILES_URL = `https://api.mapbox.com/styles/v1/liza42023/${MAPBOX_STYLE_ID}/tiles/%z/%x/%y@2x?access_token=${MAPBOX_API_KEY}`;
+export const CURRENCY_API_KEY = 'dd9eaa6b4bc76c549bdf8dd9';
