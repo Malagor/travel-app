@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     icon: {
       fill: '#ffffff',
-    }
+    },
   })
 );
 
@@ -44,6 +44,7 @@ export const LanguageToggle: FC = () => {
     <div>
       <FormControl className={classes.formControl}>
         <Select
+
           value={i18n.language}
           onChange={handleChange}
           displayEmpty

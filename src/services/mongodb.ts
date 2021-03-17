@@ -4,6 +4,7 @@ import {
   DBUser,
   GeoType,
   RatingServerResponse,
+  UserInfo,
 } from 'types';
 import { COUNTRY_PER_PAGE } from 'appConstants';
 
@@ -11,6 +12,7 @@ class MongoDatabase {
   private readonly URL: string;
 
   constructor() {
+    // this.URL = 'http://localhost:3001';
     this.URL = 'https://malagor-travel-app-47934.herokuapp.com';
   }
 
@@ -56,6 +58,33 @@ class MongoDatabase {
     return fetch(url, {
       method: 'PUT',
       body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
+  };
+
+  createUser = async (
+    id: string,
+    name: string,
+    lang: string = 'ru'
+  ): Promise<UserInfo> => {
+    const url = `${this.URL}/user`;
+    const userData: UserInfo = {
+      id,
+      name,
+      lang,
+      avatar: '',
+      theme: 'light',
+      currencies: ['USD', 'EUR', 'BYN', 'RUB'],
+      attractionRates: [],
+    };
+
+    const body = JSON.stringify(userData);
+
+    return fetch(url, {
+      method: 'POST',
+      body,
       headers: {
         'Content-Type': 'application/json',
       },

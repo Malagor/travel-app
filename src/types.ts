@@ -98,6 +98,7 @@ export type CountryType = {
 };
 
 export type State = {
+  userIsLogin: boolean;
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
