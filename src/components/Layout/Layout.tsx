@@ -10,7 +10,7 @@ type LayoutProps = {
 
 export const Layout: FC<LayoutProps> = ({ children, pathname }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
