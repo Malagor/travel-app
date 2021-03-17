@@ -17,7 +17,7 @@ export const WeatherView: FC<WeatherViewProps> = ({ info, title }) => {
   const { speed: windSpeed } = info.wind;
   const [t] = useTranslation();
 
-  const iconUrl = `url(http://openweathermap.org/img/wn/${icon}@2x.png)`;
+  const iconUrl = `url(https://openweathermap.org/img/wn/${icon}@2x.png)`;
 
   return (
     <div className={classes.weather}>
