@@ -25,18 +25,19 @@ export const WidgetsPanel: FC<WidgetsPanelProps> = () => {
   const lang = useSelector((state: State) => state.userInfo.lang);
   const countryCurrency = useSelector((state: State) => state.country.currency);
   const currencies = useSelector((state: State) => state.userInfo.currencies);
-  const city: string | undefined = useSelector(
-    (state: State) => state.country.capital[lang as keyof LanguagesType]
-  );
-  const countryName = useSelector(
-    (state: State) => state.country.name[lang as keyof LanguagesType]
-  );
+  const city = useSelector((state: State) => state.country.capital);
+  const countryName = useSelector((state: State) => state.country.name);
 
-  const weatherLocation: string = city || countryName || '';
+  const weatherLocation = city.en || countryName.en || '';
+  const weatherTitle =
+    city[lang as keyof LanguagesType] ||
+    countryName[lang as keyof LanguagesType] ||
+    '';
+
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper}>
-        <Weather city={weatherLocation} />
+        <Weather location={weatherLocation} title={weatherTitle} />
         <ClockWidget data={clockWidgetData} theme={theme} />
         {countryCurrency && (
           <CurrencyRate

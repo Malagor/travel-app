@@ -98,6 +98,7 @@ export type CountryType = {
 };
 
 export type State = {
+  userIsLogin: boolean;
   userInfo: UserInfo;
   country: CountryType;
   countryList: CountryType[] | [];
@@ -128,13 +129,27 @@ export type DBUser = {
   currencies: string[];
 };
 
-type GeoPointType = [number, number];
+export type GeoPointType = [number, number];
 
 export type GeoType = {
   [key: string]: {
     type: string;
     coordinates: [[GeoPointType[]]];
+    properties: {
+      capital: GeoPointType;
+    };
   };
+};
+
+export type YMapsPanoramaManager = {
+  enableLookup: () => void;
+  disableLookup: () => void;
+  isLookupEnabled: () => boolean;
+};
+
+export type YMapsLayer = {
+  getTileUrl: (tileNumber: number[], zoom: number) => string;
+  getTileSize: () => [number, number];
 };
 
 export type RatingServerResponse = {

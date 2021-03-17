@@ -7,6 +7,7 @@ import {
   SET_USER_LANGUAGE,
   SET_SEARCH,
   SET_FIRST_CARD_REF,
+  SET_LOGIN_STATUS,
 } from 'appConstants';
 import { CountryType, DBUser, GeoType, State } from 'types';
 import { database } from 'services';
@@ -46,6 +47,11 @@ export const setUserInfo = (payload: DBUser) => ({
 
 export const setGeo = (payload: GeoType) => ({
   type: SET_GEO,
+  payload,
+});
+
+export const setLoginStatus = (payload: boolean) => ({
+  type: SET_LOGIN_STATUS,
   payload,
 });
 
