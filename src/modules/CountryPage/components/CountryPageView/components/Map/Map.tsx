@@ -51,12 +51,6 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
 
   useLayoutEffect(() => {
     if (mapElement) {
-      if (countryPolygon) {
-        mapElement.setBounds(countryPolygon.geometry.getBounds(), {
-          checkZoomRange: true,
-        });
-      }
-
       mapElement
         .getPanoramaManager()
         .then((panoramaManager: YMapsPanoramaManager) => {
@@ -68,7 +62,15 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
     return () => {
       manager?.disableLookup();
     };
-  }, [mapElement, manager, countryPolygon, capital]);
+  }, [mapElement, manager]);
+
+  useEffect(() => {
+    if (mapElement && countryPolygon) {
+      mapElement.setBounds(countryPolygon.geometry.getBounds(), {
+        checkZoomRange: true,
+      });
+    }
+  }, [mapElement, countryPolygon, capital]);
 
   useEffect(() => {
     if (ymaps && mapElement) {

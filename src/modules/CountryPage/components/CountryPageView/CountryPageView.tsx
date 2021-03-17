@@ -64,12 +64,6 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                     <Grid item xs={12} md={7} lg={7}>
                       <VideoPlayer url={country?.videos?.[0] || ''} />
                     </Grid>
-                    <Grid item xs={12}>
-                      <Map
-                        geo={geo}
-                        capital={country?.capital[lang as keyof LanguagesType]}
-                      />
-                    </Grid>
                   </Grid>
                 </Paper>
               </Grid>
@@ -79,6 +73,16 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                     <PhotoGallery
                       sliderData={country.attractions}
                       lang={lang}
+                    />
+                  </Paper>
+                </Grid>
+              )}
+              {geo && (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Map
+                      geo={geo}
+                      capital={country?.capital[lang as keyof LanguagesType]}
                     />
                   </Paper>
                 </Grid>
