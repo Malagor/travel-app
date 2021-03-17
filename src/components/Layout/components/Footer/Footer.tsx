@@ -4,6 +4,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import gitLogo from 'assets/webp/mark-github-512.webp';
+import youtubeLogo from 'assets/images/youtubeLogo.png';
+import { VIDEO_LINK } from 'appConstants/index';
 
 const authors = [
   {
@@ -35,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapperContent: {},
   nameApp: {
+    display: 'flex',
+    justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
+      justifyContent: 'flex-start',
       order: '1',
     },
   },
@@ -50,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
   },
   logoSchool: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     [theme.breakpoints.down('sm')]: {
-      justifyContent: 'flex-end',
+      justifyContent: 'center',
       order: '2',
     },
   },
@@ -66,6 +71,11 @@ const useStyles = makeStyles((theme) => ({
     width: '12px',
     margin: '3px',
   },
+  wrapperButton: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
 }));
 
 export const Footer = () => {
@@ -75,20 +85,21 @@ export const Footer = () => {
       <Grid
         container
         direction="row"
-        justify="space-between"
+        justify="center"
         alignItems="center"
         className={classes.wrapperContent}
+        spacing={3}
       >
-        <Grid item sm={6} md={2} className={classes.nameApp}>
+        <Grid item xs={4} sm={7} md={2} className={classes.nameApp}>
           <ButtonBase focusRipple href="https://github.com/Malagor/travel-app">
             <Typography variant="h6">Go-Go Travel</Typography>
           </ButtonBase>
         </Grid>
 
-        <Grid item md={8} xs={12} className={classes.authorsContent}>
-          <Grid container justify="space-between">
+        <Grid item xs={12} md={7} className={classes.authorsContent}>
+          <Grid container justify="center" spacing={3}>
             {authors.map((author) => (
-              <Grid item md={3} key={author.name} justify="center">
+              <Grid item xs={6} sm={3} key={author.name}>
                 <ButtonBase focusRipple href={author.gitHub}>
                   <span>
                     <Typography
@@ -112,21 +123,41 @@ export const Footer = () => {
 
         <Grid
           item
-          sm={6}
-          md={2}
+          container
+          xs={8}
+          sm={5}
+          md={3}
           justify="center"
           className={classes.logoSchool}
         >
-          <ButtonBase focusRipple href="https://rs.school/js/">
-            <span
-              className={classes.imageSchool}
-              style={{
-                margin: '8px',
-                backgroundImage: `url('https://rs.school/images/rs_school_js.svg')`,
-              }}
-            />
-          </ButtonBase>
-          <Typography>© 2021</Typography>
+          <Grid item xs={3} className={classes.wrapperButton}>
+            <ButtonBase focusRipple href={VIDEO_LINK}>
+              <img
+                src={youtubeLogo}
+                alt="youtube logo"
+                style={{ width: '40px' }}
+              />
+            </ButtonBase>
+          </Grid>
+          <Grid
+            item
+            xs={9}
+            className={classes.wrapperButton}
+            style={{
+              paddingRight: '16px',
+            }}
+          >
+            <ButtonBase focusRipple href="https://rs.school/js/">
+              <span
+                className={classes.imageSchool}
+                style={{
+                  margin: '8px',
+                  backgroundImage: `url('https://rs.school/images/rs_school_js.svg')`,
+                }}
+              />
+            </ButtonBase>
+            <Typography>© 2021</Typography>
+          </Grid>
         </Grid>
       </Grid>
     </footer>

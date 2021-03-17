@@ -13,3 +13,5 @@ export const SET_SEARCH = 'SET_SEARCH';
 export const SET_FIRST_CARD_REF = 'SET_FIRST_CARD_REF';
 export const SET_OFFSET = 'SET_OFFSET';
 export const SET_GEO = 'SET_GEO';
+
+export const VIDEO_LINK = 'https://www.youtube.com/';
