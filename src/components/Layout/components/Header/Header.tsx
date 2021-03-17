@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
+import firebase from 'firebase';
 import clsx from 'clsx';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import { LanguageToggle, Search } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { State } from 'types';
-import { database } from 'services';
-import i18n from 'i18n';
 import { useTranslation } from 'react-i18next';
-import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
 
@@ -27,24 +26,21 @@ export const Header: FC<HeaderProps> = ({
   pathname,
 }) => {
   const [t] = useTranslation();
+
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
-  const isLogin = useSelector((state: State) => state.userIsLogin);
+  const isUser = false; // значение из стейта есть юзер илил нет
 
-  const dispatch = useDispatch();
+  const singOut = async () => {
+    console.log('singOut');
+    const getSingOut = await firebase
+      .auth()
+      .signOut()
+      .then((error) => {
+        console.log('error', error);
+      });
 
-  const loginHandler = async () => {
-    try {
-      const user = await database.createUser(
-        'ihruih324urbu3ybub34rbu3bf',
-        'Malagor',
-        i18n.language
-      );
-      dispatch(setUserInfo(user));
-      dispatch(setLoginStatus(true));
-    } catch (e) {
-      console.log('User create Error!', e);
-    }
+    console.log('getSingOut', getSingOut);
   };
 
   return (
@@ -66,14 +62,25 @@ export const Header: FC<HeaderProps> = ({
         <div className={classes.grow} />
         {pathname === '/' && <Search />}
         <LanguageToggle />
-        {isLogin && <Typography>{userInfo.name}</Typography>}
-        <Button
-          variant="outlined"
-          className={classes.loginButton}
-          onClick={loginHandler}
-        >
-          {isLogin ? t('Registration.signOut') : t('Registration.signIn')}
-        </Button>
+
+        {isUser ? (
+          <NavLink to="/#" style={{ textDecoration: 'none' }}>
+            <Button
+              onClick={singOut}
+              variant="contained"
+              color="primary"
+              disableElevation
+            >
+              {t('Registration.signOut')}
+            </Button>
+          </NavLink>
+        ) : (
+          <NavLink to="/login" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" disableElevation>
+              {t('Registration.signIn')}
+            </Button>
+          </NavLink>
+        )}
       </Toolbar>
     </AppBar>
   );
