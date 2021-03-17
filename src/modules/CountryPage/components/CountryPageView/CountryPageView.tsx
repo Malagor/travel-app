@@ -5,7 +5,7 @@ import { LanguagesType, CountryType, State } from 'types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useStyles } from './styled';
-import { PhotoGallery, VideoPlayer } from './components';
+import { PhotoGallery, WidgetsPanel, VideoPlayer, Map } from './components';
 
 type CountryPageProps = {
   country: CountryType;
@@ -61,18 +61,32 @@ export const CountryPageView: FC<CountryPageProps> = ({ country, lang }) => {
                         </Grid>
                       </Grid>
                     </Grid>
-                    <Grid item xs={12} md={7} lg={7}>
-                      <VideoPlayer url={country?.videos?.[0] || ''} />
-                    </Grid>
                   </Grid>
                 </Paper>
               </Grid>
+              {country.videos?.[0] && (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <VideoPlayer url={country.videos[0] || ''} />
+                  </Paper>
+                </Grid>
+              )}
               {country.attractions && (
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
                     <PhotoGallery
                       sliderData={country.attractions}
                       lang={lang}
+                    />
+                  </Paper>
+                </Grid>
+              )}
+              {geo && (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Map
+                      geo={geo}
+                      capital={country?.capital[lang as keyof LanguagesType]}
                     />
                   </Paper>
                 </Grid>
