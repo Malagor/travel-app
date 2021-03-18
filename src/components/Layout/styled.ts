@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100vh',
+    minHeight: '100vh',
     overflow: 'auto',
   }
 }));

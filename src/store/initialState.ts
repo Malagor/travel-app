@@ -32,6 +32,7 @@ export const initialState = () => {
         en: '',
       },
       currency: '',
+      timeZone: ''
     },
     search: '',
     firstCardRef: null,

@@ -1,1 +1,1 @@
-export { mainListItems, secondaryListItems } from './MenuItems';
+export { MenuItems } from './MenuItems';

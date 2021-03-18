@@ -1,1 +1,0 @@
-export { WidgetsPanel } from './WidgetsPanel';

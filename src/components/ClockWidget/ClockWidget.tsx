@@ -4,6 +4,7 @@ import 'moment/locale/ru';
 import moment from 'moment-timezone';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Paper } from '@material-ui/core';
 import { Clock, DigitalWatch, DateString } from './components';
 import classes from './ClockWidget.module.scss';
 
@@ -24,36 +25,23 @@ const getCountryDate = (date: moment.Moment) => {
 
 type TClockWidgetProps = {
   data: {
-    localeCity: {
       name: string;
       timezone: string;
-    };
-    otherCity: {
-      name: string;
-      timezone: string;
-    };
   };
   theme: string;
 };
 
 export const ClockWidget: FC<TClockWidgetProps> = ({ data, theme }) => {
-  const { localeCity, otherCity } = data;
 
   const [, i18n] = useTranslation();
 
-  const [localeDate, setLocaleDate] = useState<null | moment.Moment>(null);
   const [otherDate, setOtherDate] = useState<null | moment.Moment>(null);
 
   const tick = useCallback(() => {
-    const dateLocaleCityNow = moment()
-      .locale(i18n.language)
-      .tz(localeCity.timezone);
-
     const dateOtherCityNow = moment()
       .locale(i18n.language)
-      .tz(otherCity.timezone);
+      .tz(data.timezone);
 
-    setLocaleDate(dateLocaleCityNow);
     setOtherDate(dateOtherCityNow);
   }, [data, i18n.language]);
 
@@ -66,35 +54,13 @@ export const ClockWidget: FC<TClockWidgetProps> = ({ data, theme }) => {
     <div className={classes.wrapper}>
       <div className={classes.wrapperClock}>
         <div className={classes.timeBlock}>
+          <Paper elevation={3} className={classes.paper}>
           <h4
             className={
               theme === 'light' ? classes.lightTheme : classes.darkTheme
             }
           >
-            {localeCity.name}
-          </h4>
-          {localeDate && (
-            <Clock time={getTimeForClock(localeDate)} theme={theme} />
-          )}
-          <div className={classes.timeBlock__time}>
-            {localeDate && (
-              <DigitalWatch time={getCountryTime(localeDate)} theme={theme} />
-            )}
-          </div>
-          <div className={classes.timeBlock__time}>
-            {localeDate && (
-              <DateString date={getCountryDate(localeDate)} theme={theme} />
-            )}
-          </div>
-        </div>
-
-        <div className={classes.timeBlock}>
-          <h4
-            className={
-              theme === 'light' ? classes.lightTheme : classes.darkTheme
-            }
-          >
-            {otherCity.name}
+            {data.name}
           </h4>
           {otherDate && (
             <Clock time={getTimeForClock(otherDate)} theme={theme} />
@@ -109,6 +75,7 @@ export const ClockWidget: FC<TClockWidgetProps> = ({ data, theme }) => {
               <DateString date={getCountryDate(otherDate)} theme={theme} />
             )}
           </div>
+          </Paper>
         </div>
       </div>
     </div>
