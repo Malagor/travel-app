@@ -8,12 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 
-import { LanguagesType, SliderDataType } from 'types';
+import { LanguagesType, AttractionDataType } from 'types';
 import classes from './PhotoGallery.module.scss';
 import { PrevArrow, NextArrow, Slide } from './components';
 
 type PhotoGalleryProps = {
-  sliderData: SliderDataType[];
+  sliderData: AttractionDataType[];
   lang: string;
 };
 
