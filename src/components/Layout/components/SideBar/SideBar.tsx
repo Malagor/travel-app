@@ -17,9 +17,7 @@ type SidebarProps = {
   handleDrawerClose: () => void;
 };
 
-export const SideBar: FC<SidebarProps> = (
-  { open, handleDrawerClose }
-) => {
+export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
   const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
 
   const classes = useStyles();
@@ -42,6 +40,10 @@ export const SideBar: FC<SidebarProps> = (
         paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
       }}
       open={open}
+      onClose={handleDrawerClose}
+      ModalProps={{
+        keepMounted: true,
+      }}
     >
       <div className={classes.toolbarIcon}>
         <IconButton onClick={handleDrawerClose}>
