@@ -25,6 +25,7 @@
     "signIn": "Sign in",
     "signOut": "Sign out",
     "textIsHaveAcc": "Don't have an account?",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "avatar": "Avatar"
   }
 }

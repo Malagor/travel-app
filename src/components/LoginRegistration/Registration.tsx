@@ -79,13 +79,6 @@ export const Registration = () => {
     }
   };
 
-  /*   const [stateValidationField, setStateValidationField] = React.useState({
-    stateOfValidEmail: false,
-    stateOfValidName: false,
-    stateOfValidPassword: false,
-    avatar: false,
-  }); */
-
   const validationForm = (): void => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -195,7 +188,7 @@ export const Registration = () => {
               variant="contained"
               component="label"
             >
-              Avatar
+              {t('Registration.avatar')}
               <input
                 accept="image/*"
                 type="file"

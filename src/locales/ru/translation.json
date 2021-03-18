@@ -25,6 +25,7 @@
     "signIn": "Вход",
     "signOut": "Выйти",
     "textIsHaveAcc": "Нет аккаунта?",
-    "createAccount": "Создать аккаунт"
+    "createAccount": "Создать аккаунт",
+    "avatar": "Аватар"
   }
 }
