@@ -1,4 +1,4 @@
-import React, { createRef, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import {
   Grid,
@@ -11,9 +11,12 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import firebase from 'firebase';
 import googleLogo from 'assets/svg/google-logo.svg.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { database } from 'services';
+import { useDispatch } from 'react-redux';
 import signInByGoogle from './utils/signInByGoogle';
+import { setLoginStatus, setUserInfo } from '../../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   wrapperEmail: {
@@ -48,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 
 export function Login() {
   const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -66,18 +71,29 @@ export function Login() {
     const getLogin = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-      });
+      .catch((error) => error);
 
     if (getLogin) {
       if (getLogin.operationType === 'signIn') {
-        // go redirect
-        console.log('user made Login: ok');
+        const uid: string = getLogin.user?.uid || '';
+        const user = await database.getUserInfo(uid);
+        if (user) {
+          dispatch(setUserInfo(user));
+          dispatch(setLoginStatus(true));
+          history.push('/');
+        }
       }
     } else {
       setStateErrorField(true);
+    }
+  };
+
+  const signInByGoogleHandler = async () => {
+    const userData = await signInByGoogle();
+    if (userData) {
+      dispatch(setUserInfo(userData));
+      dispatch(setLoginStatus(true));
+      history.push('/');
     }
   };
 
@@ -116,7 +132,7 @@ export function Login() {
           </NavLink>
         </Grid>
         <Grid>
-          <Button onClick={signInByGoogle}>
+          <Button onClick={signInByGoogleHandler}>
             <span
               style={{
                 width: '20px',

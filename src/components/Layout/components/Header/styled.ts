@@ -40,5 +40,8 @@ export const useStyles = makeStyles((theme) => ({
   loginButton: {
     marginLeft: '10px',
     color: '#ffffff'
+  },
+  marginLeft: {
+    marginLeft: '10px'
   }
 }));

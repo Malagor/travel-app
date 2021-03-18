@@ -13,20 +13,21 @@ import {
 import { useTranslation } from 'react-i18next';
 import firebase from 'firebase';
 import 'firebase/auth';
-import { MIN_LENGTH_PASSWORD } from 'appConstants/index';
+import { MIN_LENGTH_PASSWORD } from 'appConstants';
 import googleLogo from 'assets/svg/google-logo.svg.png';
 import addPhotoImg from 'assets/images/addPhoto.png';
+import { database } from 'services';
+import { useDispatch } from 'react-redux';
+import { setLoginStatus, setUserInfo } from 'store/actions';
+import { useHistory } from 'react-router-dom';
 import signInByGoogle from './utils/signInByGoogle';
 import { useStyles } from './styledRegistration';
-
 
 type TRegistrationState = {
   email: string;
   name: string;
   password: string;
   avatar: string;
-  avatarFile: File | null;
-  avatarReaderResult: string | ArrayBuffer | undefined;
 };
 
 export const Registration = () => {
@@ -35,11 +36,9 @@ export const Registration = () => {
     email: '',
     name: '',
     password: '',
-    avatar: addPhotoImg,
-    avatarFile: null,
-    avatarReaderResult: '',
+    avatar: '',
   });
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<string>('');
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [stateValidationField, setStateValidationField] = React.useState({
     stateOfValidEmail: false,
@@ -49,6 +48,9 @@ export const Registration = () => {
 
   console.log('state.avatar', state.avatar);
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleState = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
@@ -57,39 +59,41 @@ export const Registration = () => {
     setShowPassword(event.target.checked);
   };
 
-  const createAccountByEmail = async () => {
+  const createAccountByEmail = async (name: string, avatar: string = '') => {
     const { user } = await firebase
       .auth()
       .createUserWithEmailAndPassword(state.email, state.password);
 
     if (user) {
-      // go to DB
-      // тут не записывается state.avatarFile приходит null
-      /*       if (state.avatarFile) {
-        const nameAvatarForFirebase = `${new Date()}-${state.avatarFile.name}`;
-        const uploadImg = firebase
-          .storage()
-          .ref(`Images/${nameAvatarForFirebase}`)
-          .put(state.avatarFile);
-
-        console.log('nameAvatarForFirebase', nameAvatarForFirebase);
-        console.log('state.avatarFile', state.avatarFile);
-      } */
+      const createdUser = await database.createUser(
+        user.uid,
+        name,
+        'ru',
+        avatar
+      );
+      if (createdUser.id) {
+        dispatch(setUserInfo(createdUser));
+        dispatch(setLoginStatus(true));
+        history.push('/');
+      }
     }
   };
 
-  const validationForm = (): void => {
-    let stateOfValidEmail = false;
-    let stateOfValidName = false;
-    let stateOfValidPassword = false;
+  /*   const [stateValidationField, setStateValidationField] = React.useState({
+    stateOfValidEmail: false,
+    stateOfValidName: false,
+    stateOfValidPassword: false,
+    avatar: false,
+  }); */
 
+  const validationForm = (): void => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     const isValidEmail = re.test(String(state.email).toLowerCase());
 
-    isValidEmail ? (stateOfValidEmail = false) : (stateOfValidEmail = true);
-    state.name ? (stateOfValidName = false) : (stateOfValidName = true);
-
-    stateOfValidPassword = state.password.length <= MIN_LENGTH_PASSWORD;
+    const stateOfValidEmail = !isValidEmail;
+    const stateOfValidName = !state.name;
+    const stateOfValidPassword = state.password.length <= MIN_LENGTH_PASSWORD;
 
     setStateValidationField({
       ...stateValidationField,
@@ -99,7 +103,7 @@ export const Registration = () => {
     });
 
     if (!stateOfValidEmail && !stateOfValidName && !stateOfValidPassword) {
-      createAccountByEmail().catch((e) => {
+      createAccountByEmail(state.name, state.avatar).catch((e) => {
         if (e.code === 'auth/email-already-in-use') {
           setStateValidationField({
             ...stateValidationField,
@@ -118,10 +122,20 @@ export const Registration = () => {
     const { files } = e.target;
     const filesArr = Array.prototype.slice.call(files);
 
-    const storageRef = firebase.storage().ref(`${'Images' + '/profilePicture/'}${filesArr[0].name}`);
+    const storageRef = firebase
+      .storage()
+      .ref(`${'Images' + '/profilePicture/'}${filesArr[0].name}`);
     await storageRef.put(filesArr[0]);
     setImage(await storageRef.getDownloadURL());
+  };
 
+  const signInByGoogleHandler = async () => {
+    const userData = await signInByGoogle();
+    if (userData) {
+      dispatch(setUserInfo(userData));
+      dispatch(setLoginStatus(true));
+      history.push('/');
+    }
   };
 
   const classes = useStyles();
@@ -206,7 +220,7 @@ export const Registration = () => {
           </Grid>
 
           <Grid item xs={12} className={classes.wrapperContainer}>
-            <Button onClick={signInByGoogle}>
+            <Button onClick={signInByGoogleHandler}>
               <span
                 className={classes.imageIcon}
                 style={{

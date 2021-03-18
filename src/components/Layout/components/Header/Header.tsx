@@ -4,13 +4,14 @@ import clsx from 'clsx';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Button } from '@material-ui/core';
+import { Avatar, Button, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import { LanguageToggle, Search } from 'components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'types';
 import { useTranslation } from 'react-i18next';
+import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
 
@@ -25,22 +26,29 @@ export const Header: FC<HeaderProps> = ({
   handleDrawerOpen,
   pathname,
 }) => {
+  const classes = useStyles();
   const [t] = useTranslation();
+  const dispatch = useDispatch();
 
   const userInfo = useSelector((state: State) => state.userInfo);
-  const classes = useStyles();
-  const isUser = false; // значение из стейта есть юзер илил нет
+  const isLogin = useSelector((state: State) => state.userIsLogin);
 
   const singOut = async () => {
-    console.log('singOut');
-    const getSingOut = await firebase
+    await firebase
       .auth()
       .signOut()
-      .then((error) => {
-        console.log('error', error);
-      });
-
-    console.log('getSingOut', getSingOut);
+      .then(() => {
+        dispatch(
+          setUserInfo({
+            ...userInfo,
+            id: '',
+            name: '',
+            avatar: '',
+          })
+        );
+        dispatch(setLoginStatus(false));
+      })
+      .catch((error) => error);
   };
 
   return (
@@ -63,17 +71,27 @@ export const Header: FC<HeaderProps> = ({
         {pathname === '/' && <Search />}
         <LanguageToggle />
 
-        {isUser ? (
-          <NavLink to="/#" style={{ textDecoration: 'none' }}>
-            <Button
-              onClick={singOut}
-              variant="contained"
-              color="primary"
-              disableElevation
-            >
-              {t('Registration.signOut')}
-            </Button>
-          </NavLink>
+        {isLogin ? (
+          <>
+            <Avatar
+              alt={userInfo.name}
+              src={userInfo.avatar}
+              className={classes.marginLeft}
+            />
+            <Typography className={classes.marginLeft}>
+              {userInfo.name}
+            </Typography>
+            <NavLink to="/#" className={classes.marginLeft}>
+              <Button
+                onClick={singOut}
+                variant="contained"
+                color="primary"
+                disableElevation
+              >
+                {t('Registration.signOut')}
+              </Button>
+            </NavLink>
+          </>
         ) : (
           <NavLink to="/login" style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="primary" disableElevation>
