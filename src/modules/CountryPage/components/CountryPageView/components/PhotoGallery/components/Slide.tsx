@@ -6,13 +6,21 @@ import Grid from '@material-ui/core/Grid';
 import Rating from '@material-ui/lab/Rating';
 import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Avatar from '@material-ui/core/Avatar';
 
-import { LanguagesType, SliderDataType, State } from 'types';
+import { LanguagesType, AttractionDataType, State } from 'types';
 import { database } from 'services';
 import classes from '../PhotoGallery.module.scss';
 
 type SlideProps = {
-  slideData: SliderDataType;
+  slideData: AttractionDataType;
   lang: string;
 };
 
@@ -56,6 +64,16 @@ export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
       })
       .catch((err) => err);
   };
+
+  const recentVoters = slideData.users.map((user) => (
+    <TableRow key={user.name}>
+      <TableCell scope="row">
+        <Avatar src={user.avatar} />
+      </TableCell>
+      <TableCell scope="row">{user.name}</TableCell>
+      <TableCell align="right">{user.rating}</TableCell>
+    </TableRow>
+  ));
 
   return (
     <Grid container className={classes.slickImage} key={slideData.id}>
@@ -111,6 +129,22 @@ export const Slide: React.FC<SlideProps> = ({ slideData, lang }) => {
               <Badge badgeContent={currentRatingCount || '0'} color="primary">
                 <Chip label={t('Voted')} />
               </Badge>
+              <TableContainer component={Paper}>
+                <Table
+                  size="small"
+                  className={classes.table}
+                  aria-label="simple table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={3} align="center">
+                        {t('Recent Votes')}
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{recentVoters}</TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </div>
         </div>
