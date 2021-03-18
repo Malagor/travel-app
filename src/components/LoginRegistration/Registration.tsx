@@ -46,8 +46,6 @@ export const Registration = () => {
     stateOfValidPassword: false,
   });
 
-  console.log('state.avatar', state.avatar);
-
   const dispatch = useDispatch();
   const history = useHistory();
 
