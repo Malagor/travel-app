@@ -8,6 +8,7 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
+  Fab,
 } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
@@ -16,6 +17,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import { MIN_LENGTH_PASSWORD } from 'appConstants/index';
 import googleLogo from 'assets/svg/google-logo.svg.png';
+import addPhotoImg from 'assets/images/addPhoto.png';
 import signInByGoogle from './utils/signInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     marginTop: theme.spacing(4),
   },
+  avatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
   inputGroup: {
     display: 'flex',
     flexDirection: 'column',
@@ -63,13 +69,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+type TRegistrationState = {
+  email: string;
+  name: string;
+  password: string;
+  avatar: string;
+  avatarFile: File | null;
+  avatarReaderResult: string | ArrayBuffer | undefined;
+};
+
 export const Registration = () => {
   const [t] = useTranslation();
-  const [state, setState] = React.useState({
+  const [state, setState] = React.useState<TRegistrationState>({
     email: '',
     name: '',
     password: '',
+    avatar: '',
+    avatarFile: null,
+    avatarReaderResult: '',
   });
+
+  console.log('state.avatar', state.avatar);
 
   const handleState = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -87,8 +107,18 @@ export const Registration = () => {
       .createUserWithEmailAndPassword(state.email, state.password);
 
     if (user) {
-      console.log('uid', user.uid);
       // go to DB
+      // тут не записывается state.avatarFile приходит null
+      /*       if (state.avatarFile) {
+        const nameAvatarForFirebase = `${new Date()}-${state.avatarFile.name}`;
+        const uploadImg = firebase
+          .storage()
+          .ref(`Images/${nameAvatarForFirebase}`)
+          .put(state.avatarFile);
+
+        console.log('nameAvatarForFirebase', nameAvatarForFirebase);
+        console.log('state.avatarFile', state.avatarFile);
+      } */
     }
   };
 
@@ -137,24 +167,74 @@ export const Registration = () => {
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log('E', e);
+
+    const reader = new FileReader();
+
+    if (e && e.target && e.target.files) {
+      const file = e.target.files[0];
+      setState({ ...state, avatarFile: file });
+
+      reader.onloadend = () => {
+        if (reader && reader.result) {
+          setState({ ...state, avatarReaderResult: reader.result });
+        }
+      };
+      reader.readAsDataURL(file);
+
+      // отправка фото на firebase фото загружается но потом не получаю url
+      if (file) {
+        const nameAvatarForFirebase = `${new Date()}-${file.name}`;
+        const uploadImg = firebase
+          .storage()
+          .ref(`Images/${nameAvatarForFirebase}`)
+          .put(file)
+          .then(() => {});
+
+        uploadImg
+          .then((snapshot) => snapshot.ref.getDownloadURL())
+          .then((url) => {
+            setState({ ...state, avatar: url });
+          });
+      }
+    }
+  };
+
   const classes = useStyles();
   return (
     <Grid>
       <Paper elevation={10} className={classes.wrapperEmail}>
         <Grid container>
           <Grid item xs={12} className={classes.wrapperContainer}>
-            <Avatar className={classes.logo}>
-              <PlaylistAddCheckIcon />
-            </Avatar>
-          </Grid>
+            <input
+              className="fileInput"
+              type="file"
+              onChange={(e) => handleImageChange(e)}
+            />
 
-          <Grid item xs={12} className={classes.wrapperContainer}>
             <Typography variant="h5">{t('Registration.signUp')}</Typography>
           </Grid>
 
           <Grid container xs={12} className={classes.wrapperContainer}>
+            <Fab color="primary" aria-label="add">
+              <Avatar
+                alt="avatar"
+                src={
+                  typeof state.avatarReaderResult === 'string'
+                    ? state.avatarReaderResult
+                    : addPhotoImg
+                }
+                className={classes.avatar}
+                style={{ width: '56px' }}
+              />
+            </Fab>
+          </Grid>
+
+          <Grid container xs={12} className={classes.wrapperContainer}>
             <TextField
-              error={stateValidationField.name}
+              error={stateValidationField.stateOfValidName}
               onChange={handleState}
               value={state.name}
               name="name"
@@ -165,7 +245,7 @@ export const Registration = () => {
 
           <Grid container xs={12} className={classes.wrapperContainer}>
             <TextField
-              error={stateValidationField.email}
+              error={stateValidationField.stateOfValidEmail}
               onChange={handleState}
               value={state.email}
               name="email"
@@ -175,7 +255,7 @@ export const Registration = () => {
 
           <Grid container xs={12} className={classes.wrapperContainer}>
             <TextField
-              error={stateValidationField.password}
+              error={stateValidationField.stateOfValidPassword}
               onChange={handleState}
               value={state.password}
               name="password"
