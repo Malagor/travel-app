@@ -36,7 +36,7 @@ export const MainPage: FC = () => {
       name: {},
       capital: {},
       currency: '',
-      timeZone: ''
+      timeZone: '',
     };
     dispatch(setCountry(clearCountry));
   }, [dispatch]);
@@ -55,19 +55,18 @@ export const MainPage: FC = () => {
       };
       dispatch(loadCountryList(options));
     } catch (e) {
-      setIsLoading(false);
       setIsError(true);
     }
-    setIsLoading(false);
+      setIsLoading(false);
   }, [dispatch, count, lang, filter, offset]);
 
   const hasContent = !(isLoading || isError);
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <Paper className={classes.paper}>
-        {isLoading && <Loader />}
-        {isError && <ErrorMessage />}
-        {hasContent && (
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
+      {hasContent && (
+        <Paper className={classes.paper}>
           <Grid container spacing={3}>
             {countryList.length !== 0 ? (
               countryList.map((country, index) => (
@@ -95,8 +94,8 @@ export const MainPage: FC = () => {
               </Grid>
             )}
           </Grid>
-        )}
-      </Paper>
+        </Paper>
+      )}
     </Container>
   );
 };
