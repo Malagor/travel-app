@@ -20,12 +20,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
     },
     searchContainer: {
-      // display: 'grid',
-      // gridGap: '5px',
-      // gridTemplateColumns: '1fr 100px',
-      // alignItems: 'center',
-      // marginRight: theme.spacing(2),
-      // marginLeft: theme.spacing(2),
       display: 'flex',
       justifyContent: 'space-between',
       gap: theme.spacing(1)
