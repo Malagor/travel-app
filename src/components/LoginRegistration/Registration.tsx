@@ -120,6 +120,7 @@ export const Registration = () => {
       .ref(`${'Images' + '/profilePicture/'}${filesArr[0].name}`);
     await storageRef.put(filesArr[0]);
     setImage(await storageRef.getDownloadURL());
+    setState({ ...state, avatar: await storageRef.getDownloadURL() });
   };
 
   const signInByGoogleHandler = async () => {
