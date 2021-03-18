@@ -93,34 +93,42 @@ export const Registration = () => {
   };
 
   const [stateValidationField, setStateValidationField] = React.useState({
-    email: false,
-    name: false,
-    password: false,
+    stateOfValidEmail: false,
+    stateOfValidName: false,
+    stateOfValidPassword: false,
   });
 
   const validationForm = (): void => {
-    let email = false;
-    let name = false;
-    let password = false;
+    let stateOfValidEmail = false;
+    let stateOfValidName = false;
+    let stateOfValidPassword = false;
 
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const isValidEmail = re.test(String(state.email).toLowerCase());
 
-    isValidEmail ? (email = false) : (email = true);
-    state.name ? (name = false) : (name = true);
+    isValidEmail ? (stateOfValidEmail = false) : (stateOfValidEmail = true);
+    state.name ? (stateOfValidName = false) : (stateOfValidName = true);
 
     if (state.password.length > MIN_LENGTH_PASSWORD) {
-      password = false;
+      stateOfValidPassword = false;
     } else {
-      password = true;
+      stateOfValidPassword = true;
     }
 
-    setStateValidationField({ ...stateValidationField, email, name, password });
+    setStateValidationField({
+      ...stateValidationField,
+      stateOfValidEmail,
+      stateOfValidName,
+      stateOfValidPassword,
+    });
 
-    if (!email && !name && !password) {
+    if (!stateOfValidEmail && !stateOfValidName && !stateOfValidPassword) {
       createAccountByEmail().catch((e) => {
         if (e.code === 'auth/email-already-in-use') {
-          setStateValidationField({ ...stateValidationField, ['email']: true });
+          setStateValidationField({
+            ...stateValidationField,
+            ['stateOfValidEmail']: true,
+          });
         } else {
           console.log('Error_code', e.code);
           console.log('Error', e);
