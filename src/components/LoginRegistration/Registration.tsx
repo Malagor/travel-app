@@ -15,7 +15,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import { MIN_LENGTH_PASSWORD } from 'appConstants';
 import googleLogo from 'assets/svg/google-logo.svg.png';
-import addPhotoImg from 'assets/images/addPhoto.png';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import { database } from 'services';
 import { useDispatch } from 'react-redux';
 import { setLoginStatus, setUserInfo } from 'store/actions';
@@ -136,6 +136,12 @@ export const Registration = () => {
     <Grid>
       <Paper elevation={10} className={classes.wrapperEmail}>
         <Grid container className={classes.wrapperContainer}>
+          <Grid item xs={12} className={classes.wrapperContainer}>
+            <Avatar className={classes.logo}>
+              <PlaylistAddCheckIcon />
+            </Avatar>
+          </Grid>
+
           <Grid item xs={12} className={classes.wrapperContainer}>
             <Typography variant="h5">{t('Registration.signUp')}</Typography>
           </Grid>
