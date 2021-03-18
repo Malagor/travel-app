@@ -7,12 +7,12 @@ import Rating from '@material-ui/lab/Rating';
 import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
 
-import { LanguagesType, SliderDataType, State } from 'types';
+import { LanguagesType, AttractionDataType, State } from 'types';
 import { database } from 'services';
 import classes from '../PhotoGallery.module.scss';
 
 type SlideProps = {
-  slideData: SliderDataType;
+  slideData: AttractionDataType;
   lang: string;
 };
 

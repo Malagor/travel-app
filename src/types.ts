@@ -69,7 +69,13 @@ export type LanguagesType = {
   be?: string;
 };
 
-export type SliderDataType = {
+export type VoterType = {
+  avatar: string;
+  name: string;
+  rating: number;
+};
+
+export type AttractionDataType = {
   id: string;
   photo: string;
   name: LanguagesType;
@@ -78,6 +84,7 @@ export type SliderDataType = {
     sum: number;
     count: number;
   };
+  users: VoterType[];
 };
 
 export type CountryType = {
@@ -94,7 +101,7 @@ export type CountryType = {
   photos?: string[];
   locale?: string;
   timeZone: string;
-  attractions?: SliderDataType[];
+  attractions?: AttractionDataType[];
 };
 
 export type State = {
