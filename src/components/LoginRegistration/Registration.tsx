@@ -14,8 +14,12 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import { useTranslation } from 'react-i18next';
 import firebase from 'firebase';
 import 'firebase/auth';
-import { MIN_LENGTH_PASSWORD } from 'appConstants/index';
+import { MIN_LENGTH_PASSWORD } from 'appConstants';
 import googleLogo from 'assets/svg/google-logo.svg.png';
+import { database } from 'services';
+import { useDispatch } from 'react-redux';
+import { setLoginStatus, setUserInfo } from 'store/actions';
+import { useHistory } from 'react-router-dom';
 import signInByGoogle from './utils/signInByGoogle';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +73,11 @@ export const Registration = () => {
     email: '',
     name: '',
     password: '',
+    avatar: '',
   });
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleState = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -81,14 +89,23 @@ export const Registration = () => {
     setShowPassword(event.target.checked);
   };
 
-  const createAccountByEmail = async () => {
+  const createAccountByEmail = async (name: string, avatar: string = '') => {
     const { user } = await firebase
       .auth()
       .createUserWithEmailAndPassword(state.email, state.password);
 
     if (user) {
-      console.log('uid', user.uid);
-      // go to DB
+      const createdUser = await database.createUser(
+        user.uid,
+        name,
+        'ru',
+        avatar
+      );
+      if (createdUser.id) {
+        dispatch(setUserInfo(createdUser));
+        dispatch(setLoginStatus(true));
+        history.push('/');
+      }
     }
   };
 
@@ -96,36 +113,38 @@ export const Registration = () => {
     email: false,
     name: false,
     password: false,
+    avatar: false,
   });
 
   const validationForm = (): void => {
-    let email = false;
-    let name = false;
-    let password = false;
-
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     const isValidEmail = re.test(String(state.email).toLowerCase());
 
-    isValidEmail ? (email = false) : (email = true);
-    state.name ? (name = false) : (name = true);
-
-    if (state.password.length > MIN_LENGTH_PASSWORD) {
-      password = false;
-    } else {
-      password = true;
-    }
+    const email = !isValidEmail;
+    const name = !state.name;
+    const password = state.password.length <= MIN_LENGTH_PASSWORD;
 
     setStateValidationField({ ...stateValidationField, email, name, password });
 
     if (!email && !name && !password) {
-      createAccountByEmail().catch((e) => {
+      createAccountByEmail(state.name, state.avatar).catch((e) => {
         if (e.code === 'auth/email-already-in-use') {
-          setStateValidationField({ ...stateValidationField, ['email']: true });
+          setStateValidationField({ ...stateValidationField, email: true });
         } else {
           console.log('Error_code', e.code);
           console.log('Error', e);
         }
       });
+    }
+  };
+
+  const signInByGoogleHandler = async () => {
+    const userData = await signInByGoogle();
+    if (userData) {
+      dispatch(setUserInfo(userData));
+      dispatch(setLoginStatus(true));
+      history.push('/');
     }
   };
 
@@ -193,7 +212,7 @@ export const Registration = () => {
           </Grid>
 
           <Grid item xs={12} className={classes.wrapperContainer}>
-            <Button onClick={signInByGoogle}>
+            <Button onClick={signInByGoogleHandler}>
               <span
                 className={classes.imageIcon}
                 style={{

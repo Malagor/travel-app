@@ -1,21 +1,27 @@
 import firebase from 'firebase';
+import { database } from 'services';
+import { DBUser } from 'types';
 
-const signInByGoogle = async () => {
+const signInByGoogle = async (): Promise<DBUser | null > => {
   const provider = new firebase.auth.GoogleAuthProvider();
+
 
   const result = await firebase.auth().signInWithPopup(provider);
 
-  const dataUser = result.additionalUserInfo;
-
   const { user } = result;
-  console.log('user', user);
   if (user) {
-    // получили  user.uid
-    // го редирект
-    console.log('userID', user.uid);
-  } else {
-    console.log('Error: uid is not defined');
+    let userData = await database.getUserInfo(user.uid);
+    if (!userData.id) {
+      userData = await database.createUser(
+        user.uid,
+        user.displayName || '',
+        'ru',
+        user.photoURL || ''
+      );
+    }
+    return userData;
   }
+    return null;
 };
 
 export default signInByGoogle;
