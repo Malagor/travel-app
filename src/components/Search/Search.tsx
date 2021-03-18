@@ -10,11 +10,14 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import { StringMap } from 'i18next';
+import { MOBILE_WIDTH } from 'appConstants';
 import { useStyles } from './styled';
 
 type SearchProps = {};
 
 export const Search: FC<SearchProps> = () => {
+  const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
+
   const classes = useStyles();
   const inputRef = useRef<HTMLInputElement>(null);
   const search = useSelector((state: State) => state.search);
@@ -89,9 +92,9 @@ export const Search: FC<SearchProps> = () => {
           <ClearIcon />
         </IconButton>
       </div>
-      <Button variant="contained" onClick={onSearch}>
+      {!isMobile && <Button variant="contained" onClick={onSearch}>
         {t('Search Button')}
-      </Button>
+      </Button>}
     </div>
   );
 };

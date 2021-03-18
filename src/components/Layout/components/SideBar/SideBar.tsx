@@ -8,7 +8,8 @@ import Drawer from '@material-ui/core/Drawer';
 import { useSelector } from 'react-redux';
 import { LanguagesType, State } from 'types';
 import { ClockWidget, CurrencyRate, Weather } from 'components';
-import { MenuItems } from '../MenyItems';
+import { MOBILE_WIDTH } from 'appConstants';
+import { MenuItems } from './components';
 import { useStyles } from './styled';
 
 type SidebarProps = {
@@ -17,6 +18,8 @@ type SidebarProps = {
 };
 
 export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
+  const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
+
   const classes = useStyles();
   const user = useSelector((state: State) => state.userInfo);
   const country = useSelector((state: State) => state.country);
@@ -24,19 +27,23 @@ export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
   const location = useLocation();
 
   const clockWidgetData = {
-      name: `${country.name[user.lang as keyof LanguagesType] || ''} / ${
-        country.capital[user.lang as keyof LanguagesType] || ''
-      }`,
-      timezone: country.timeZone,
+    name: `${country.name[user.lang as keyof LanguagesType] || ''} / ${
+      country.capital[user.lang as keyof LanguagesType] || ''
+    }`,
+    timezone: country.timeZone,
   };
 
   return (
     <Drawer
-      variant="permanent"
+      variant={isMobile ? 'temporary' : 'permanent'}
       classes={{
         paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
       }}
       open={open}
+      onClose={handleDrawerClose}
+      ModalProps={{
+        keepMounted: true,
+      }}
     >
       <div className={classes.toolbarIcon}>
         <IconButton onClick={handleDrawerClose}>

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MOBILE_WIDTH } from 'appConstants';
 import { Header, Footer, SideBar } from './components';
 import { useStyles } from './styled';
 
@@ -9,8 +10,10 @@ type LayoutProps = {
 };
 
 export const Layout: FC<LayoutProps> = ({ children, pathname }) => {
+  const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
+
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(!isMobile);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

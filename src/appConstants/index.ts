@@ -1,5 +1,6 @@
 export const DEFAULT_LANGUAGE = 'ru';
 export const COUNTRY_PER_PAGE = 8;
+export const MOBILE_WIDTH = 768;
 
 export const SET_COUNTRIES_LIST = 'SET_COUNTRIES_LIST';
 export const SET_COUNTRY = 'SET_COUNTRY';
