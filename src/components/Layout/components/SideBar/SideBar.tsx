@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { LanguagesType, State } from 'types';
 import { ClockWidget, CurrencyRate, Weather } from 'components';
 import { MOBILE_WIDTH } from 'appConstants';
-import { MenuItems } from '../MenyItems';
+import { MenuItems } from './components';
 import { useStyles } from './styled';
 
 type SidebarProps = {
