@@ -9,8 +9,10 @@ type LayoutProps = {
 };
 
 export const Layout: FC<LayoutProps> = ({ children, pathname }) => {
+  const isMobile = window.document.body.offsetWidth < 768;
+
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(!isMobile);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

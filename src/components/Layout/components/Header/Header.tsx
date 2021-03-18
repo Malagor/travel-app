@@ -11,6 +11,7 @@ import { State } from 'types';
 import { database } from 'services';
 import i18n from 'i18n';
 import { setLoginStatus, setUserInfo } from 'store/actions';
+import { MOBILE_WIDTH } from 'appConstants';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
 
@@ -25,6 +26,8 @@ export const Header: FC<HeaderProps> = ({
   handleDrawerOpen,
   pathname,
 }) => {
+  const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
+
   const userInfo = useSelector((state: State) => state.userInfo);
   const classes = useStyles();
   const isLogin = useSelector((state: State) => state.userIsLogin);
@@ -33,7 +36,7 @@ export const Header: FC<HeaderProps> = ({
 
   const loginHandler = async () => {
     try{
-      const user = await database.createUser('ihruih324urbu3ybub34rbu3bf', 'Malagor', i18n.language );
+      const user = await database.createUser('', '', i18n.language );
       dispatch(setUserInfo(user));
       dispatch(setLoginStatus(true));
     } catch (e) {
@@ -44,7 +47,7 @@ export const Header: FC<HeaderProps> = ({
   return (
     <AppBar
       position="absolute"
-      className={clsx(classes.appBar, open && classes.appBarShift)}
+      className={clsx(classes.appBar, open && !isMobile && classes.appBarShift)}
     >
       <Toolbar className={classes.toolbar}>
         <IconButton
