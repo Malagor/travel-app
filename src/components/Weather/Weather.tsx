@@ -68,6 +68,7 @@ export const Weather: FC<WeatherProps> = ({ location, title }) => {
     minWidth: '200px',
     overflow: 'hidden',
     margin: '0 auto',
+    width: '100%'
   };
 
   const hasData = !isLoading && !isError;

@@ -1,6 +1,6 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
 export const useStyles = makeStyles((theme) => ({
   toolbar: {

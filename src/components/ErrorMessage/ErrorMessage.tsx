@@ -8,7 +8,7 @@ export const ErrorMessage: FC = () => {
   return (
     <ErrorMessageStyled>
       <Tourist />
-      <p>{t('Error Message')}</p>
+      <div>{t('Error Message')}</div>
     </ErrorMessageStyled>
   );
 };

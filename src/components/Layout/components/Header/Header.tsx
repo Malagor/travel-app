@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'types';
 import { useTranslation } from 'react-i18next';
 import { setLoginStatus, setUserInfo } from 'store/actions';
+import { MOBILE_WIDTH } from 'appConstants';
 import { useStyles } from './styled';
 import { Logo } from './components/Logo';
 
@@ -26,6 +27,8 @@ export const Header: FC<HeaderProps> = ({
   handleDrawerOpen,
   pathname,
 }) => {
+  const isMobile = window.document.body.offsetWidth < MOBILE_WIDTH;
+
   const classes = useStyles();
   const [t] = useTranslation();
   const dispatch = useDispatch();
@@ -54,7 +57,7 @@ export const Header: FC<HeaderProps> = ({
   return (
     <AppBar
       position="absolute"
-      className={clsx(classes.appBar, open && classes.appBarShift)}
+      className={clsx(classes.appBar, open && !isMobile && classes.appBarShift)}
     >
       <Toolbar className={classes.toolbar}>
         <IconButton

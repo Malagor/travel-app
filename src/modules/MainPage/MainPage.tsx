@@ -30,12 +30,13 @@ export const MainPage: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const clearCountry = {
+    const clearCountry: CountryType = {
       id: '',
       iso3: '',
       name: {},
       capital: {},
       currency: '',
+      timeZone: ''
     };
     dispatch(setCountry(clearCountry));
   }, [dispatch]);
