@@ -15,6 +15,8 @@
   "Wrong Search Input": "Input is incorrect. Enter country or capital name in English.",
   "Nothing Was Found": "Sorry, we found nothing.",
   "Capital:": "Capital:",
+  "Recent Votes": "Recent Votes",
+  "Main": "Main",
 
   "Registration": {
     "name": "Name",
