@@ -72,7 +72,7 @@ export const Registration = () => {
       if (createdUser.id) {
         dispatch(setUserInfo(createdUser));
         dispatch(setLoginStatus(true));
-        localStorage.setItem('userId', createdUser.id);
+        localStorage.setItem('userId', user.uid);
         history.push('/');
       }
     }

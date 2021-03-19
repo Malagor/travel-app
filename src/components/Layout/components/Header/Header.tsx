@@ -50,6 +50,7 @@ export const Header: FC<HeaderProps> = ({
           })
         );
         dispatch(setLoginStatus(false));
+        localStorage.removeItem('userId');
       })
       .catch((error) => error);
   };

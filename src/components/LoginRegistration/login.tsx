@@ -80,7 +80,7 @@ export function Login() {
         if (user) {
           dispatch(setUserInfo(user));
           dispatch(setLoginStatus(true));
-          localStorage.setItem('userId', uid);
+          localStorage.setItem('userId', user.id);
           history.push('/');
         }
       }
@@ -94,6 +94,7 @@ export function Login() {
     if (userData) {
       dispatch(setUserInfo(userData));
       dispatch(setLoginStatus(true));
+      localStorage.setItem('userId', userData.id);
       history.push('/');
     }
   };

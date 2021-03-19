@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { MainPage, CountryPage } from 'modules';
 import { useDispatch } from 'react-redux';
-import { loadGeo, loadUserInfo } from 'store/actions';
+import { loadGeo, loadUserInfo, setLoginStatus } from 'store/actions';
 import { Layout, Registration, Login } from 'components';
 import firebase from 'firebase';
 import FIREBASE_CONFIG from 'appConstants/firedaseConfig';
@@ -10,17 +10,18 @@ import FIREBASE_CONFIG from 'appConstants/firedaseConfig';
 export function App() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const userID = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId') || null;
 
   useEffect(() => {
-    if (userID) {
-      dispatch(loadUserInfo(userID));
+    if (userId) {
+      dispatch(loadUserInfo(userId));
+      dispatch(setLoginStatus(true));
     }
-  }, [dispatch, userID]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     try {
-    dispatch(loadGeo());
+      dispatch(loadGeo());
     } catch (e) {
       console.log(e);
     }
