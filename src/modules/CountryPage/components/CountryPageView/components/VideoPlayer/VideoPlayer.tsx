@@ -52,6 +52,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({ url }) => {
       )}
       (
       <ReactPlayer
+        id="player"
         width="100%"
         height="100%"
         url={actualUrl || url}
