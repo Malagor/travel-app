@@ -15,5 +15,19 @@
   "Wrong Search Input": "Input is incorrect. Enter country or capital name in English.",
   "Nothing Was Found": "Sorry, we found nothing.",
   "Capital:": "Capital:",
+
+  "Registration": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "signUp": "Sing up",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "textIsHaveAcc": "Don't have an account?",
+    "createAccount": "Create account",
+    "avatar": "Avatar"
+  },
+
   "Recent Votes": "Recent Votes"
 }

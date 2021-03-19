@@ -15,5 +15,19 @@
   "Wrong Search Input": "Некорректный ввод. Введите название страны или столицы на русском языке.",
   "Nothing Was Found": "Извините, ничего не найдено.",
   "Capital:": "Столица:",
+
+  "Registration": {
+    "name": "Имя",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "showPassword": "Показать пароль",
+    "signUp": "Регистрация",
+    "signIn": "Вход",
+    "signOut": "Выйти",
+    "textIsHaveAcc": "Нет аккаунта?",
+    "createAccount": "Создать аккаунт",
+    "avatar": "Аватар"
+  },
+
   "Recent Votes": "Недавние голоса"
 }
