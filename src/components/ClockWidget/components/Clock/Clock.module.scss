@@ -1,0 +1,112 @@
+.Clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  background-color: #091921;
+  background-image: url('/assets/images/clock.png');
+  background-size: cover;
+  border: 4px solid #091321;
+  border-radius: 50%;
+  box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+    inset 0 -15px 15px rgba(255, 255, 255, 0.05), 0 15px 15px rgba(0, 0, 0, 0.3),
+    inset 0 -15px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+  &.light {
+    background-color: #ffffff;
+    border: 6px solid #ffffff;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1),
+      0 15px 15px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(255, 255, 255, 1);
+
+    &:before {
+      background-color: #848484;
+      border: 1px solid #ffffff;
+    }
+
+    .hr:before {
+      background-color: #848484;
+    }
+
+    .mn:before {
+      background-color: #d6d6d6;
+    }
+
+    .sc:before {
+      background-color: #ff6767;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    z-index: 3;
+  }
+
+  .hour,
+  .min,
+  .sec {
+    position: absolute;
+  }
+
+  .hour,
+  .hr {
+    width: 80px;
+    height: 80px;
+  }
+
+  .min,
+  .mn {
+    width: 95px;
+    height: 95px;
+  }
+
+  .sec,
+  .sc {
+    width: 115px;
+    height: 115px;
+  }
+
+  .hr,
+  .mn,
+  .sc {
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .hr:before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 40px;
+    background-color: #ff105e;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .mn:before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 3px 3px 0 0;
+    z-index: 1;
+  }
+
+  .sc:before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 80px;
+    background-color: #ffffff;
+    z-index: 2;
+  }
+}

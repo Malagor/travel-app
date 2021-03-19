@@ -1,0 +1,33 @@
+{
+  "Error Message": "The data was lost somewhere and we sent a lifeguard to search for it.",
+  "Theme toggle": "Theme toggle",
+  "Weather": {
+    "cloudCover": "cloud cover",
+    "wind": "wind",
+    "humidity": "humidity",
+    "metersPerSecond": "m/s"
+  },
+  "Rate This Place": "Rate the place",
+  "Rating": "Rating",
+  "Voted": "Voted",
+  "Search Placeholder": "Enter country",
+  "Search Button": "Search",
+  "Wrong Search Input": "Input is incorrect. Enter country or capital name in English.",
+  "Nothing Was Found": "Sorry, we found nothing.",
+  "Capital:": "Capital:",
+  "Recent Votes": "Recent Votes",
+  "Main": "Main",
+
+  "Registration": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "signUp": "Sing up",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "textIsHaveAcc": "Don't have an account?",
+    "createAccount": "Create account",
+    "avatar": "Avatar"
+  }
+}

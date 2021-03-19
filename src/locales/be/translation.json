@@ -1,0 +1,33 @@
+{
+  "Error Message": "Данныя дзесьці згубіліся і мы выслалі выратавальніка на іх пошукі.",
+  "Theme toggle": "Змяніць тэму",
+  "Weather": {
+    "cloudCover": "воблачнасць",
+    "wind": "вецер",
+    "humidity": "вільготнасць",
+    "metersPerSecond": "м/с"
+  },
+  "Rate This Place": "Ацаніце месца",
+  "Rating": "Рэйтынг",
+  "Voted": "Галасоў",
+  "Search Placeholder": "Увядзіце краіну",
+  "Search Button": "Пошук",
+  "Wrong Search Input": "Некарэктны ўвод. Калі ласка, увядзіце назву краіны або сталіцы на беларускай мове.",
+  "Nothing Was Found": "Выбачайце, нічога не знойдзена.",
+  "Capital:": "Сталіца:",
+  "Recent Votes": "Нядаўнія галасы",
+  "Main": "Галоўная",
+
+  "Registration": {
+    "name": "Iмя",
+    "email": "Электронная пошта",
+    "password": "Пароль",
+    "showPassword": "Паказаць пароль",
+    "signUp": "Рэгістрацыя",
+    "signIn": "Увайсці",
+    "signOut": "Выйсці",
+    "textIsHaveAcc": "Не маеце ўліковага запісу?",
+    "createAccount": "Cтварыць уліковы запіс",
+    "avatar": "Аватар"
+  }
+}

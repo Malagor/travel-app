@@ -1,0 +1,33 @@
+{
+  "Error Message": "Данные где-то потерялись и мы выслали спасателя на их поиски.",
+  "Theme toggle": "Переключить тему",
+  "Weather": {
+    "cloudCover": "облачность",
+    "wind": "ветер",
+    "humidity": "влажность",
+    "metersPerSecond": "м/с"
+  },
+  "Rate This Place": "Оцените место",
+  "Rating": "Рейтинг",
+  "Voted": "Голосов",
+  "Search Placeholder": "Введите страну",
+  "Search Button": "Поиск",
+  "Wrong Search Input": "Некорректный ввод. Введите название страны или столицы на русском языке.",
+  "Nothing Was Found": "Извините, ничего не найдено.",
+  "Capital:": "Столица:",
+  "Recent Votes": "Недавние голоса",
+  "Main": "Главная",
+
+  "Registration": {
+    "name": "Имя",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "showPassword": "Показать пароль",
+    "signUp": "Регистрация",
+    "signIn": "Вход",
+    "signOut": "Выйти",
+    "textIsHaveAcc": "Нет аккаунта?",
+    "createAccount": "Создать аккаунт",
+    "avatar": "Аватар"
+  }
+}
