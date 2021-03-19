@@ -7,7 +7,7 @@ import {
   SET_USER_LANGUAGE,
   SET_SEARCH,
   SET_FIRST_CARD_REF,
-  SET_LOGIN_STATUS,
+  SET_LOGIN_STATUS, SET_USER_NAME, SET_USER_AVATAR,
 } from 'appConstants';
 import { CountryType, DBUser, GeoType, State } from 'types';
 import { database } from 'services';
@@ -40,6 +40,7 @@ export const setFirstCardRef = (
   type: SET_FIRST_CARD_REF,
   payload,
 });
+
 export const setUserInfo = (payload: DBUser) => ({
   type: SET_USER,
   payload,
@@ -54,6 +55,17 @@ export const setLoginStatus = (payload: boolean) => ({
   type: SET_LOGIN_STATUS,
   payload,
 });
+
+export const setUserName = (payload: string) => ({
+  type: SET_USER_NAME,
+  payload,
+});
+
+export const setUserAvatar = (payload: string) => ({
+  type: SET_USER_AVATAR,
+  payload,
+});
+
 
 //  payload = page of countryList
 export const setPageCountry = (payload: number) => ({

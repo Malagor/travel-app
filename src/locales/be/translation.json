@@ -16,5 +16,20 @@
   "Nothing Was Found": "Выбачайце, нічога не знойдзена.",
   "Capital:": "Сталіца:",
   "Recent Votes": "Нядаўнія галасы",
-  "Main": "Галоўная"
+  "Main": "Галоўная",
+
+  "Registration": {
+    "name": "Iмя",
+    "email": "Электронная пошта",
+    "password": "Пароль",
+    "showPassword": "Паказаць пароль",
+    "signUp": "Рэгістрацыя",
+    "signIn": "Увайсці",
+    "signOut": "Выйсці",
+    "textIsHaveAcc": "Не маеце ўліковага запісу?",
+    "createAccount": "Cтварыць уліковы запіс",
+    "avatar": "Аватар"
+  },
+
+  "Recent Votes": "Нядаўнія галасы"
 }

@@ -29,6 +29,11 @@ export const MainPage: FC = () => {
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const onError = () => {
+    setIsError(true);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     const clearCountry: CountryType = {
       id: '',
@@ -54,10 +59,10 @@ export const MainPage: FC = () => {
         lang,
       };
       dispatch(loadCountryList(options));
-    } catch (e) {
-      setIsError(true);
-    }
       setIsLoading(false);
+    } catch (e) {
+      onError();
+    }
   }, [dispatch, count, lang, filter, offset]);
 
   const hasContent = !(isLoading || isError);

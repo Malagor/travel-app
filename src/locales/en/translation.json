@@ -16,5 +16,20 @@
   "Nothing Was Found": "Sorry, we found nothing.",
   "Capital:": "Capital:",
   "Recent Votes": "Recent Votes",
-  "Main": "Main"
+  "Main": "Main",
+
+  "Registration": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "signUp": "Sing up",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "textIsHaveAcc": "Don't have an account?",
+    "createAccount": "Create account",
+    "avatar": "Avatar"
+  },
+
+  "Recent Votes": "Recent Votes"
 }
