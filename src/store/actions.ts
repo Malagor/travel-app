@@ -85,10 +85,7 @@ export const loadCountryList = (option: {
     .then((countries) => {
       dispatch(setCountriesList(countries));
     })
-    .catch((err) => {
-      // console.error(err);
-      throw new Error(`Can not read countries list data. ${err}`);
-    });
+
 };
 
 export const loadCountry = (
@@ -99,9 +96,7 @@ export const loadCountry = (
     .then((country) => {
       dispatch(setCountry(country));
     })
-    .catch((err) => {
-      throw new Error(`Can not read country data. ${err}`);
-    });
+
 };
 
 export const loadUserInfo = (
@@ -112,9 +107,7 @@ export const loadUserInfo = (
     .then((user) => {
       dispatch(setUserInfo(user));
     })
-    .catch((err) => {
-      throw new Error(`Can not read UserInfo. ${err}`);
-    });
+
 };
 
 export const loadGeo = (): ThunkAction<
@@ -127,7 +120,5 @@ export const loadGeo = (): ThunkAction<
     .getGeo()
     .then((geoData: [GeoType]) => geoData[0])
     .then((geoData) => dispatch(setGeo(geoData)))
-    .catch((err) => {
-      throw new Error(`Can not read Geo data. ${err}`);
-    });
+   
 };

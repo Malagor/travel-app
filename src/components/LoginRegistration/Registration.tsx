@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useHistory } from 'react-router-dom';
 import { State } from 'types';
+import i18n from 'i18next';
 import signInByGoogle from './utils/signInByGoogle';
 import { useStyles } from './styledRegistration';
 
@@ -77,6 +78,7 @@ export const Registration = () => {
         dispatch(setUserInfo(createdUser));
         dispatch(setLoginStatus(true));
         localStorage.setItem('userId', user.uid);
+        i18n.changeLanguage(lang);
         history.push('/');
       }
     }
@@ -131,6 +133,8 @@ export const Registration = () => {
     if (userData) {
       dispatch(setUserInfo(userData));
       dispatch(setLoginStatus(true));
+      localStorage.setItem('userId', userData.id);
+      i18n.changeLanguage(lang);
       history.push('/');
     }
   };
