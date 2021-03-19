@@ -32,6 +32,10 @@ export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
     }`,
     timezone: country.timeZone,
   };
+  const isCountryPage =
+    location.pathname !== '/' &&
+    location.pathname !== '/login' &&
+    location.pathname !== '/registration';
 
   return (
     <Drawer
@@ -52,7 +56,7 @@ export const SideBar: FC<SidebarProps> = ({ open, handleDrawerClose }) => {
       </div>
       <MenuItems />
       <Divider className={classes.divided} />
-      {location.pathname !== '/' ? (
+      {isCountryPage ? (
         <>
           <ClockWidget data={clockWidgetData} theme={user.theme} />
           <Divider className={classes.divided} />

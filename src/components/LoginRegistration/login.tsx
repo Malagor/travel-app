@@ -80,6 +80,7 @@ export function Login() {
         if (user) {
           dispatch(setUserInfo(user));
           dispatch(setLoginStatus(true));
+          localStorage.setItem('userId', uid);
           history.push('/');
         }
       }

@@ -10,13 +10,20 @@ import FIREBASE_CONFIG from 'appConstants/firedaseConfig';
 export function App() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const userID = localStorage.getItem('userId');
 
   useEffect(() => {
-    dispatch(loadUserInfo('5515c398-4dd4-4ac8-9dd5-4783bd889cc3'));
-  }, [dispatch]);
+    if (userID) {
+      dispatch(loadUserInfo(userID));
+    }
+  }, [dispatch, userID]);
 
   useEffect(() => {
+    try {
     dispatch(loadGeo());
+    } catch (e) {
+      console.log(e);
+    }
   }, [dispatch]);
 
   useEffect(() => {
