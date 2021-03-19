@@ -65,12 +65,15 @@ export const Map: FC<MapProps> = ({ geo, capital }) => {
   }, [mapElement, manager]);
 
   useEffect(() => {
-    if (mapElement && countryPolygon) {
-      mapElement.setBounds(countryPolygon.geometry.getBounds(), {
-        checkZoomRange: true,
-      });
+    if (ymaps && mapElement && countryPolygon) {
+      const bounds = mapElement.geoObjects.getBounds();
+      if (bounds) {
+        mapElement.setBounds(bounds, {
+          checkZoomRange: true,
+        });
+      }
     }
-  }, [mapElement, countryPolygon, capital]);
+  }, [ymaps, mapElement, countryPolygon, capital]);
 
   useEffect(() => {
     if (ymaps && mapElement) {
