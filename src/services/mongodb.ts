@@ -91,6 +91,21 @@ class MongoDatabase {
       },
     }).then((res) => res.json());
   };
+
+  updateLang = async (userId: string, lang: string) => {
+    const url = `${this.URL}/user/${userId}/lang`;
+    const body = JSON.stringify({ lang });
+
+    return fetch(url, {
+      method: 'PATCH',
+      body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
+  };
+
+
 }
 
 export const database = MongoDatabase.create();
