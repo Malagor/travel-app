@@ -8,8 +8,10 @@ import {
   Theme,
 } from '@material-ui/core';
 import i18n from 'i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from 'store/actions';
+import { database } from 'services';
+import { State } from 'types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +36,14 @@ export const LanguageToggle: FC = () => {
     dispatch(setLanguage(lang));
   };
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const userId = useSelector((state: State) => state.userInfo.id);
+
+  const handleChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
     const lang = event.target.value as string;
     i18n.changeLanguage(lang);
+    if (userId) {
+      await database.updateLang(userId, lang);
+    }
     updateLang(lang);
   };
 
@@ -44,7 +51,6 @@ export const LanguageToggle: FC = () => {
     <div>
       <FormControl className={classes.formControl}>
         <Select
-
           value={i18n.language}
           onChange={handleChange}
           displayEmpty
