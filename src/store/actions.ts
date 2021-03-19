@@ -80,7 +80,7 @@ export const loadCountryList = (option: {
   lang: string;
 }) => async (dispatch: (func: unknown) => void) => {
   const { lang, filter, offset, count } = option;
-  database
+  await database
     .getCountriesList(count, offset, filter, lang)
     .then((countries) => {
       dispatch(setCountriesList(countries));
@@ -94,7 +94,7 @@ export const loadCountryList = (option: {
 export const loadCountry = (
   id: string
 ): ThunkAction<void, State, unknown, Action<string>> => async (dispatch) => {
-  database
+  await database
     .getCountryById(id)
     .then((country) => {
       dispatch(setCountry(country));
@@ -123,7 +123,7 @@ export const loadGeo = (): ThunkAction<
   unknown,
   Action<string>
 > => async (dispatch) => {
-  database
+  await database
     .getGeo()
     .then((geoData: [GeoType]) => geoData[0])
     .then((geoData) => dispatch(setGeo(geoData)))
