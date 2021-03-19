@@ -21,7 +21,7 @@ export const Weather: FC<WeatherProps> = ({ location, title }) => {
   const [, i18n] = useTranslation();
   const locale = i18n.language;
 
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${WEATHER_API_KEY}&units=metric&lang=${locale}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${WEATHER_API_KEY}&units=metric&lang=${locale}`;
 
   const getWeatherData = useCallback(() => {
     const abortController = new AbortController();
@@ -68,7 +68,7 @@ export const Weather: FC<WeatherProps> = ({ location, title }) => {
     minWidth: '200px',
     overflow: 'hidden',
     margin: '0 auto',
-    width: '100%'
+    width: '100%',
   };
 
   const hasData = !isLoading && !isError;
