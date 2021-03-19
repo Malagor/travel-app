@@ -17,11 +17,12 @@ import { MIN_LENGTH_PASSWORD } from 'appConstants';
 import googleLogo from 'assets/svg/google-logo.svg.png';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import { database } from 'services';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useHistory } from 'react-router-dom';
 import signInByGoogle from './utils/signInByGoogle';
 import { useStyles } from './styledRegistration';
+import { State } from '../../types';
 
 type TRegistrationState = {
   email: string;
@@ -46,6 +47,8 @@ export const Registration = () => {
     stateOfValidPassword: false,
   });
 
+  const lang = useSelector((globalState: State) => globalState.userInfo.lang);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -66,7 +69,7 @@ export const Registration = () => {
       const createdUser = await database.createUser(
         user.uid,
         name,
-        'ru',
+        lang,
         avatar
       );
       if (createdUser.id) {
@@ -116,7 +119,7 @@ export const Registration = () => {
 
     const storageRef = firebase
       .storage()
-      .ref(`${'Images' + '/profilePicture/'}${filesArr[0].name}`);
+      .ref(`${'Images/profilePicture/'}${filesArr[0].name}`);
     await storageRef.put(filesArr[0]);
     setImage(await storageRef.getDownloadURL());
     setState({ ...state, avatar: await storageRef.getDownloadURL() });
