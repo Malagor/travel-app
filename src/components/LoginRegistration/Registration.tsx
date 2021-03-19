@@ -47,7 +47,7 @@ export const Registration = () => {
     stateOfValidPassword: false,
   });
 
-  const lang = useSelector((globalState: State) => globalState.userInfo.lang);
+  const lang = useSelector((globalState: State) => globalState.userInfo.lang) || 'ru';
 
   const dispatch = useDispatch();
   const history = useHistory();
