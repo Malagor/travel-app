@@ -20,9 +20,9 @@ import { database } from 'services';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginStatus, setUserInfo } from 'store/actions';
 import { useHistory } from 'react-router-dom';
+import { State } from 'types';
 import signInByGoogle from './utils/signInByGoogle';
 import { useStyles } from './styledRegistration';
-import { State } from '../../types';
 
 type TRegistrationState = {
   email: string;
@@ -47,7 +47,8 @@ export const Registration = () => {
     stateOfValidPassword: false,
   });
 
-  const lang = useSelector((globalState: State) => globalState.userInfo.lang) || 'ru';
+  const lang =
+    useSelector((globalState: State) => globalState.userInfo.lang) || 'ru';
 
   const dispatch = useDispatch();
   const history = useHistory();
